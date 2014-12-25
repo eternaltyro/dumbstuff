@@ -1,0 +1,139 @@
+dn: dc=acme,dc=com
+objectClass: dcObject
+objectClass: organization
+o: labs
+dc: acme
+
+dn: cn=admin,dc=acme,dc=com
+objectClass: organizationalRole
+cn: admin
+
+dn: ou=Doers,dc=acme,dc=com
+objectClass: organizationalUnit
+ou: Doers
+
+dn: ou=Thinkers,dc=acme,dc=com
+objectClass: organizationalUnit
+ou: Thinkers
+
+dn: ou=Speakers,dc=acme,dc=com
+objectClass: organizationalUnit
+ou: Speakers
+
+dn: ou=Researchers,dc=acme,dc=com
+objectClass: organizationalUnit
+ou: Researchers
+
+dn: ou=Artists,dc=acme,dc=com
+objectClass: organizationalUnit
+ou: Artists
+
+dn: ou=Writers,dc=acme,dc=com
+objectClass: organizationalUnit
+ou: Writers
+
+dn: uid=emusk,ou=Doers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: emusk
+cn: Elon Musk
+sn: Musk
+userPassword: T3slaIsGreat
+
+dn: uid=aeinstein,ou=Thinkers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: aeinstein
+cn: Albert Einstein
+sn: Einstein
+userPassword: energyismass
+
+dn: uid=minman,ou=Artists,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: minman
+cn: Mathew Inman
+sn: Inman
+userPassword: Defea+theBl3rch
+
+dn: uid=gcarlin,ou=Speakers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: gcarlin
+cn: George Carlin
+sn: Carlin
+userPassword: Takecare0fthemTITSma!
+
+dn: uid=gorwell,ou=Writers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: gorwell
+cn: George Orwell
+sn: Orwell
+userPassword: douBl3think666thoughtCr!mEB^gbr0+h3rrr1984
+
+dn: uid=ratkinson,ou=Artists,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: ratkinson
+cn: Rowan Atkinson
+sn: Atkinson
+userPassword: BBBBeanHelooooTeddy
+
+dn: uid=dlama,ou=Thinkers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: dlama
+cn: Dalai Lama
+sn: Lama
+userPassword: compassion<3tolerance
+
+dn: uid=rms,ou=Doers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: rms
+cn: Richard Stallman
+sn: Stallman
+userPassword: free_as_in_FREEDOM!
+
+dn: uid=dritchie,ou=Researchers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: dritchie
+cn: Dennis Ritchie
+sn: Ritchie
+userPassword: seelangunixvoidmain(123)
+
+dn: uid=calvin,ou=Thinkers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: calvin
+cn: Calvin Spiff
+sn: SpaceManSpiff
+userPassword: HobbesTheREALtiger
+
+dn: uid=pwodehouse,ou=Writers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: pwodehouse
+cn: PG Wodehouse
+sn: Wodehouse
+userPassword: UncleFredCatsMr.Mulliner
+
+dn: uid=hpotter,ou=Doers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: hpotter
+cn: Harry Potter
+sn: Potter
+userPassword: AvadAK3davRA
+
+dn: uid=hgranger,ou=Thinkers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: hgranger
+cn: Hermione Granger
+sn: Granger
+userPassword: WingardiumLeviOsa
+
+dn: uid=rweasely,ou=Researchers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: rweasely
+cn: Ron Weasely
+sn: Weasely
+userPassword: sweater123
+
+dn: uid=jsparrow,ou=Researchers,dc=acme,dc=com
+objectClass: inetOrgPerson
+uid: jsparrow
+cn: Cap'n Jack Sparrow
+sn: Sparrow
+userPassword: BUTWHYISTHErumGONE?
+
