@@ -36,6 +36,7 @@ dn: uid=emusk,ou=Doers,dc=acme,dc=com
 objectClass: inetOrgPerson
 uid: emusk
 cn: Elon Musk
+gn: oopsie
 sn: Musk
 userPassword: T3slaIsGreat
 
@@ -43,6 +44,7 @@ dn: uid=aeinstein,ou=Thinkers,dc=acme,dc=com
 objectClass: inetOrgPerson
 uid: aeinstein
 cn: Albert Einstein
+gn: oops
 sn: Einstein
 userPassword: energyismass
 

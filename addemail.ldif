@@ -1,0 +1,19 @@
+dn: uid=emusk,ou=Doers,dc=et,dc=com
+changetype: modify
+add: mail
+mail: musk@tesla.com
+
+dn: uid=minman,ou=Artists,dc=et,dc=com
+changetype: modify
+add: mail
+mail: blerch@oatmeal.com
+
+dn: uid=ratkinson,ou=Artists,dc=et,dc=com
+changetype: modify
+add: mail
+mail: bean@teddy.com
+
+dn: uid=rms,ou=Doers,dc=et,dc=com
+changetype: modify
+add: mail
+mail: rms@gnu.org

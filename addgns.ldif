@@ -1,0 +1,80 @@
+dn: uid=emusk,ou=Doers,dc=et,dc=com
+changetype: modify
+replace: gn
+gn: Elon
+
+dn: uid=aeinstein,ou=Thinkers,dc=et,dc=com
+changetype: modify
+replace: gn
+gn: Albert
+
+dn: uid=minman,ou=Artists,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Matthew
+gn: Oatmeal
+-
+add: cn
+cn: Oatmeal
+
+dn: uid=gcarlin,ou=Speakers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: George
+
+dn: uid=gorwell,ou=Writers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: George
+
+dn: uid=ratkinson,ou=Artists,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Rowan
+gn: Mr. Bean
+
+dn: uid=rms,ou=Doers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Richard
+gn: RMS
+-
+add: cn
+cn: RMS
+
+dn: uid=dritchie,ou=Researchers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Dennis
+
+dn: uid=calvin,ou=Thinkers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Calvin
+gn: Spaceman Spiff
+-
+add: cn
+cn: Spaceman Spiff
+
+dn: uid=hpotter,ou=Doers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Harry James
+
+dn: uid=hgranger,ou=Thinkers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Hermione
+
+dn: uid=rweasely,ou=Researchers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Ron
+-
+add: cn
+cn: Ron
+
+dn: uid=jsparrow,ou=Researchers,dc=et,dc=com
+changetype: modify
+add: gn
+gn: Captain Jack
