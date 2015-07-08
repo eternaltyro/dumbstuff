@@ -26,7 +26,7 @@ apt-get -y install curl git cryptsetup zsh awesome rxvt-unicode-256color
 apt-get -y install bcrypt ccrypt p7zip-full 
 
 # Install forensics
-apt-get -y install dcfldd gddrescue sleuthkit scalpel
+apt-get -y install dcfldd gddrescue sleuthkit scalpel dff
 
 # Install security packages
 apt-get -y install fslint secure-delete bleachbit chkrootkit etherape rkhunter unhide
