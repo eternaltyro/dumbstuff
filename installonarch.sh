@@ -1,32 +1,24 @@
 #!/bin/bash
 
-isBackup=1
-
-# BACKUP GPG KEYS
-if isBackup; then
-    gpg --export -a > gpgkeys.pub
-    gpg --export-secret-keys -a > gpgkeys.priv
-fi
-
-# BACKUP SSH KEYS
-if isBackup; then
-    #copy ssh keys somewhere
-fi
-
-# RESTORE GPG KEYS
-# RESTORE SSH KEYS
-
 # Sources and stuff
-sed -i 's/in.archive/archive/g' /etc/apt/sources.list
+#sed -i 's/in.archive/archive/g' /etc/apt/sources.list
+
+pacman -S --noconfirm firefox
+pacman -S --noconfirm git
+pacman -S --noconfirm ttf-indic-otf
+pacman -S --noconfirm zsh
+pacman -S --noconfirm cryptsetup
+pacman -S --noconfirm ecryptfs-utils
+pacman -S --noconfirm awesome
+pacman -S --noconfirm rtorrent
+pacman -S --noconfirm xfce4
+pacman -S --noconfirm rxvt-unicode
+pacman -S --noconfirm lynx
+pacman -S --noconfirm irssi
+
 
 # Install essentials
-apt-get -y install curl git cryptsetup zsh awesome rxvt-unicode-256color
-
-# Install 
-apt-get -y install bcrypt ccrypt p7zip-full 
-
-# Install forensics
-apt-get -y install dcfldd gddrescue sleuthkit scalpel
+pacman -S install curl
 
 # Install security packages
 apt-get -y install fslint secure-delete bleachbit chkrootkit etherape rkhunter unhide
@@ -44,7 +36,7 @@ apt-get -y install ipython
 apt-get -y install kvm virt-manager virtualbox-ose
 
 # Other packages
-apt-get -y install centerim irssi camorama exif testdisk elinks lynx
+apt-get -y install centerim camorama exif testdisk elinks
 
 # Utilities
 apt-get -y install bc units
@@ -54,6 +46,3 @@ apt-get -y install bc units
 
 git config --global user.name "My name"
 git config --global user.email "myemail@domain.com"
-
-# GET WEBEX TO WORK
-apt-get -y install libgcj14-awt:i386 libxtst6:i386  libxmu6:i386 

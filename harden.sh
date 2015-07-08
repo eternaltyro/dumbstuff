@@ -5,3 +5,5 @@
 /usr/bin/chattr +i /usr/bin/*
 /usr/bin/chattr +i /usr/sbin/*
 
+modprobe -r uvcvideo
+

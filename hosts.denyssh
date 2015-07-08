@@ -1,0 +1,8 @@
+# -- Hosts denied using denyhosts -- #
+# -- Putting this up publicly -- #
+
+sshd: fl1-221-171-244-6.fko.mesh.ad.jp : deny
+sshd: 60.190.71.52 : deny
+sshd: 211.152.40.249 : deny
+sshd: 69.10.54.250 : deny
+sshd: 173.242.114.81 : deny
