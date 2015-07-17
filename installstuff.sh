@@ -13,6 +13,16 @@ if isBackup; then
     #copy ssh keys somewhere
 fi
 
+# BACKUP FIREFOX BOOKMARKS
+
+# BACKUP PASSWORDSAFE FILES AND KEYS
+
+# BACKUP EMERGENCY OTP
+
+# BACKUP BITCOINS
+
+# DISABLE PASSWORD SSH LOGIN AND ROOT SSH LOGIN
+
 # RESTORE GPG KEYS
 # RESTORE SSH KEYS
 
@@ -29,7 +39,7 @@ apt-get -y install bcrypt ccrypt p7zip-full
 apt-get -y install dcfldd gddrescue sleuthkit scalpel dff
 
 # Install security packages
-apt-get -y install fslint secure-delete bleachbit chkrootkit etherape rkhunter unhide
+apt-get -y install fslint secure-delete bleachbit chkrootkit etherape rkhunter unhide fail2ban
 
 # Install entertainment packages
 apt-get -y install moc audacious vlc mpd
