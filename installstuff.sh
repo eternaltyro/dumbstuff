@@ -32,14 +32,15 @@ sed -i 's/in.archive/archive/g' /etc/apt/sources.list
 # Install essentials
 apt-get -y install curl git cryptsetup zsh awesome rxvt-unicode-256color
 
-# Install 
-apt-get -y install bcrypt ccrypt p7zip-full 
+# Install (cryptcat --> Netcat over twofish)
+apt-get -y install bcrypt ccrypt p7zip-full cryptcat mcrypt
 
 # Install forensics
-apt-get -y install dcfldd gddrescue sleuthkit scalpel dff
+apt-get -y install dcfldd gddrescue sleuthkit scalpel dff mat 
 
 # Install security packages
-apt-get -y install fslint secure-delete bleachbit chkrootkit etherape rkhunter unhide fail2ban
+apt-get -y install fslint secure-delete bleachbit chkrootkit etherape
+apt-get -y install rkhunter unhide fail2ban mat steghide
 
 # Install entertainment packages
 apt-get -y install moc audacious vlc mpd
