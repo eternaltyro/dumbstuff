@@ -1,0 +1,119 @@
+ARCH INSTALL (BTRFS + crpyto_LUKS)
+
+Boot with media
+loadkeys Dvorak
+List disks (fdisk -l)
+Use parted to create ESP and Root data partitions
+
++—+—— /dev/sda
+      |
+      +—— /dev/sda1, 512MiB, fat32, ESP
+      +—— /dev/sdb2, 100%, btrfs, linux
+
+/dev/sda1 mounted on /boot
+
+	# parted /dev/sda
+	(parted) mklabel gpt
+	(parted) mkpart ESP fat32 1MiB 513MiB
+	(parted) set 1 boot on
+	(parted) mkpart primary btrfs 513MiB 100%
+	(parted) quit
+
+	# mkfs.fat -F32 /dev/sda1
+
+	# cryptsetup —verbose —cipher aes-xts-plain64 —hash sha512 —key-size 512 —iter-time 5000 —use-random luksFormat /dev/sda2
+
+## SWAP CREATION LATER ON  - encrypt with plain encryption with throwaway keys from urandom.
+
+	# cryptsetup luksOpen /dev/sda2 cryptted
+	# mkfs.btrfs /dev/mapper/cryptted
+	# mount /dev/mapper/cryptted /mnt
+	# btrfs subvolume create /mnt/root
+	# btrfs subvolume create /mnt/root/home
+	# btrfs sub volume create /mnt/root/var
+	# btrfs sub volume create /mnt/root/opt
+	# btrfs sub volume create /mnt/root/usr
+	# mkdir /mnt/boot
+	# umount /mnt
+	# mount -o defaults,compress=lzo,subvol=root /dev/mapper/cryptted /mnt
+	# mount /dev/sda1 /mnt/boot
+
+	# pacstrap /mnt base base-devel
+	# genfstab -U /mnt > /mnt/etc/fstab
+	# arch-chroot /mnt /bin/bash
+	# nano /etc/locale.gen # Edit to enable en_US.UTF-8
+	# locale-gen
+	# echo LANG=en_US.UTF-8 > /etc/locale.conf
+	# echo KEYMAP=dvorak > /etc/vconsole.conf
+	# echo FONT=lat9w-16 >> /etc/vconsole.conf
+	# tzselect
+	# ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+	# hwclock —systohc —utc
+	
+# nano /etc/mkinitcpio.conf
+	##edit the HOOKS line. Remove fsck and add btrfs; add encrypt for LUKS;
+	HOOKS="base udev autodetect modconf encrypt block filesystems keyboard btrfs”
+# pacman -S btrfs-progs
+# mkinitcpio -p linux
+# bootctl install
+# cat /boot/loader/entries/arch.conf
+title         Arch Linux
+linux        /vmlinuz-linux
+initrd        /initramfs-linux.img
+options    cryptdevice=UUID=14420948-2cea-4de7-b042-40f67c618660:cryptted root=/dev/mapper/roasted rw rootflags=compress=lzo,subvol=root
+
+# cat /boot/loader/loader.conf
+timeout 3
+default arch
+
+# echo cockroach > /etc/hostname
+# cat /etc/hosts
+127.0.0.1 localhost cockroach
+
+# pacman -S iw wpa_supplicant dialog
+#  passwd
+
+# reboot
+
+# useradd -m -G wheel -s /bin/zsh eternaltyro
+# pacman -S awesome zsh slim slim-themes xorg-server xorg-xinit xf86-input-synaptics alsa-utils vicious rxvt-unicode rxvt-unicode-terminfo
+# pacman -S moc
+# pacman -S btrfs-progs
+# pacman -S snapper
+# pacman -S firefox
+# pacman -S libreoffice-fresh
+rlwrap, dex, vicious, alsa-utils, wireless_tools, 
+rlwrap, dex, vicious, alsa-utils, wireless_tools, 
+ttf*
+
+visudo
+cp /etc/X11/xinit/xinitrc ~/.xinitrc	
+# vi /etc/slim.conf
+# systemctl enable slim
+
+https://bbs.archlinux.org/viewtopic.php?id=120243
+
+Fix SLiM Keyboard layout issue
+
+# pacman -S xf86-input-evdev
+# cat /etc/X11/xorg.conf.d/10-evdev.conf
+Section "InputClass"
+        Identifier "evdev keyboard catchall"
+        MatchIsKeyboard "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "evdev"
+        
+        # Keyboard layouts
+        Option "XkbLayout" “latam”
+EndSection
+https://bbs.archlinux.org/viewtopic.php?id=96634
+TODO:
+Fix initrd keyboard layout keyboard layout 
+
+xorg-xbacklight
+# echo 5000 > /sys/class/backlight/intel_backlight/brightness
+# cat /sys/class/backlight/intel_backlight/max_brightness
+pacman -S xbindkeys
+xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
+
+
