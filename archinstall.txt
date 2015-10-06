@@ -75,7 +75,18 @@ default arch
 
 # reboot
 
+## Configure Internet using netctl. 
+## Interface name from `ip link`
+# cp /etc/netctl/examples/ethernet-static /etc/netctl/
+# netctl start ethernet-static
+# netctl enable ethernet-static
+
+
 # useradd -m -G wheel -s /bin/zsh eternaltyro
+# passwd eternaltyro
+Enter new UNIX password: somelongcompl3x$hi+
+Retype new UINX password: samelongcompl3x$hi+
+passwd: password updated successfully
 # pacman -S awesome zsh slim slim-themes xorg-server xorg-xinit xf86-input-synaptics alsa-utils vicious rxvt-unicode rxvt-unicode-terminfo
 # pacman -S moc
 # pacman -S btrfs-progs
@@ -87,13 +98,34 @@ rlwrap, dex, vicious, alsa-utils, wireless_tools,
 ttf*
 
 visudo
-cp /etc/X11/xinit/xinitrc ~/.xinitrc	
+# cp /etc/X11/xinit/xinitrc ~/.xinitrc	
+# vi /home/eternaltyro/.xinitrc
+
+Comment out the xterms and twm lines in the bottom and add awesome like so
+
+exec awesome
+
 # vi /etc/slim.conf
 # systemctl enable slim
 
 https://bbs.archlinux.org/viewtopic.php?id=120243
 
+ZSH config
+==========
+
+Z Shell is configured the first time user logs in
+
+VirtualBox Guest:
+=================
+
+If Arch is installed as a virtualbox guest, there could be errors starting X. To fix this, install the `virtualbox-guest-utils` package. Then do:
+
+# modprobe -a vboxguest vboxvideo vboxsf 
+
+Only vboxvideo and vboxguest are important. vboxsf is for shared directories.
+
 Fix SLiM Keyboard layout issue
+==============================
 
 # pacman -S xf86-input-evdev
 # cat /etc/X11/xorg.conf.d/10-evdev.conf
