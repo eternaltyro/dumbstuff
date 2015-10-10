@@ -102,7 +102,7 @@ visudo
 # vi /home/eternaltyro/.xinitrc
 
 Comment out the xterms and twm lines in the bottom and add awesome like so
-
+setxkbmap dvorak
 exec awesome
 
 # vi /etc/slim.conf
@@ -148,4 +148,19 @@ xorg-xbacklight
 pacman -S xbindkeys
 xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 
+Install KeePassX
+================
+
+Download the AUR package for keepassx2 and `makepkg -sri` 
+
+Install Lain
+============
+
+Download and install lain-git package from AUR
+
+Updating Repos: pacman -Syy
+Upgrading Packages: pacman -Su
+
+# pacman -S wget
+# pacman -S gnucash
 
