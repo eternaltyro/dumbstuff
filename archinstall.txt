@@ -164,8 +164,21 @@ Upgrading Packages: pacman -Su
 # pacman -S wget
 # pacman -S gnucash
 
-Install VLC
+Install Fonts
+=============
+
+# pacman -S ttf-dejavu ttf-anonymous-pro ttf-inconsolata
+
+
+Install PKG
 ===========
 
 pacman -S vlc
 pacman -S inkscape
+pacman -S mpd
+pacman -S tmux
+pacman -S ntfs-3g (or you can't write to NTFS devices)
+pacman -S jre8-openjdk icedtea-web
+pacman -S vagrant docker
+pacman -S xorg-xrdb (rendering Xresources)
+e
