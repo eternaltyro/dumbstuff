@@ -164,3 +164,8 @@ Upgrading Packages: pacman -Su
 # pacman -S wget
 # pacman -S gnucash
 
+Install VLC
+===========
+
+pacman -S vlc
+pacman -S inkscape
