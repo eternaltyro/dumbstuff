@@ -94,10 +94,14 @@ passwd: password updated successfully
 # pacman -S firefox
 # pacman -S libreoffice-fresh
 rlwrap, dex, vicious, alsa-utils, wireless_tools, 
-rlwrap, dex, vicious, alsa-utils, wireless_tools, 
-ttf*
 
 visudo
+Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
+                      /sbin/halt, /sbin/reboot, /sbin/poweroff, \
+                      /usr/bin/pacman, /usr/bin/vim, /usr/bin/vi, \
+                      /usr/bin/systemct, /usr/bin/wifi-menu, /usr/bin/cryptsetup, \
+                      /usr/bin/mount, /usr/bin/umount
+myusername ALL=USER1
 # cp /etc/X11/xinit/xinitrc ~/.xinitrc	
 # vi /home/eternaltyro/.xinitrc
 
@@ -168,17 +172,18 @@ Install Fonts
 =============
 
 # pacman -S ttf-dejavu ttf-anonymous-pro ttf-inconsolata
-
+# Install ttf-tamil package from AUR
 
 Install PKG
 ===========
 
 pacman -S vlc
-pacman -S inkscape
+pacman -S inkscape gimp
 pacman -S mpd
 pacman -S tmux
 pacman -S ntfs-3g (or you can't write to NTFS devices)
 pacman -S jre8-openjdk icedtea-web
 pacman -S vagrant docker
 pacman -S xorg-xrdb (rendering Xresources)
-e
+pacman -S cherrytree
+pacman -S ibus ibus-m17n
