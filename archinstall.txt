@@ -173,6 +173,16 @@ Install Fonts
 
 # pacman -S ttf-dejavu ttf-anonymous-pro ttf-inconsolata
 # Install ttf-tamil package from AUR
+## Add infinality repository
+pacman-key -r 962DDE58
+pacman-key --lsign 962DDE58
+cat <<'INFIN' >>/etc/pacman.conf
+[infinality-bundle]
+Server =  http://bohoomil.com/repo/$arch
+pacman -Syyy
+pacman -S infinality-bundle #(select default [all] for freetype, cairo 
+and fontconfig replacements)
+
 
 Install PKG
 ===========
@@ -187,3 +197,14 @@ pacman -S vagrant docker
 pacman -S xorg-xrdb (rendering Xresources)
 pacman -S cherrytree
 pacman -S ibus ibus-m17n
+pacman -S vim-airline
+google-chrome (AUR)
+
+
+YUBIKEY
+=======
+Add UDEV rules for U2F token by YubiKey
+
+cat <<U2F >> /etc/udev/rules.d/45-u2f.rules
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0120", TAG+="uaccess"
+U2F
