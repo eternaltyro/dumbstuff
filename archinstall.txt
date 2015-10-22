@@ -198,6 +198,7 @@ pacman -S xorg-xrdb (rendering Xresources)
 pacman -S cherrytree
 pacman -S ibus ibus-m17n
 pacman -S vim-airline
+(VIM airline config?)
 google-chrome (AUR)
 
 
