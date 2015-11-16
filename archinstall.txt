@@ -163,7 +163,8 @@ Install Lain
 Download and install lain-git package from AUR
 
 Updating Repos: pacman -Syy
-Upgrading Packages: pacman -Su
+Upgrading Packages: pacman -Su | pacman -Syu
+Removing Packages: pacman -R
 
 # pacman -S wget
 # pacman -S gnucash
@@ -198,8 +199,11 @@ pacman -S xorg-xrdb (rendering Xresources)
 pacman -S cherrytree
 pacman -S ibus ibus-m17n
 pacman -S vim-airline
-google-chrome (AUR)
+pacman -S chromium
+pacman -S python-pip
 
+pip install requests
+pip install ipython
 
 YUBIKEY
 =======
