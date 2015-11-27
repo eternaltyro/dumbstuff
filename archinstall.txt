@@ -75,25 +75,29 @@ default arch
 
 # reboot
 
+
+##### POST INSTALL CONFIGURATION
+
 ## Configure Internet using netctl. 
 ## Interface name from `ip link`
-# cp /etc/netctl/examples/ethernet-static /etc/netctl/
-# netctl start ethernet-static
-# netctl enable ethernet-static
+sudo cp /etc/netctl/examples/ethernet-static /etc/netctl/
+sudo netctl start ethernet-static
+sudo netctl enable ethernet-static
 
-
-# useradd -m -G wheel -s /bin/zsh eternaltyro
-# passwd eternaltyro
+sudo useradd -m -G wheel -s /bin/zsh eternaltyro
+sudo passwd eternaltyro
 Enter new UNIX password: somelongcompl3x$hi+
 Retype new UINX password: samelongcompl3x$hi+
 passwd: password updated successfully
-# pacman -S awesome zsh slim slim-themes xorg-server xorg-xinit xf86-input-synaptics alsa-utils vicious rxvt-unicode rxvt-unicode-terminfo
-# pacman -S moc
-# pacman -S btrfs-progs
-# pacman -S snapper
-# pacman -S firefox
-# pacman -S libreoffice-fresh
-rlwrap, dex, vicious, alsa-utils, wireless_tools, 
+
+sudo pacman -S xorg-server xorg-xinit xf86-input-synaptics
+sudo pacman -S rxvt-unicode rxvt-unicode-terminfo
+sudo pacman -S awesome zsh slim slim-themes vicious
+sudo pacman -S alsa-utils moc vlc mpd
+sudo pacman -S btrfs-progs snapper
+sudo pacman -S firefox chromium
+sudo pacman -S libreoffice-fresh
+#rlwrap, dex, wireless_tools 
 
 visudo
 Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
@@ -102,29 +106,32 @@ Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
                       /usr/bin/systemct, /usr/bin/wifi-menu, /usr/bin/cryptsetup, \
                       /usr/bin/mount, /usr/bin/umount
 myusername ALL=USER1
-# cp /etc/X11/xinit/xinitrc ~/.xinitrc	
-# vi /home/eternaltyro/.xinitrc
 
-Comment out the xterms and twm lines in the bottom and add awesome like so
+sudo cp /etc/X11/xinit/xinitrc ~/.xinitrc	
+sudo vim /home/eternaltyro/.xinitrc
+
+# Comment out the xterms and twm lines in the bottom and add awesome like so
 setxkbmap dvorak
 exec awesome
 
-# vi /etc/slim.conf
-# systemctl enable slim
+sudo vi /etc/slim.conf
+sudo systemctl enable slim
 
-https://bbs.archlinux.org/viewtopic.php?id=120243
+## https://bbs.archlinux.org/viewtopic.php?id=120243
 
 ZSH config
 ==========
 
 Z Shell is configured the first time user logs in
+# Install `prezto-git` for Zsh customization
 
-VirtualBox Guest:
-=================
+# If virtualbox guest, add virtualbox modules
+# Errors starting X could be related to this
 
-If Arch is installed as a virtualbox guest, there could be errors starting X. To fix this, install the `virtualbox-guest-utils` package. Then do:
-
-# modprobe -a vboxguest vboxvideo vboxsf 
+if grep hypervisor /proc/cpuinfo > /dev/null; then
+    sudo pacman -S virtualbox-guest-utils
+    sudo modprobe -a vboxguest vboxvideo vboxsf
+fi
 
 Only vboxvideo and vboxguest are important. vboxsf is for shared directories.
 
@@ -143,8 +150,6 @@ Section "InputClass"
         Option "XkbLayout" “latam”
 EndSection
 https://bbs.archlinux.org/viewtopic.php?id=96634
-TODO:
-Fix initrd keyboard layout keyboard layout 
 
 xorg-xbacklight
 # echo 5000 > /sys/class/backlight/intel_backlight/brightness
@@ -152,27 +157,24 @@ xorg-xbacklight
 pacman -S xbindkeys
 xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 
-Install KeePassX
+# Install KeePassX
 ================
-
 Download the AUR package for keepassx2 and `makepkg -sri` 
 
-Install Lain
-============
+# Install Lain
 
-Download and install lain-git package from AUR
+# Download and install lain-git package from AUR
 
 Updating Repos: pacman -Syy
 Upgrading Packages: pacman -Su | pacman -Syu
 Removing Packages: pacman -R
 
-# pacman -S wget
-# pacman -S gnucash
+sudo pacman -S wget
+sudo pacman -S gnucash
 
-Install Fonts
-=============
+# Install Fonts
 
-# pacman -S ttf-dejavu ttf-anonymous-pro ttf-inconsolata
+sudo pacman -S ttf-dejavu ttf-anonymous-pro ttf-inconsolata
 # Install ttf-tamil package from AUR
 ## Add infinality repository
 pacman-key -r 962DDE58
@@ -180,34 +182,39 @@ pacman-key --lsign 962DDE58
 cat <<'INFIN' >>/etc/pacman.conf
 [infinality-bundle]
 Server =  http://bohoomil.com/repo/$arch
+INFIN
+
 pacman -Syyy
 pacman -S infinality-bundle #(select default [all] for freetype, cairo 
 and fontconfig replacements)
 
+sudo pacman -S inkscape gimp
+sudo pacman -S tmux vim-airline
+sudo pacman -S ntfs-3g (or you can't write to NTFS devices)
+sudo pacman -S jre8-openjdk icedtea-web
+sudo pacman -S virtualbox
+sudo modprobe vboxdrv
+sudo pacman -S vagrant docker
+sudo systemctl enable docker
+sudo systemctl start docker
+gem install rhc ## Openshift RedHat Client
+rhc-setup
+PATH=$PATH:/home/yogesh/.gem/ruby/2.2.0/bin
+## Install heroku toolbelt
+wget -O- https://toolbelt.heroku.com/install.sh | sh
+PATH=$PATH:/usr/local/heroku/bin
+sudo pacman -S xorg-xrdb (rendering Xresources)
+sudo pacman -S cherrytree
+sudo pacman -S ibus ibus-m17n
 
-Install PKG
-===========
+sudo pacman -S python-pip
+sudo pip install requests
+sudo pip install ipython
 
-pacman -S vlc
-pacman -S inkscape gimp
-pacman -S mpd
-pacman -S tmux
-pacman -S ntfs-3g (or you can't write to NTFS devices)
-pacman -S jre8-openjdk icedtea-web
-pacman -S vagrant docker
-pacman -S xorg-xrdb (rendering Xresources)
-pacman -S cherrytree
-pacman -S ibus ibus-m17n
-pacman -S vim-airline
-pacman -S chromium
-pacman -S python-pip
-
-pip install requests
-pip install ipython
-
-YUBIKEY
-=======
-Add UDEV rules for U2F token by YubiKey
+##########################################
+# YUBIKEY
+# Add UDEV rules for U2F token by YubiKey
+##########################################
 
 cat <<U2F >> /etc/udev/rules.d/45-u2f.rules
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0120", TAG+="uaccess"
