@@ -219,3 +219,12 @@ sudo pip install ipython
 cat <<U2F >> /etc/udev/rules.d/45-u2f.rules
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0120", TAG+="uaccess"
 U2F
+
+########################################
+# DOCKER 
+# Add IP forwarding to fix container public routing issue
+####################################
+# cat >/etc/systemd/network/ipforward.network <<EOF
+[Network]
+IPForward=yes
+EOF
