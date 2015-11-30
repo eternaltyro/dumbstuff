@@ -228,3 +228,7 @@ U2F
 [Network]
 IPForward=yes
 EOF
+
+## Blacklist PC speaker to prevent system beeps
+echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+sudo rmmod pcspkr
