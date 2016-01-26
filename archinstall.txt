@@ -194,7 +194,7 @@ sudo pacman -S ntfs-3g (or you can't write to NTFS devices)
 sudo pacman -S jre8-openjdk icedtea-web
 sudo pacman -S virtualbox
 sudo modprobe vboxdrv
-sudo pacman -S vagrant docker
+sudo pacman -S vagrant docker lxc
 sudo systemctl enable docker
 sudo systemctl start docker
 gem install rhc ## Openshift RedHat Client
@@ -226,9 +226,10 @@ U2F
 ####################################
 # cat >/etc/systemd/network/ipforward.network <<EOF
 [Network]
-IPForward=yes
+IPForward=kernel
 EOF
 
 ## Blacklist PC speaker to prevent system beeps
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 sudo rmmod pcspkr
+pacman -S zathura-pdf-poppler
