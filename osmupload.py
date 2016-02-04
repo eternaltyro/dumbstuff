@@ -32,12 +32,12 @@ class OsmUpload(object):
         self.passwordfile = u'/tmp/osm.pwd'
         self.csv_file = csv_file
 
-    def Point(self, list):
+    def create_point(self, list):
         self.lat = list[0]
         self.lon = list[1]
         return self.lat, self.lon
 
-    def Polygon(self, list):
+    def create_polygon(self, list):
         self.polygon_nodes = []
         for ordinate_pair in list:
             osm_handle = OsmApi(passwordfile=self.passwordfile, api=self.api)
