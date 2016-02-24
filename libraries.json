@@ -1,0 +1,107 @@
+{
+    "maduvankarai_public_library": { 
+        "lon":"80.21416666666667",
+        "lat":"12.999444444444444",
+        "tag":{
+            "amenity":"library",
+            "name":"Maduvinkarai District Branch Library",
+            "operator":"Chennai Corporation",
+            "level":"1",
+            "opening_hours":"Mo-Th 08:00-11:30,14:00-19:00; week 02 Sa off; Su off",
+            "addr:city":"Chennai",
+            "addr:street":"Five furlong road, Maduvankarai, Guindy",
+            "addr:postcode":"600032",
+            "addr:country":"IN",
+            "name:ta": "மடுவன்கரை கிளை நூலகம்"
+        }
+    },
+    "velachery_public_library": {
+        "lat":"",
+        "lon":"",
+        "tag": {
+            "amenity":"library",
+            "name":"Chennai District full time library, Velachery",
+            "addr:city":"Chennai",
+            "addr:postcode": "600042",
+            "addr:street":"7th Avenue, Thandeeswaram Nagar, Velachery",
+            "addr:housenumber":"153",
+            "name:ta":"சென்னை மாவட்ட முழு நேர நூலகம்" 
+        }
+    },
+    "panuval_private_library": {
+        "lat":"12.97496192",
+        "lon":"80.25853169",
+        "tag": {
+            "shop":"books",
+            "name":"Panuval",
+            "operator":"Panuval",
+            "level":"1",
+            "opening_hours":"Mo-Fr:10:00-18:00",
+            "addr:city":"Chennai",
+            "addr:suburb":"Tiruvanmiyur",
+            "addr:street":"Thiruvalluvar Salai",
+            "addr:postcode":"600041",
+            "addr:housenumber":"112",
+            "name:ta":"பனுவல் புத்தக விற்பனை நிலையம்",
+            "contact:phone": "+91 44 4310 0442",
+            "contact:email":"buybooks@panuval.com",
+            "contact:website":"www.panuval.com" }
+    },
+    "elur_library": {
+        "lat":"",
+        "lon":"",
+        "amenity":"library",
+        "name":"Elur private library",
+        "addr:city":"Chennai",
+        "addr:area":"T Nagar"
+    },
+    "T-nagar_library": {
+        "lat":"",
+        "lon":"",
+        "amenity":"library",
+        "name":"",
+        "addr:city":"Chennai",
+        "addr:street":"North Boag Road",
+        "addr:postcode":""
+    },
+    "Cofee_central_library": {
+        "lat":"",
+        "lon":"",
+        "tag": {
+            "amenity":"library",
+            "operator":"Coffee Central",
+            "level":"0",
+            "addr:city":"Chennai",
+            "addr:street":"North Boag Road"
+        }
+    },
+    "Velachery_private_library": {
+        "lat":"",
+        "lon":"",
+        "tag": {
+            "amenity":"library",
+            "name":"",
+            "operator":"",
+            "addr:city":"Chennai",
+            "addr:street":"Velachery-Tambaram Road",
+            "addr:postcode":"600042"
+        }
+    },
+    "Anna_Centenary_library": {
+        "lat":"",
+        "lon":"",
+        "tag": {
+            "amenity":"library",
+            "name":"Anna Centenary Library",
+            "operatory":"Chennai Corporation",
+            "addr:city":"Chennai",
+            "addr:street":"Kotturpuram Road",
+            "addr:postcode":"600025",
+            "contact:website":"www.annacentenarylibrary.com",
+            "contact:email":"acl.librarians@gmail.com",
+            "contact:phone": "+91 44 2220 1011",
+            "opening_hours": "Mo-Su 09:00-20:00; PH off",
+            "name:ta": "அண்ணா நூற்றாண்டு நூலகம்"
+        }
+    }
+}
