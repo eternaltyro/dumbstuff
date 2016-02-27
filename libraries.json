@@ -50,19 +50,23 @@
     "elur_library": {
         "lat":"",
         "lon":"",
-        "amenity":"library",
-        "name":"Elur private library",
-        "addr:city":"Chennai",
-        "addr:area":"T Nagar"
+        "tag": { 
+            "amenity":"library",
+            "name":"Elur private library",
+            "addr:city":"Chennai",
+            "addr:area":"T Nagar"
+        }
     },
     "T-nagar_library": {
         "lat":"",
         "lon":"",
-        "amenity":"library",
-        "name":"",
-        "addr:city":"Chennai",
-        "addr:street":"North Boag Road",
-        "addr:postcode":""
+        "tag": {
+            "amenity":"library",
+            "name":"",
+            "addr:city":"Chennai",
+            "addr:street":"North Boag Road",
+            "addr:postcode":""
+        }
     },
     "Cofee_central_library": {
         "lat":"",

@@ -1,0 +1,77 @@
+{
+    "type": "FeatureCollection",
+    "copyright": "EternalTyro - CC-BY",
+    "timestamp": "",
+    "features": [
+    {
+        "type": "Feature",
+        "id": "",
+        "properties": {
+            "name": "Maduvankarai District Branch Library",
+            "amenity": "library",
+            "operator": "Chennai Corporation",
+            "opening_hours": "Mo-Th 08:00-11:30,14:00-19:00; week 02 Sa off; Su off",
+            "addr:city": "Chennai",
+            "addr:street": "",
+            "addr:housenumber": "",
+            "addr:postcode": "",
+            "addr:level": "",
+            "name:ta": ""
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+            80.21416666666667,
+            12.999444444444444
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "id": "",
+        "properties": {
+            "name": "Maduvankarai District Branch Library",
+            "amenity": "library",
+            "operator": "Chennai Corporation",
+            "opening_hours": "Mo-Th 08:00-11:30,14:00-19:00; week 02 Sa off; Su off",
+            "addr:city": "Chennai",
+            "addr:street": "",
+            "addr:housenumber": "",
+            "addr:postcode": "",
+            "addr:level": "",
+            "name:ta": ""
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+            80.21416666666667,
+            12.999444444444444
+            ]
+        }
+    }
+    {
+        "type": "Feature",
+        "id": "",
+        "properties": {
+            "name": "Gandhi Nagar Branch Library",
+            "amenity": "library",
+            "operator": "Chennai Corporation",
+            "opening_hours": "Mo-Th 08:00-11:30,14:00-19:00; week 02 Sa off; Su off",
+            "addr:city": "Chennai",
+            "addr:street": "x Main Road, Gandhi Nagar",
+            "addr:housenumber": "",
+            "addr:postcode": "",
+            "addr:level": "",
+            "name:ta": ""
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+            80.256944,
+            13.009444
+            ]
+        }
+    }
+    
+    ]
+}
