@@ -1,32 +1,52 @@
-from geojson import FeatureCollection, Feature, Point
+from geojson import Point
+from geojson import Feature, FeatureCollection
+from geojson import dump, load
+import os
 
-class LibraryPoint(object):
+DATAFILE='libraries_new.geojson'
 
-    def __init__(self, lat='', lon='', opening_hours='', operator='',
-            housenumber='', city='', postcode='', amenity='library', country='IN'):
-        self.lat = lat
-        self.lon = lon
-        self.opening_hours = opening_hours
-        self.amenity = amenity
-        self.operator = operator
-        self.housenumber = housenumber
-        self.city = city
-        self.country = country
-        self.postcode = postcode
+lat = input('lat: ')
+lon = input('lon: ')
+my_point = Point((lat,lon))
 
+''' Properties:
+    Name
+    Operator
+    Opening Hours
+    Address
+'''
 
+name = raw_input('Name: ')
+timings = raw_input('Time: ')
+street = raw_input('Street: ')
+housenumber = raw_input('Numb: ')
+postcode = raw_input('PINCODE: ')
 
-def getDetails():
-    lat = input('lat> ')
-    lon = input('lon> ')
-    opening_hours = raw_input('opening hours> ')
-    operator = raw_input('operator> ')
-    housenumber = raw_input('housenumber> ')
-    postcode = raw_input('postcode> ')
-    city = raw_input('city> ')
-    return lat,lon,opening_hours,operator,housenumber,city,postcode
+my_feature = Feature(geometry=my_point, properties={
+    'amenity':'library',
+    'name':name,
+    'operator':'Directorate of Public Libraries',
+    'opening_hours':timings,
+    'addr:country':'IN',
+    'addr:city':'Chennai',
+    'addr:street':street,
+    'addr:housenumber':housenumber,
+    'address:postcode':postcode } )
 
-xyz = LibraryPoint(getDetails())
-print xyz.lat, xyz.lon, xyz.postcode
+if os.stat(DATAFILE).st_size == 0:
+    FILE_EMPTY = True
+else:
+    FILE_EMPTY = False
 
+if not FILE_EMPTY:
+    with open(DATAFILE,'r') as data:
+        current = load(data)
+        featureSet = current['features']
+        featureSet.append(my_feature)
+        libraries = FeatureCollection(featureSet)
+else:
+        libraries = FeatureCollection([my_feature])
+
+with open(DATAFILE,'w+') as data:
+    dump(libraries,data)
 
