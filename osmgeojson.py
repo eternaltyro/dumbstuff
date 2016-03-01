@@ -66,6 +66,6 @@ else:
     libraries = FeatureCollection([my_feature])
 
 with open(GEODATAFILE,'w+') as data:
-    dump(libraries,data)
+    dump(libraries, data, indent=4, sort_keys=True)
 
 
