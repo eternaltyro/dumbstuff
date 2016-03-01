@@ -166,6 +166,7 @@
                 "address:postcode": "600032",
                 "amenity": "library",
                 "marker-symbol": "library",
+                "marker-color": "#ff0000",
                 "name": "Eloor Private Library",
                 "opening_hours": "Mo-Fr 10:00-18:00",
                 "operator": "Directorate of Public Libraries"
