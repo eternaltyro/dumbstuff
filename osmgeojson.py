@@ -7,7 +7,8 @@ DATAFILE='libraries_new.geojson'
 
 lat = input('lat: ')
 lon = input('lon: ')
-my_point = Point((lat,lon))
+# GeoJSON point is Easting, Northing / Long, Lat order!
+my_point = Point((lon,lat))
 
 ''' Properties:
     Name
