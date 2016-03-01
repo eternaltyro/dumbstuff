@@ -183,6 +183,29 @@
                 "operator": "Directorate of Public Libraries"
             },
             "type": "Feature"
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    80.2397,
+                    13.01696
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "addr:city": "Chennai",
+                "addr:country": "IN",
+                "addr:housenumber": "",
+                "addr:street": "Kotturpuram Main Road",
+                "address:postcode": "600025",
+                "amenity": "library",
+                "marker-color": "#00ff00",
+                "marker-symbol": "library",
+                "name": "Anna Centenary Library",
+                "opening_hours": "Mo-Su 09:00-20:00 || Mo-Su 08:00-21:00 open \"Own book reading section\"",
+                "operator": "Directorate of Public Libraries"
+            },
+            "type": "Feature"
         }
     ],
     "type": "FeatureCollection"
