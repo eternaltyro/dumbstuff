@@ -118,10 +118,10 @@ Server =  http://bohoomil.com/repo/$arch
 INFIN
 
 pacman -S infinality-bundle #(select default [all] for freetype, cairo 
-and fontconfig replacements)
+#and fontconfig replacements)
 
 pacman -S inkscape gimp
-pacman -S ntfs-3g (or you can\'t write to NTFS devices)
+pacman -S ntfs-3g #or you can\'t write to NTFS devices
 pacman -S jre8-openjdk icedtea-web
 
 #######################################
