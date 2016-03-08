@@ -201,6 +201,7 @@ main() {
     err "exiting with error"
     exit 1
   fi
+  echo "ELK Stack installation complete!"
 }
 
 main
