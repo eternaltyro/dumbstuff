@@ -17,6 +17,7 @@ check_root() {
     exit 1
   fi
 }
+check_root
 
 #############################
 # Function to pipe errors to
@@ -155,6 +156,7 @@ test_k() {
 
 ############################################################
 # Main function running in order:
+# 0. Prepare the system: Add repositories, update, etc.
 # 1. Install elasticsearch, logstash, kibana in that order
 # 2. Start elasticsearch service; once it is up,
 # 3. Start logstash; Check and report Logstash status
@@ -162,8 +164,6 @@ test_k() {
 # 5. If any of these fail, exit with error 
 ############################################################
 main() {
-  check_root
-  check_ubuntu
   sys_prep
   install_elasticsearch
   install_logstash
