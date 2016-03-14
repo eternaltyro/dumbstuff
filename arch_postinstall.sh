@@ -153,14 +153,15 @@ pacman -S ibus ibus-m17n
 ###########################
 ### PYTHON PACKAGES
 ###########################
-pacman -S python2 python2-pip
+pacman -S python2 python2-pip ipython2-notebook
+pip2.7 install jupyter
 pip2.7 install requests
 pip2.7 install ipython
 pip2.7 install osmapi
 pip2.7 install ipython
 pip2.7 install geojson
 pip2.7 install fastly
-pip2.7 install requests
+pip2.7 install scrapy
 
 ##########################################
 # YUBIKEY
