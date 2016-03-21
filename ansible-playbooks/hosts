@@ -1,0 +1,17 @@
+archlaptop ansible_connection=local ansible_user=eternaltyro become=yes  
+
+[homepc]
+homeubuntu ansible_connection=ssh ansible_user=eternaltyro become=yes ansible_become_pass=cuddalore ansible_host=11.23.58.140
+
+[storage]
+nfs ansible_connection=ssh ansible_user=mediagoblin ansible_host=11.23.58.199
+
+[openstack]
+velachery ansible_connection=ssh ansible_user=localadmin ansible_host=11.23.58.138
+
+
+[all]
+11.23.58.138
+11.23.58.140
+11.23.58.199
+

@@ -1,0 +1,67 @@
+type:full_name:name:code:description:color:notes:commoditym:commodityn:hidden:tax:place_holder
+ASSET:Assets:Assets::Assets:::INR:CURRENCY:F:F:T
+ASSET:"Assets:Current Assets":Current Assets::Current Assets:::INR:CURRENCY:F:F:T
+CASH:"Assets:Current Assets:Cash in Wallet":Cash in Wallet::Cash in Wallet:::INR:CURRENCY:F:F:F
+BANK:"Assets:Current Assets:HDFC Savings":HDFC Savings:HDFC:HDFC Account:Not Set::INR:CURRENCY:F:F:F
+BANK:"Assets:Current Assets:HDFC Savings:HDFC Deposits":HDFC Deposits::Fixed Deposits:Not Set::INR:CURRENCY:F:F:F
+BANK:"Assets:Current Assets:ICICI Savings":ICICI Savings:ICIC:ICICI Account:Not Set::INR:CURRENCY:F:F:F
+BANK:"Assets:Current Assets:IDBI Savings":IDBI Savings:IDBI:IDBI Account:Not Set::INR:CURRENCY:F:F:F
+BANK:"Assets:Current Assets:Kotak Savings":Kotak Savings:KKBK:Kotak Account:Not Set::INR:CURRENCY:F:F:F
+BANK:"Assets:Current Assets:Axis Savings":Axis Savings:UTIB:Axis Account:Not Set::INR:CURRENCY:F:F:F
+BANK:"Assets:Current Assets:Axis Savings:AXIS Deposits":AXIS Deposits::Fixed Deposits:Not Set::INR:CURRENCY:F:F:F
+ASSET:"Assets:Fixed Assets":Fixed Assets:::Not Set::INR:CURRENCY:F:F:T
+ASSET:"Assets:Fixed Assets:House":House::Apartment:Not Set:Oragadam:INR:CURRENCY:F:F:F
+ASSET:"Assets:Loan-out":Loan-out:::Not Set::INR:CURRENCY:F:F:F
+LIABILITY:Liabilities:Liabilities::Liabilities:::INR:CURRENCY:F:F:T
+CREDIT:"Liabilities:Credit Card":Credit Card::Credit Card:::INR:CURRENCY:F:F:F
+LIABILITY:"Liabilities:Loans":Loans::Loans:::INR:CURRENCY:F:F:T
+LIABILITY:"Liabilities:Loans:Mortgage Loan":Mortgage Loan::Mortgage Loan:::INR:CURRENCY:F:F:F
+LIABILITY:"Liabilities:Loans:Other Loan":Other Loan::Other Loan:::INR:CURRENCY:F:F:F
+INCOME:Income:Income::Income:::INR:CURRENCY:F:F:T
+INCOME:"Income:Gifts Received":Gifts Received::Gifts Received:::INR:CURRENCY:F:F:F
+INCOME:"Income:Interest Income":Interest Income::Interest Income:::INR:CURRENCY:F:F:F
+INCOME:"Income:Interest Income:Checking Interest":Checking Interest::Checking Interest:::INR:CURRENCY:F:F:F
+INCOME:"Income:Interest Income:Other Interest":Other Interest::Other Interest:::INR:CURRENCY:F:F:F
+INCOME:"Income:Interest Income:Savings Interest":Savings Interest::Savings Interest:::INR:CURRENCY:F:F:F
+INCOME:"Income:Other Income":Other Income::Other Income:::INR:CURRENCY:F:F:F
+INCOME:"Income:Salary":Salary::Salary:::INR:CURRENCY:F:F:F
+EXPENSE:Expenses:Expenses::Expenses:::INR:CURRENCY:F:F:T
+EXPENSE:"Expenses:Bank Service Charge":Bank Service Charge::Bank Service Charge:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Books":Books:::Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Charity":Charity::Charity:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Clothes":Clothes:::Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Computer":Computer::Computer:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Dining":Dining::Dining:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Entertainment":Entertainment::Entertainment:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Entertainment:Music/Movies":Music/Movies::Music/Movies:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Entertainment:Recreation":Recreation::Recreation:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Entertainment:Travel":Travel::Travel:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Gifts":Gifts::Gifts:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Dad":Dad:::Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Haircut":Haircut:::Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Insurance":Insurance::Insurance:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Insurance:Auto Insurance":Auto Insurance::Auto Insurance:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Insurance:Health Insurance":Health Insurance::Health Insurance:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Insurance:Life Insurance":Life Insurance::Life Insurance:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Interest":Interest::Interest:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Interest:Mortgage Interest":Mortgage Interest::Mortgage Interest:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Interest:Other Interest":Other Interest::Other Interest:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Medical Expenses":Medical Expenses::Medical Expenses:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Miscellaneous":Miscellaneous::Miscellaneous:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Rent":Rent::Rent:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Snacks":Snacks:::Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Supplies":Supplies::Supplies:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Transportation":Transportation::Transportation:Not Set::INR:CURRENCY:F:F:T
+EXPENSE:"Expenses:Transportation:Auto / Taxi":Auto / Taxi::Auto / Taxi:Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Transportation:Public transport":Public transport::Bus / Train:Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Utilities":Utilities::Utilities:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Utilities:Cable":Cable:::Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Utilities:Electric":Electric::Electric:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Utilities:Gas":Gas::Gas:::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Utilities:Internet":Internet::ACT Broadband:Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Utilities:Phone":Phone::Phone:Not Set::INR:CURRENCY:F:F:F
+EXPENSE:"Expenses:Utilities:Water":Water::Water:::INR:CURRENCY:F:F:F
+EQUITY:Equity:Equity::Equity:::INR:CURRENCY:F:F:T
+EQUITY:"Equity:Opening Balances":Opening Balances::Opening Balances:::INR:CURRENCY:F:F:F
+BANK:Imbalance-INR:Imbalance-INR:::::INR:CURRENCY:F:F:F
+BANK:Orphan-INR:Orphan-INR:::::INR:CURRENCY:F:F:F

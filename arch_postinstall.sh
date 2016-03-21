@@ -32,8 +32,27 @@ pacman -S tmux vim-airline
 
 pacman -S alsa-utils moc vlc mpd mpc
 pacman -S btrfs-progs snapper
-pacman -S firefox chromium
-pacman -S libreoffice-fresh
+pacman -S firefox chromium claws-mail claws-mail-themes skype
+pacman -S libreoffice-fresh hunspell-en gnucash cherrytree keepassx2
+pacman -S ibus ibus-m17n
+pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
+pacman -S slock dos2unix unzip redshift wget
+pacman -S ristretto shotwell fbreader tumbler
+pacman -S nodejs npm
+pacman -S dnsutils whois nmap gnu-netcat
+pacman -S tree josm
+pacman -S openldap
+pacman -S hdparm strace dmidecode
+pacman -S git bzr
+pacman -S openvpn
+pacman -S rdesktop
+youtube-dl -U
+pacman -S ansible
+pacman -S putty
+pacman -S inkscape gimp josm
+pacman -S ntfs-3g #or you can\'t write to NTFS devices
+pacman -S jre8-openjdk icedtea-web
+
 #rlwrap, dex, wireless_tools 
 
 visudo
@@ -82,18 +101,13 @@ Section "InputClass"
 EndSection
 https://bbs.archlinux.org/viewtopic.php?id=96634
 
-xorg-xbacklight
+# pacman -S xorg-xbacklight
 # echo 5000 > /sys/class/backlight/intel_backlight/brightness
 # cat /sys/class/backlight/intel_backlight/max_brightness
 pacman -S xbindkeys
 xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 
-# Install KeePassX
-================
-Download the AUR package for keepassx2 and `makepkg -sri` 
-
 # Install Lain
-
 # Download and install lain-git package from AUR
 
 :() {
@@ -103,8 +117,6 @@ Removing Packages: pacman -R
 sudo pacman -Rsn $(pacman -Qdtq)
 }
 
-pacman -S wget
-pacman -S gnucash
 
 # Install Fonts
 pacman -S ttf-dejavu ttf-anonymous-pro ttf-inconsolata
@@ -120,9 +132,6 @@ INFIN
 pacman -S infinality-bundle #(select default [all] for freetype, cairo 
 #and fontconfig replacements)
 
-pacman -S inkscape gimp
-pacman -S ntfs-3g #or you can\'t write to NTFS devices
-pacman -S jre8-openjdk icedtea-web
 
 #######################################
 ### Virtualization and code deployment
@@ -137,7 +146,7 @@ systemctl start docker
 
 gem install rhc ## Openshift RedHat Client
 rhc-setup
-PATH=$PATH:/home/yogesh/.gem/ruby/2.2.0/bin
+PATH=$PATH:/home/eternaltyro/.gem/ruby/2.2.0/bin
 
 ## Install heroku toolbelt
 wget -O- https://toolbelt.heroku.com/install.sh | sh
@@ -146,9 +155,6 @@ PATH=$PATH:/usr/local/heroku/bin
 
 ## Need to configure better on Arch. KVM package?
 pacman -S qemu virt-manager
-
-pacman -S cherrytree
-pacman -S ibus ibus-m17n
 
 ###########################
 ### PYTHON PACKAGES
@@ -184,31 +190,8 @@ EOF
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 sudo rmmod pcspkr
 
-## Document Readers
-pacman -S zathura-pdf-poppler zathura-pdf-mupdf
-pacman -S qpdf
 
 google-talkplugin (aur)
-
-pacman -S slock redshift
-pacman -S clamav claws-mail claws-mail-themes
-pacman -S ristretto shotwell fbreader tumbler
-pacman -S nodejs npm
-pacman -s mpc 
-pacman -S dnsutils whois nmap gnu-netcat
-pacman -S unzip
-pacman -S dos2unix
-pacman -S tree josm
-pacman -S openldap
-pacman -S hdparm strace dmidecode
-pacman -S git bzr
-pacman -S openvpn
-pacman -S hunspell-en
-pacman -S skype
-pacman -S rdesktop
-youtube-dl -U
-pacman -S ansible
-pacman -S putty
 
 ### ARDUINO PACKAGES
 ardunio (AUR)

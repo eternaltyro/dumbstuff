@@ -1,0 +1,29 @@
+---
+- hosts: archlaptop
+  remote_user: eternaltyro 
+  become: yes
+
+  tasks:
+  - name: Install Security essentials
+    pacman: name=keepassx2 state=latest
+
+  - name: Install X essentials
+    pacman:
+      name: xorg-xrdb,xorg-xkill,xorg-xrandr,xorg-server,xorg-xinit,xf86-input
+      state: latest
+
+  - name: Setup Window Manager and Shell
+    pacman:
+      name: awesome,slim,slim-themes,vicious,zsh,tmux,vim-airline
+      state: latest
+
+  - name: Setup Multimedia
+    pacman:
+      name: mpd,mpc,moc,vlc,alsa-utils
+      state: latest
+
+  - name: Setup Office tools
+    pacman:
+      name: libreoffice-fresh,firefox,cherrytree, gnucash
+      state: latest
+...

@@ -1,0 +1,43 @@
+---
+- hosts: openstack
+  remote_user: localadmin
+  become: yes
+
+  tasks:
+  - name: Ensure apache2 is up to date
+    apt: name=apache2 state=latest
+  - name: Write apache2 template
+    template: src=/usr/share/examples/apache2_openstack.conf dest=/etc/apache2/apache2.conf
+    notify:
+    - restart apache
+  - name: Enable apache and make it run at boot
+    service: name=apache2 state=started enabled=yes
+  handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted
+
+- hosts: homepc
+  remote_user: eternaltyro
+  become: yes
+
+  tasks:
+  - name: Upgrade everything including Kernel
+    apt: update_cache=yes upgrade=dist
+
+- hosts: archlaptop
+  remote_user: eternaltyro
+  become: yes
+
+  tasks:
+  - name: Upgrade Everything
+    pacman: update_cache=yes upgrade=yes
+
+- hosts: storage
+  remote_user: mediagoblin
+  become: yes
+
+  tasks:
+  - name: Upgrade everything including Kernel
+    apt: update_cache=yes upgrade=dist
+
+...  
