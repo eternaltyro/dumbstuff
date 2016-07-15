@@ -11,3 +11,8 @@ Add to the top of scripts the following for vim to be able to read
 #!/usr/bin/env python
 #
 # vim: set expandtab:tw=4:ts=4:sw=4:
+
+# before you paste in a vim session that has ai and si on
+:set paste
+
+# spliting the window
