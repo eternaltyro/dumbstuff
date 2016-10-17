@@ -1,0 +1,93 @@
+#domainf.net {
+#    root /usr/local/www
+#    log ./monitorix.log
+#    tls domail@mail.com
+#    basicauth / admin passwordpassword123123
+#    fastcgi /cgi-bin localhost:8999 {
+#        ext   .pl
+#        split .pl
+#        index index.html
+#    }
+#}
+
+domainf.net:2015  {
+    root /usr/local/www/domainf.net
+    log /usr/local/www/domainf.net/domainf.log
+    tls domail@mail.com
+    gzip
+    browse 
+    basicauth /public admin password123password123
+
+    header / {
+        X-Spock "Live Long and Prosper!"
+        # Enable HTTP Strict Transport Security (HSTS) to force clients to always
+        # connect via HTTPS (not recommended if only experimenting with HTTPS)
+        Strict-Transport-Security  "max-age=31536000; includeSubDomains; preload"
+        # Enable cross-site filter (XSS) and tell browser to block detected attacks
+        X-XSS-Protection "1; mode=block"
+        # Prevent some browsers from MIME-sniffing a response away from the declared Content-Type
+        X-Content-Type-Options "nosniff"
+        # Disallow the site to be rendered within a frame (clickjacking protection)
+        X-Frame-Options "DENY"
+        Content-Security-Policy "default-src https: 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src *"
+    }
+
+    filemanager {
+        show /usr/local/www/domainf.net/public
+        on /public
+    }
+
+    markdown /posts {
+        css github-markdown.css
+    }
+}
+
+# As of Caddy 0.9.3, syntax has changed;
+# hugo [directory] [admin path] {
+#   flag [directive in longform] [value]
+#
+# No value is evaluated as `true`. This does not, however, work as
+# expected. Instead, add the flags to the `config.toml` file inside the
+# domain directory AND comment the hugo sub-block out in the Caddyfile.
+domaing.me {
+    root /usr/local/www/domaing/public
+    hugo /usr/local/www/domaing # {
+#        buildDrafts
+#        watch
+#        theme paperback
+#    }
+    log /usr/local/www/domaing/domaing.log
+    tls domail@mail.com
+    gzip
+    basicauth /admin adming superweaksecretpassword123
+
+    header / {
+        X-Spock "Live Long and Prosper!"
+        Strict-Transport-Security  "max-age=31536000; includeSubDomains; preload"
+        X-XSS-Protection "1; mode=block"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Content-Security-Policy "default-src https: 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com"
+    }
+}
+
+http://96deadbeefdeadbee.onion:80 http://96deadbeefdeadbee.onion:8080 localhost:8080 127.0.0.1:8080 {
+    root /usr/local/www/torservice/public
+    hugo /usr/local/www/torservice {
+        flag buildDrafts
+        flag watch
+        flag theme paperback
+    }
+    log /usr/local/www/torservice/torservice.log
+    tls off
+    gzip
+    basicauth /admin torservice bzzztbzzt1234
+    header / {
+        X-Spock "Live Long and Prosper!"
+        Strict-Transport-Security  "max-age=31536000; includeSubDomains; preload"
+        X-XSS-Protection "1; mode=block"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com"
+    }
+}
