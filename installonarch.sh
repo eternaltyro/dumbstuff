@@ -46,3 +46,8 @@ apt-get -y install bc units
 
 git config --global user.name "My name"
 git config --global user.email "myemail@domain.com"
+git config --global core.editor "vim"
+
+# Set vim as the editor throughout
+export VISUAL=vim
+export EDITOR="$VISUAL"
