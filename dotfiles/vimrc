@@ -34,3 +34,6 @@ set omnifunc=pythoncomplete#Complete
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 map <F2> :NERDTreeToggle<CR>
+
+autocmd FileType tf setlocal shiftwidth=2 tabstop=2
+autocmd FileType tfvars setlocal shiftwidth=2 tabstop=2
