@@ -37,3 +37,9 @@ map <F2> :NERDTreeToggle<CR>
 
 autocmd FileType tf setlocal shiftwidth=2 tabstop=2
 autocmd FileType tfvars setlocal shiftwidth=2 tabstop=2
+
+" https://superuser.com/questions/22444/make-vim-display-a-line-at-the-edge-of-the-set-textwidth
+" set colorcolumn=80
+" set colorcolumn=-2 (if textwidth = 80, column would be drawn in 78)
+" highlight ColorColumn ctermbg=green guibg=orange
+
