@@ -1,0 +1,57 @@
+#
+# Aliases roughly based on Orwell's 1984 ;)
+#
+
+#
+# Get beanstalkd stats from localhost
+# Example usage: b peek-delayed
+#                b "stats-tube default"
+# Enclose spaced args with double quotes
+#
+b () { echo -e "$1\r\n" | nc localhost 11300 }
+
+#
+# Get values from consul
+#
+# export consul_ro_acl_token="<TOKEN>"
+# kv /instances/manifest/666666
+#
+# consul_ro_acl_token=""
+kv () {
+    curl -H "X-Consul-Token: $consul_ro_acl_token" http://consul."${1}".example.tld:8500/v1/kv"${2}"?raw
+}
+
+#
+# Get git repo
+#
+giticle () {
+    // Clone the repo
+    git clone --depth=1 https://github.com/eternaltyro/$1.git $(echo "$1")
+    // Remove the .git directory
+    rm -rf !$/.git
+}
+
+#
+# Git push origin master
+#
+upsub () { git push origin master }
+
+#
+# badstuff
+#
+ungood () { git revert HEAD }
+
+#
+# goodstuff
+#
+rectify () { }
+
+#
+#
+#
+dayorder () { }
+
+#
+#
+#
+bb () { }

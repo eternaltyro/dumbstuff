@@ -1,3 +1,5 @@
+" Font on terminal - inconsolata
+
 execute pathogen#infect()
 syntax enable
 
@@ -25,8 +27,18 @@ let python_highlight_all = 1
 
 set wrap "Wrap lines"
 
+set numberwidth=5 "Set width of the gutter column
+
 set nu "number - show line numbers"
 
+" Makes it easy to jump up and down x number of lines
+set rnu "relativenumber - show line numbers in relation to the cursor
+
+set cursorline "Highlight current cursor line
+
+"set cursorcolumn "Highlight current column
+
+"set mouse+=a "Use mouse to highlight lines for copy
 
 set omnifunc=pythoncomplete#Complete
 
@@ -43,3 +55,6 @@ autocmd FileType tfvars setlocal shiftwidth=2 tabstop=2
 " set colorcolumn=-2 (if textwidth = 80, column would be drawn in 78)
 " highlight ColorColumn ctermbg=green guibg=orange
 
+" Colors from zenburn: https://github.com/jnurmine/Zenburn/blob/master/colors/zenburn.vim
+" Copy to ~/.vim/colors/
+colors zenburn
