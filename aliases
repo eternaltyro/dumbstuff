@@ -52,6 +52,10 @@ rectify () { }
 dayorder () { }
 
 #
+# [gb | gumball]: create a gzip compressed archive of a file or directory
+# [bb | bunball]: create a bzip2 compressed archive of a file or directory
 #
-#
-bb () { }
+gumball () { tar -czf "${1}.tar.gz" "$1" }
+gb () { tar -czf "${1}.tar.gz" "$1" }
+bunball () { tar -cjf "${1}.tar.bz2" "$1" }
+bb () { tar -cjf "${1}.tar.bz2" "$1" }

@@ -47,6 +47,9 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 map <F2> :NERDTreeToggle<CR>
 
+autocmd Filetype rb setlocal shiftwidth=2 tabstop=2
+autocmd Filetype erb setlocal shiftwidth=2 tabstop=2
+autocmd FileType py setlocal shiftwidth=4 tabstop=4
 autocmd FileType tf setlocal shiftwidth=2 tabstop=2
 autocmd FileType tfvars setlocal shiftwidth=2 tabstop=2
 
@@ -58,3 +61,6 @@ autocmd FileType tfvars setlocal shiftwidth=2 tabstop=2
 " Colors from zenburn: https://github.com/jnurmine/Zenburn/blob/master/colors/zenburn.vim
 " Copy to ~/.vim/colors/
 colors zenburn
+
+set ls=2 "laststatus=2 # Always show status line esp. for vim-airline
+"set t_Co=256 "Terminal colors
