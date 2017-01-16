@@ -90,6 +90,7 @@ channels = (
   { name = "#openstack-101"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#openstack-dev"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#openstack"; chatnet = "Freenode"; autojoin = "Yes"; },
+  { name = "#archlinux"; chatnet = "Freenode"; autojoin = "Yes"; },
   {
     name = "#openstack-community";
     chatnet = "Freenode";
