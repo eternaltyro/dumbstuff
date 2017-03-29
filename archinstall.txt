@@ -2,7 +2,8 @@ ARCH INSTALL (BTRFS + crpyto_LUKS)
 
 Boot with media
 loadkeys Dvorak
-List disks (fdisk -l)
+List disks (fdisk -l) --> Boot media is usually /dev/sda
+Local disk is usually /dev/sdb or /dev/nvme0n1 (NVMe disks)
 Use parted to create ESP and Root data partitions
 
 +—+—— /dev/sda
@@ -21,7 +22,7 @@ Use parted to create ESP and Root data partitions
 
 	# mkfs.fat -F32 /dev/sda1
 
-	# cryptsetup —verbose —cipher aes-xts-plain64 —hash sha512 —key-size 512 —iter-time 5000 —use-random luksFormat /dev/sda2
+	# cryptsetup --verbose --cipher aes-xts-plain64 --hash sha512 --key-size 512 --iter-time 5000 --use-random luksFormat /dev/sda2
 
 ## SWAP CREATION LATER ON  - encrypt with plain encryption with throwaway keys from urandom.
 
