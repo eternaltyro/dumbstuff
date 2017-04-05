@@ -1,40 +1,71 @@
 #!/bin/zsh
 ## POST INSTALL CONFIGURATION
 
-## Configure Internet using netctl. 
-## Interface name from `ip link`
-cp /etc/netctl/examples/ethernet-static /etc/netctl/
-netctl start ethernet-static
-netctl enable ethernet-static
-# netctl switch-to different-network
-
+##############################
+##________ SECURITY ________##
+##############################
+visudo
+Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
+                      /sbin/halt, /sbin/reboot, /sbin/poweroff, \
+                      /usr/bin/pacman, /usr/bin/vim, /usr/bin/vi, \
+                      /usr/bin/systemct, /usr/bin/wifi-menu, /usr/bin/cryptsetup, \
+                      /usr/bin/mount, /usr/bin/umount
+myusername ALL=USER1
 sudo useradd -m -G wheel -s /bin/zsh eternaltyro
 sudo passwd eternaltyro
 Enter new UNIX password: somelongcompl3x$hi+
 Retype new UINX password: samelongcompl3x$hi+
 passwd: password updated successfully
 
-##################################
-### X.org Configuration
-##################################
+gpg2 --recv-keys ec3cbe7f607d11e6
+yaourt -S ecryptfs-simple
+
+################################
+##________ NETWORKING ________##
+################################
+## Configure Internet using netctl.
+## Interface name from `ip link`
+cp /etc/netctl/examples/ethernet-static /etc/netctl/
+netctl start ethernet-static
+netctl enable ethernet-static
+## netctl switch-to different-network
+
+#########################################
+##________ X.ORG CONFIGURATION ________##
+#########################################
 pacman -S xorg-xrdb (rendering Xresources)
 pacman -S xorg-xrandr xorg-xkill
 pacman -S xorg-server xorg-xinit xf86-input-synaptics
 
-########################
-# ZSH, Terminal and VIM 
-########################
-pacman -S awesome zsh slim slim-themes vicious
+########################################
+##________ ZSH, TERMINAL, VIM ________##
+########################################
+pacman -S zsh tmux vim-airline
 pacman -S rxvt-unicode rxvt-unicode-terminfo
-pacman -S tmux vim-airline
+
+pacman -S awesome slim slim-themes vicious
 #Z Shell is configured the first time user logs in
 # Install `prezto-git` for Zsh customization
 
-pacman -S alsa-utils moc vlc mpd mpc
+TODO: vim-fugitive, plugins, etc.
+
+###################################
+##________ AUDIO / SOUND ________##
+###################################
+pacman -S alsa-utils
+pacman -S moc mpd mpc    ## Audio players
+pacman -S vlc
+
 pacman -S btrfs-progs snapper
-pacman -S firefox chromium claws-mail claws-mail-themes skype
-pacman -S libreoffice-fresh hunspell-en gnucash cherrytree keepassx2
-pacman -S ibus ibus-m17n
+pacman -S lynx firefox chromium    ## Browsers
+pacman -S claws-mail claws-mail-themes    ## Mail Clients
+pacman -S libreoffice-fresh hunspell-en
+pacman -S gnucash
+pacman -S cherrytree    ## Note taking
+pacman -S laverna       ## Note taking
+yaourt -S keepassxc     ## Password manager
+pacman -S keepassx2
+pacman -S ibus ibus-m17n  ## Indic language typing
 pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
 pacman -S slock dos2unix unzip redshift wget
 pacman -S ristretto shotwell fbreader tumbler
@@ -43,26 +74,23 @@ pacman -S dnsutils whois nmap gnu-netcat
 pacman -S tree josm
 pacman -S openldap
 pacman -S hdparm strace dmidecode
-pacman -S git bzr
+pacman -S git bzr       ## Distributed version control
 pacman -S openvpn
 pacman -S rdesktop
 youtube-dl -U
 pacman -S ansible
 pacman -S putty
-pacman -S inkscape gimp josm
-pacman -S ntfs-3g #or you can\'t write to NTFS devices
+pacman -S inkscape gimp  ## Raster and Vector graphics editor
+pacman -S josm           ## OpenStreetMap editor
+pacman -S ntfs-3g        ## NTFS devices write support
 pacman -S jre8-openjdk icedtea-web
 
 #rlwrap, dex, wireless_tools 
 
-visudo
-Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
-                      /sbin/halt, /sbin/reboot, /sbin/poweroff, \
-                      /usr/bin/pacman, /usr/bin/vim, /usr/bin/vi, \
-                      /usr/bin/systemct, /usr/bin/wifi-menu, /usr/bin/cryptsetup, \
-                      /usr/bin/mount, /usr/bin/umount
-myusername ALL=USER1
 
+################################
+##________ LOGGING IN ________##
+################################
 cp /etc/X11/xinit/xinitrc ~/.xinitrc	
 vim /home/eternaltyro/.xinitrc
 
@@ -85,6 +113,10 @@ fi
 
 Only vboxvideo and vboxguest are important. vboxsf is for shared directories.
 
+
+####################################
+##________ KEYBOARD INPUT ________##
+####################################
 Fix SLiM Keyboard layout issue
 ==============================
 
@@ -101,6 +133,9 @@ Section "InputClass"
 EndSection
 https://bbs.archlinux.org/viewtopic.php?id=96634
 
+#############################
+##________ DISPLAY ________##
+#############################
 # pacman -S xorg-xbacklight
 # echo 5000 > /sys/class/backlight/intel_backlight/brightness
 # cat /sys/class/backlight/intel_backlight/max_brightness
@@ -117,9 +152,19 @@ Removing Packages: pacman -R
 sudo pacman -Rsn $(pacman -Qdtq)
 }
 
-
-# Install Fonts
-pacman -S ttf-dejavu ttf-anonymous-pro ttf-inconsolata
+###############################
+##__________ FONTS __________##
+###############################
+pacman -S ttf-dejavu    ## Alternative to Bitstream Vera Sans
+pacman -S ttf-liberation
+pacman -S ttf-anonymous-pro
+pacman -S ttf-inconsolata
+pacman -S ttf-linux-libertine ttf-linux-libertine-g
+pacman -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
+pacman -S adobe-source-serif-pro-fonts
+pacman -S noto-fonts ttf-roboto
+pacman -S font-mathematica
+pacman -S powerline-fonts    ## Patched fonts to show powerline icons
 # Install ttf-tamil package from AUR
 ## Add infinality repository
 pacman-key -r 962DDE58
@@ -134,7 +179,7 @@ pacman -S infinality-bundle #(select default [all] for freetype, cairo
 
 
 #######################################
-### Virtualization and code deployment
+## Virtualization and code deployment
 #######################################
 pacman -S virtualbox
 modprobe vboxdrv
@@ -156,15 +201,18 @@ PATH=$PATH:/usr/local/heroku/bin
 ## Need to configure better on Arch. KVM package?
 pacman -S qemu virt-manager
 
-###########################
-### PYTHON PACKAGES
-###########################
-pacman -S python2 python2-pip ipython2-notebook
-pip2.7 install jupyter
+############################
+##________ PYTHON ________##
+## Prefer pacman over pip ##
+## to avoid perms issues. ##
+############################
+
+pacman -S python-pip python2-pip
+pacman -S jupyter-notebook python2-ipykernel ## ipython is a dependency
+
 pip2.7 install requests
 pip2.7 install ipython
 pip2.7 install osmapi
-pip2.7 install ipython
 pip2.7 install geojson
 pip2.7 install fastly
 pip2.7 install scrapy
@@ -191,8 +239,14 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 sudo rmmod pcspkr
 
 
-google-talkplugin (aur)
+## google-talkplugin (aur) ## Depricated
 
 ### ARDUINO PACKAGES
 ardunio (AUR)
 gnoduino (AUR)
+
+###########################
+##________ COMMS ________##
+###########################
+gnupg2 --recv-keys 6feb6f83d48b3547
+yaourt -S riot-web

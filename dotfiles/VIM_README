@@ -3,6 +3,7 @@ Plugins:
 - NerdTree
 - ctrlp
 - Pathogen
+- fugitive
 
 Tips:
 ----
