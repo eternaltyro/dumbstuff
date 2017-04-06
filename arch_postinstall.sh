@@ -1,6 +1,16 @@
 #!/bin/zsh
 ## POST INSTALL CONFIGURATION
 
+###############################
+##________ DATE TIME ________##
+###############################
+
+pacman -S ntp
+ntpdate 0.arch.pool.ntp.org
+systemctl start ntpd
+systemctl enable ntpd
+
+
 ##############################
 ##________ SECURITY ________##
 ##############################
