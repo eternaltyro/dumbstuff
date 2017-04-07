@@ -46,6 +46,7 @@ netctl enable ethernet-static
 pacman -S xorg-xrdb (rendering Xresources)
 pacman -S xorg-xrandr xorg-xkill
 pacman -S xorg-server xorg-xinit xf86-input-synaptics
+# TODO: Add synaptics config / libinput config
 
 ########################################
 ##________ ZSH, TERMINAL, VIM ________##
@@ -78,7 +79,9 @@ pacman -S keepassx2
 pacman -S ibus ibus-m17n  ## Indic language typing
 pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
 pacman -S slock dos2unix unzip redshift wget
-pacman -S ristretto shotwell fbreader tumbler
+pacman -S shotwell fbreader
+pacman -S ristretto     ## Photo manager
+pacman -S tumbler       ## Thumbnailer service for ristretto
 pacman -S nodejs npm
 pacman -S dnsutils whois nmap gnu-netcat
 pacman -S tree josm
@@ -152,8 +155,6 @@ https://bbs.archlinux.org/viewtopic.php?id=96634
 pacman -S xbindkeys
 xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 
-# Install Lain
-# Download and install lain-git package from AUR
 
 :() {
 Updating Repos: pacman -Syy
@@ -260,3 +261,16 @@ gnoduino (AUR)
 ###########################
 gnupg2 --recv-keys 6feb6f83d48b3547
 yaourt -S riot-web
+
+###################################
+##________ LOOK AND FEEL ________##
+###################################
+
+# TODO: Add PS1 config
+# TODO: Add lain and copycat-killer config for AwesomeWM
+yaourt -S lain-git
+yaourt -S awesome-freedesktop-git
+
+## Configure Weather Widget in theme.lua
+## OWM City ID for New Delhi - 1273840
+## TODO: Keyboard shortcuts, screen brightness, volume, etc.
