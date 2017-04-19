@@ -56,7 +56,7 @@ pacman -S rxvt-unicode rxvt-unicode-terminfo
 
 pacman -S awesome slim slim-themes vicious
 #Z Shell is configured the first time user logs in
-# Install `prezto-git` for Zsh customization
+yaourt -S prezto-git  ## Zsh Customization
 
 TODO: vim-fugitive, plugins, etc.
 
@@ -65,7 +65,7 @@ TODO: vim-fugitive, plugins, etc.
 ###################################
 pacman -S alsa-utils
 pacman -S moc mpd mpc    ## Audio players
-pacman -S vlc
+pacman -S vlc mplayer    ## Video players
 
 pacman -S btrfs-progs snapper
 pacman -S lynx firefox chromium    ## Browsers
@@ -93,7 +93,18 @@ pacman -S rdesktop
 youtube-dl -U
 pacman -S ansible
 pacman -S putty
+
+##################################
+##________ DESIGN STUFF ________##
+##################################
 pacman -S inkscape gimp  ## Raster and Vector graphics editor
+# Download and install Xaviju's Inkscape Open Symbols
+mkdir -p ~/.config/inkscape/symbols
+git clone https://github.com/Xaviju/inkscape-open-symbols.git /tmp/
+find /tmp/Xaviju/ -type f -name "*.svg" | xargs cp -t ~/.config/inkscape/symbols/
+
+
+
 pacman -S josm           ## OpenStreetMap editor
 pacman -S ntfs-3g        ## NTFS devices write support
 pacman -S jre8-openjdk icedtea-web
@@ -274,3 +285,8 @@ yaourt -S awesome-freedesktop-git
 ## Configure Weather Widget in theme.lua
 ## OWM City ID for New Delhi - 1273840
 ## TODO: Keyboard shortcuts, screen brightness, volume, etc.
+
+###########################################
+##________ MONITORING MANAGEMENT ________##
+###########################################
+pacman -S htop
