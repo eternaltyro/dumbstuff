@@ -39,6 +39,12 @@ Use parted to create ESP and Root data partitions
 	# mount -o defaults,compress=lzo,subvol=root /dev/mapper/cryptted /mnt
 	# mount /dev/sda1 /mnt/boot
 
+## ======== INTERNET CONNECTION ========= ##
+| At this point, wired internet connection should already be working.
+| Ping 8.8.8.8 to test. If ping archlinux.org doesn't return but pinging
+| IP addresses works, then add 8.8.8.8 to /etc/resolv.conf
+## ======= INTERNET CONNECTION ======== ##
+
 	# pacstrap /mnt base base-devel
 	# genfstab -U /mnt > /mnt/etc/fstab
 	# arch-chroot /mnt /bin/bash
@@ -49,7 +55,7 @@ Use parted to create ESP and Root data partitions
 	# echo FONT=lat9w-16 >> /etc/vconsole.conf
 	# tzselect
 	# ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
-	# hwclock —systohc —utc
+	# hwclock --systohc --utc
 	
 # nano /etc/mkinitcpio.conf
 	##edit the HOOKS line. Remove fsck and add btrfs; add encrypt for LUKS;
