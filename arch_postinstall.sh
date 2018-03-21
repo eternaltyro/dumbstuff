@@ -79,7 +79,8 @@ pacman -S keepassx2
 pacman -S ibus ibus-m17n  ## Indic language typing
 pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
 pacman -S slock dos2unix unzip redshift wget
-pacman -S shotwell fbreader
+pacman -S shotwell 
+pacman -S fbreader      ## e-Book reader
 pacman -S ristretto     ## Photo manager
 pacman -S tumbler       ## Thumbnailer service for ristretto
 pacman -S nodejs npm
