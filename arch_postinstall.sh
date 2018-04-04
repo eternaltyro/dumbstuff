@@ -67,6 +67,19 @@ pacman -S alsa-utils
 pacman -S moc mpd mpc    ## Audio players
 pacman -S vlc mplayer    ## Video players
 
+###
+# .xbindkeysrc config for volume controls
+```
+"amixer set Master 5%+"
+  XF86AudioRaiseVolume
+
+"amixer set Master 5%-"
+  XF86AudioLowerVolume
+
+"amixer set Master toggle"
+  XF86AudioMute
+```
+
 pacman -S btrfs-progs snapper
 pacman -S lynx firefox chromium    ## Browsers
 pacman -S claws-mail claws-mail-themes    ## Mail Clients
@@ -158,14 +171,36 @@ Section "InputClass"
 EndSection
 https://bbs.archlinux.org/viewtopic.php?id=96634
 
+###
+# KEYBOARD SHORTCUTS (INDEPENDEND OF WM)
+#
+pacman -S xbindkeys
+xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
+
+# To figure out keys (type `q` to exit)
+`xbindkeys -mk` then type keys
+# Input into `.xbindkeysrc` file
+`xbindkeys -p` to reload config
+
 #############################
 ##________ DISPLAY ________##
 #############################
 # pacman -S xorg-xbacklight
 # echo 5000 > /sys/class/backlight/intel_backlight/brightness
 # cat /sys/class/backlight/intel_backlight/max_brightness
-pacman -S xbindkeys
-xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
+
+`sudo pacman -S light` # Monitor backlight control
+
+###
+# .xbindkeysrc config for brightness
+#
+```
+"light -A 5"
+  XF86MonBrightnessUp
+
+"light -U 5"
+  XF86MonBrightnessDown
+```
 
 
 :() {
