@@ -63,7 +63,18 @@ TODO: vim-fugitive, plugins, etc.
 ###################################
 ##________ AUDIO / SOUND ________##
 ###################################
-pacman -S alsa-utils
+
+# ALSA: API for soundcard drivers; Part of the Kernel
+#   closer to hardware
+#
+# PulseAudio: Sound Server works on top of ALSA
+#   higher level APIs
+#
+# JACK is an alternative for professionals
+#
+pacman -S alsa-utils # or...
+pacman -S pavucontrol
+
 pacman -S moc mpd mpc    ## Audio players
 pacman -S vlc mplayer    ## Video players
 
