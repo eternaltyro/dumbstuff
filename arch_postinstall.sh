@@ -28,7 +28,13 @@ Retype new UINX password: samelongcompl3x$hi+
 passwd: password updated successfully
 
 gpg2 --recv-keys ec3cbe7f607d11e6
-yaourt -S ecryptfs-simple
+aurman -S ecryptfs-simple
+pacman -S veracrypt
+
+###
+# PASSWORD MANAGERS
+aurman -S keepassxc
+aurman -S bitwarden
 
 ################################
 ##________ NETWORKING ________##
@@ -98,8 +104,6 @@ pacman -S libreoffice-fresh hunspell-en
 pacman -S gnucash
 pacman -S cherrytree    ## Note taking
 pacman -S laverna       ## Note taking
-yaourt -S keepassxc     ## Password manager
-pacman -S keepassx2
 pacman -S ibus ibus-m17n  ## Indic language typing
 pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
 pacman -S slock dos2unix unzip redshift wget
@@ -308,8 +312,6 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
 sudo rmmod pcspkr
 
 
-## google-talkplugin (aur) ## Depricated
-
 ### ARDUINO PACKAGES
 ardunio (AUR)
 gnoduino (AUR)
@@ -318,7 +320,13 @@ gnoduino (AUR)
 ##________ COMMS ________##
 ###########################
 gnupg2 --recv-keys 6feb6f83d48b3547
-yaourt -S riot-web
+aurman -S riot-web
+# aurman -S retroshare
+# aurman -S onionshare # Need PyQT5 library
+aurman -S ring-gnome
+# aurman -S ricochet
+# aurman -S zulip-desktop
+# aurman -S rambox-bin
 
 ###################################
 ##________ LOOK AND FEEL ________##
@@ -326,8 +334,8 @@ yaourt -S riot-web
 
 # TODO: Add PS1 config
 # TODO: Add lain and copycat-killer config for AwesomeWM
-yaourt -S lain-git
-yaourt -S awesome-freedesktop-git
+aurman -S lain-git
+aurman -S awesome-freedesktop-git
 
 ## Configure Weather Widget in theme.lua
 ## OWM City ID for New Delhi - 1273840
@@ -337,3 +345,36 @@ yaourt -S awesome-freedesktop-git
 ##________ MONITORING MANAGEMENT ________##
 ###########################################
 pacman -S htop
+
+##
+# EVALUATE
+# ###
+
+# Alvo
+# Telegram
+# Patchwork (secure scuttlebutt client ssb://)
+# Lucidor - E-book reader?
+# OpenBazaar
+aurman -S i2p
+aurman -S webtorrent-desktop-bin
+
+## Setting up PDF to open in Zathura
+pacman -S xdg-utils
+cat ~/.local/share/applications/zathura.desktop
+```
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/zathura %F
+Comment=Open PDF files in Zathura via xdg-mime
+```
+xdg-mime default zathura.desktop application/pdf
+
+### TODO
+# - 7Zip install
+# - Thunderbird Alpha / Beta
+# - geany / geany-plugins
+# - mpc / mpd / ncmpc setup
+# - Vagrant / etc.
+# - Steam
+
+aurman -S xbanish # Hides mouse pointer when typing;
