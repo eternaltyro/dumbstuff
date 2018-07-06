@@ -84,18 +84,6 @@ pacman -S pavucontrol
 pacman -S moc mpd mpc    ## Audio players
 pacman -S vlc mplayer    ## Video players
 
-###
-# .xbindkeysrc config for volume controls
-```
-"amixer set Master 5%+"
-  XF86AudioRaiseVolume
-
-"amixer set Master 5%-"
-  XF86AudioLowerVolume
-
-"amixer set Master toggle"
-  XF86AudioMute
-```
 
 pacman -S btrfs-progs snapper
 pacman -S lynx firefox chromium    ## Browsers
@@ -188,7 +176,7 @@ https://bbs.archlinux.org/viewtopic.php?id=96634
 
 ###
 # KEYBOARD SHORTCUTS (INDEPENDEND OF WM)
-#
+######
 pacman -S xbindkeys
 xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 
@@ -197,9 +185,9 @@ xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 # Input into `.xbindkeysrc` file
 `xbindkeys -p` to reload config
 
-#############################
-##________ DISPLAY ________##
-#############################
+###
+# DISPLAY 
+######
 # pacman -S xorg-xbacklight
 # echo 5000 > /sys/class/backlight/intel_backlight/brightness
 # cat /sys/class/backlight/intel_backlight/max_brightness
@@ -208,13 +196,30 @@ xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 
 ###
 # .xbindkeysrc config for brightness
-#
+######
 ```
 "light -A 5"
   XF86MonBrightnessUp
 
 "light -U 5"
   XF86MonBrightnessDown
+```
+
+###
+# .xbindkeysrc config for volume controls
+#
+# TODO:
+# - Switch from amixer to pactl
+######
+```
+"amixer set Master 5%+"
+  XF86AudioRaiseVolume
+
+"amixer set Master 5%-"
+  XF86AudioLowerVolume
+
+"amixer set Master toggle"
+  XF86AudioMute
 ```
 
 
@@ -378,3 +383,29 @@ xdg-mime default zathura.desktop application/pdf
 # - Steam
 
 aurman -S xbanish # Hides mouse pointer when typing;
+
+###
+# SSH Agent Config
+######
+# SSH-agent is not started automatically, create a systemd unit for
+# the current user. Do not create for the root user
+
+```
+$ systemctl show --user --property=UnitPath
+$ cat ~/.config/systemd/user.control/ssh-agent.service
+[Unit]
+Description=SSH key agent
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+
+[Install]
+WantedBy=default.target
+$ systemctl --user enable ssh-agent
+$ systemctl --user start ssh-agent
+$ tail -2 ~/.zshrc
+SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=$(/usr/bin/pgrep -xn ssh-agent); export SSH_AGENT_PID;
+```
