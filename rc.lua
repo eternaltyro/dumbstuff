@@ -402,9 +402,9 @@ globalkeys = my_table.join(
               {description = "show weather", group = "widgets"}),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end,
               {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
@@ -649,7 +649,7 @@ awful.rules.rules = {
 
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
-      properties = { titlebars_enabled = true } },
+      properties = { titlebars_enabled = false } },
 
     -- Set Firefox to always map on the first tag on screen 1.
     { rule = { class = "Firefox" },
