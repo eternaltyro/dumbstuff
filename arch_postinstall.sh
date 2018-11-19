@@ -233,6 +233,35 @@ sudo pacman -Rsn $(pacman -Qdtq)
 ###############################
 ##__________ FONTS __________##
 ###############################
+"""
+Prefer OpenType fonts to TrueType fonts; OpenType fonts
+support ligatures and font variations better esp. non-latin
+characters.
+
+Following fonts are installed:
+
+- Arvo
+- Renner
+- Raleway
+- Source-code-pro (Adobe)
+- Source-sans-pro (Adobe)
+- Source-serif-pro (Adobe)
+- Linux Biolinum
+- Linux Libertine
+- Open Baskerville
+- Inconsolata
+- Fira Code (https://github.com/tonsky/FiraCode)
+- Theano-Old-Style
+- Meslo LG
+- Lato
+- Caladea
+"""
+#\\\ TERMINAL FONTS ///#
+pacman -S otf-fira-code
+pacman -S otf-fira-mono
+pacman -S otf-fira-sans
+
+
 pacman -S ttf-dejavu    ## Alternative to Bitstream Vera Sans
 pacman -S ttf-liberation
 pacman -S ttf-anonymous-pro
