@@ -438,3 +438,13 @@ $ tail -2 ~/.zshrc
 SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket; export SSH_AUTH_SOCK;
 SSH_AGENT_PID=$(/usr/bin/pgrep -xn ssh-agent); export SSH_AGENT_PID;
 ```
+
+# ------------------ DEVICE DRIVERS -------------------------#
+# While updating kernel, if you get the following errors:
+# ==> WARNING: Possibly missing firmware for module: aic94xx
+# ==> WARNING: Possibly missing firmware for module: wd719x
+#-----------------------------------------------
+
+yay -S aic94xx-firmware wd719x-firmware
+# mkinitcpio -p  # optionally
+
