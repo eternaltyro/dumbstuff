@@ -281,8 +281,9 @@ cat <<'INFIN' >>/etc/pacman.conf
 Server =  http://bohoomil.com/repo/$arch
 INFIN
 
-pacman -S infinality-bundle #(select default [all] for freetype, cairo 
-#and fontconfig replacements)
+pacman -S infinality-bundle # select default [all] for freetype, cairo 
+                            # and fontconfig replacements)
+# install public-sans OTF (https://github.com/uswds/public-sans)
 
 
 #######################################
