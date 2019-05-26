@@ -19,3 +19,13 @@ List of scripts here:
 - Automatic Openstack installation
 - Preeseeds and Kickstarts
 
+# Setting up Awesome Themes
+
+- Install awesome WM
+- Setup awesome-freedesktop
+- Setup awesome-copycats
+- Copy rc.lua from rc.lua.template
+- Edit to enable theme
+  - Set alacritty or urxvt as x-terminal
+  - Set rofi at mod + x
+  - Set OpenWeatherMap API city code to local city code
