@@ -449,3 +449,20 @@ SSH_AGENT_PID=$(/usr/bin/pgrep -xn ssh-agent); export SSH_AGENT_PID;
 yay -S aic94xx-firmware wd719x-firmware
 # mkinitcpio -p  # optionally
 
+# Installing Graphics Drivers
+lspci | grep -e VGA
+yay -S mesa vulkan-intel vulkan-icd-loader
+yay -S xf86-video-intel   # Video drivers for intel
+yay -S intel-media-driver # For video acceleration
+yay -S libva-intel-driver
+yay -S libva-utils
+export LIBVA_DRIVER_NAME=iHD
+vainfo
+yay -S inxi               # System information tool
+yay -S mesa-demos glmark2 # GPU benchmarking
+# Figure out kernel modesetting
+
+
+# Thunar
+yay -S thunar thunar-archive-plugin thunar-media-tags-plugin
+yay -S file-roller # Archive and unarchive frontend
