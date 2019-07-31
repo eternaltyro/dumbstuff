@@ -6,13 +6,13 @@ jobs:
     steps:
       - checkout
       - run: 
-          - name: Packer Version
-            command: packer -v
+          name: Packer Version
+          command: packer -v
 
       - run:
-          - name: Packer bin path
-            command: which packer
+          name: Packer bin path
+          command: which packer
 
       - run:
-          - name: Packer run basic
-            command: echo "hello packer"
+          name: Packer run basic
+          command: echo "hello packer"
