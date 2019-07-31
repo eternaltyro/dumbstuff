@@ -5,4 +5,12 @@ jobs:
       - image: hashicorp/packer
     steps:
       - checkout
-      - run: $(which packer) -v
+      - run: 
+          - name: Packer Version
+            command: packer -v
+
+          - name: Packer bin path
+            command: which packer
+
+          - name: Packer run basic
+            command: echo "hello packer"
