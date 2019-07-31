@@ -2,7 +2,7 @@
     "_description": "Base image",
     "variables": {
         "ssh_user_name": "sre",
-        "image_family": "packer_citest",
+        "image_family": "packer-citest",
         "startup_script_file": "packer/base-image-init.sh"
     },
     "builders": [
