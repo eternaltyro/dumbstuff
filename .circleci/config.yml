@@ -1,0 +1,8 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: hashicorp/packer
+    steps:
+      - checkout
+      - run: $(which packer) -v
