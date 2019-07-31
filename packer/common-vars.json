@@ -1,0 +1,6 @@
+{
+    "project_id": "kansas-dev-189520",
+    "image_zone": "us-west1-a",
+    "account_file": "/tmp/credentials.json",
+    "ssh_key_data": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBD8DOUBdWRQQoFW9crxsBHWlSA6U1Gyd5ik/lTVq93WF0E5iZq1Pe6ni/qH32h0+H5gvIGrEcVSq2uYFUnJwmfc= eternaltyro@cockroach"
+}

@@ -14,5 +14,9 @@ jobs:
           command: which packer
 
       - run:
+          name: Prep credentials
+          command: echo "$GCP_CREDS" | base64 --decode > /tmp/credentials.json 
+
+      - run:
           name: Packer run basic
-          command: echo "hello packer"
+          command: packer build -var-file=packer/common-vars.json packer/base_image.json

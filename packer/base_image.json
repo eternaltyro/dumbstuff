@@ -1,0 +1,33 @@
+{
+    "_description": "Base image",
+    "variables": {
+        "ssh_user_name": "sre",
+        "image_family": "packer_citest",
+        "startup_script_file": "packer/base-image-init.sh"
+    },
+    "builders": [
+        {
+            "image_description": "Base image for instances",
+            "type": "googlecompute",
+            "account_file": "{{user `account_file`}}",
+            "project_id": "{{user `project_id`}}",
+            "source_image_family": "debian-9",
+            "ssh_username": "{{user `ssh_user_name`}}",
+            "zone": "{{user `image_zone`}}",
+            "disk_size": 30,
+            "disk_type": "pd-ssd",
+            "image_family": "{{user `image_family`}}",
+            "image_name": "packer-citest-{{timestamp}}",
+            "startup_script_file": "{{user `startup_script_file`}}",
+            "labels": {
+                "component": "{{user `image_family`}}"
+            },
+            "image_labels": {
+                "component": "{{user `image_family`}}"
+            },
+            "metadata": {
+                "ssh-keys": "{{user `ssh_user_name`}}:{{user `ssh_key_data`}}"
+            }
+        }
+    ]
+}
