@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: Get AMI ID
-          command: echo "export GMI_ID=$(grep -Poe 'packer-citest-\d{10}' packer-build.log)" >> $BASH_ENV  
+          command: echo "export GMI_ID=$(grep -oE 'packer-citest-\d{10}' packer-build.log)" >> $BASH_ENV  
 
       - run:
           name: Cleanup
