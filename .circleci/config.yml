@@ -6,12 +6,9 @@ jobs:
     steps:
       - checkout
       - run: 
-          name: Packer Version
-          command: packer -v
-
-      - run:
-          name: Packer bin path
-          command: which packer
+          name: Uname result
+          command: |
+              packer -v && cat /etc/issue && uname -a
 
       - run:
           name: Prep credentials
