@@ -19,4 +19,12 @@ jobs:
 
       - run:
           name: Packer run basic
-          command: packer build -var-file=packer/common-vars.json packer/base_image.json
+          command: packer build -machine-readable -on-error=cleanup -var-file=packer/common-vars.json packer/base_image.json | tee packer-build.log
+
+      - run:
+          name: Get AMI ID
+          command: echo "export GMI_ID=$(grep -Poe 'packer-citest-\d{10}' packer-build.log)" >> $BASH_ENV  
+
+      - run:
+          name: Cleanup
+          command: echo "gcloud compute images delete $GMI_ID"
