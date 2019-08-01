@@ -12,11 +12,18 @@ jobs:
 
       - run:
           name: Prep credentials
-          command: echo "$GCP_CREDS" | base64 -d > /tmp/credentials.json 
+          command: |
+              # encode: base64 -w 0 creds.json > /tmp/b64.json
+              echo "$GCP_CREDS" | base64 -d > /tmp/credentials.json 
 
       - run:
           name: Packer run basic
-          command: packer build -machine-readable -on-error=cleanup -var-file=packer/common-vars.json packer/base_image.json | tee packer-build.log
+          command: >
+              packer build \
+                -machine-readable \
+                -on-error=cleanup \
+                -var-file=packer/common-vars.json \
+                packer/base_image.json | tee packer-build.log
 
       - run:
           name: Get AMI ID
