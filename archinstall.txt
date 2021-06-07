@@ -23,6 +23,8 @@ Use parted to create ESP and Root data partitions
 	# mkfs.fat -F32 /dev/sda1
 
 	# cryptsetup --verbose --cipher aes-xts-plain64 --hash sha512 --key-size 512 --iter-time 5000 --use-random luksFormat /dev/sda2
+    # cryptsetup --type luks2 --cipher aes-xts-plain64 --hash sha512 --iter-time 5000 --key-size 512 --pbkdf argon2i --sector-size 512 --use-urandom --verify-passphrase luksFormat /dev/sda2
+
 
 ## SWAP CREATION LATER ON  - encrypt with plain encryption with throwaway keys from urandom.
 

@@ -28,13 +28,13 @@ Retype new UINX password: samelongcompl3x$hi+
 passwd: password updated successfully
 
 gpg2 --recv-keys ec3cbe7f607d11e6
-aurman -S ecryptfs-simple
+yay -S ecryptfs-simple # Do modprobe ecryptfs to be able to use this
 pacman -S veracrypt
 
 ###
 # PASSWORD MANAGERS
-aurman -S keepassxc
-aurman -S bitwarden
+yay -S keepassxc
+yay -S bitwarden-bin
 
 ################################
 ##________ NETWORKING ________##
@@ -62,7 +62,7 @@ pacman -S rxvt-unicode rxvt-unicode-terminfo
 
 pacman -S awesome slim slim-themes vicious
 #Z Shell is configured the first time user logs in
-yaourt -S prezto-git  ## Zsh Customization
+yay -S prezto-git  ## Zsh Customization
 
 TODO: vim-fugitive, plugins, etc.
 
@@ -78,27 +78,34 @@ TODO: vim-fugitive, plugins, etc.
 #
 # JACK is an alternative for professionals
 #
-pacman -S alsa-utils # or...
+# pacman -S alsa-utils # or...
 pacman -S pavucontrol
 
 pacman -S moc mpd mpc    ## Audio players
 pacman -S vlc mplayer    ## Video players
+#yay -S pulseaudio-bluetooth
+# Replace pulseaudio with pipewire
+yay -S pipewire-pulse
+yay -S clementine audacious
 
 
-pacman -S btrfs-progs snapper
+pacman -S btrfs-progs snapper # Snapper helps make btrfs subvol snapshots
+pacman -S f2fs-tools 
 pacman -S lynx firefox chromium    ## Browsers
 pacman -S claws-mail claws-mail-themes    ## Mail Clients
 pacman -S libreoffice-fresh hunspell-en
 pacman -S gnucash
 pacman -S cherrytree    ## Note taking
-pacman -S laverna       ## Note taking
+
+# DEAD
+# pacman -S laverna       ## Note taking
+
 pacman -S ibus ibus-m17n  ## Indic language typing
 pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
 pacman -S slock dos2unix unzip redshift wget
-pacman -S shotwell 
-pacman -S fbreader      ## e-Book reader
-pacman -S ristretto     ## Photo manager
+pacman -S shotwell digikam ristretto
 pacman -S tumbler       ## Thumbnailer service for ristretto
+pacman -S fbreader      ## e-Book reader
 pacman -S nodejs npm
 pacman -S dnsutils whois nmap gnu-netcat
 pacman -S tree josm
@@ -230,10 +237,8 @@ Removing Packages: pacman -R
 sudo pacman -Rsn $(pacman -Qdtq)
 }
 
-###############################
-##__________ FONTS __________##
-###############################
-"""
+"""          FONTS
+
 Prefer OpenType fonts to TrueType fonts; OpenType fonts
 support ligatures and font variations better esp. non-latin
 characters.
@@ -255,6 +260,14 @@ Following fonts are installed:
 - Meslo LG
 - Lato
 - Caladea
+- Carlito
+- Cormorant
+- Inter
+- Ligconsolata
+- Overpass
+- Roboto
+- Public Sans
+- Powerline Symbol
 """
 #\\\ TERMINAL FONTS ///#
 pacman -S otf-fira-code
@@ -270,6 +283,8 @@ pacman -S ttf-linux-libertine ttf-linux-libertine-g
 pacman -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
 pacman -S adobe-source-serif-pro-fonts
 pacman -S noto-fonts ttf-roboto
+yay -S ttf-bitstream-vera
+yay -S awesome-terminal-fonts
 pacman -S font-mathematica
 pacman -S powerline-fonts    ## Patched fonts to show powerline icons
 # Install ttf-tamil package from AUR
@@ -284,11 +299,12 @@ INFIN
 pacman -S infinality-bundle # select default [all] for freetype, cairo 
                             # and fontconfig replacements)
 # install public-sans OTF (https://github.com/uswds/public-sans)
+yay -S otf-stix
 
 
-#######################################
-## Virtualization and code deployment
-#######################################
+"""     VIRTUALIZATION AND CODE DEPLOYMENT
+!!!
+"""
 pacman -S virtualbox
 modprobe vboxdrv
 # VIRTUALBOX fix
@@ -309,11 +325,10 @@ PATH=$PATH:/usr/local/heroku/bin
 ## Need to configure better on Arch. KVM package?
 pacman -S qemu virt-manager
 
-############################
-##________ PYTHON ________##
-## Prefer pacman over pip ##
-## to avoid perms issues. ##
-############################
+"""      PYTHON AND PYTHON LIBRARIES
+
+Prefer `pacman -S` over `pip install` to avoid issues
+"""
 
 pacman -S python-pip python2-pip
 pacman -S jupyter-notebook python2-ipykernel ## ipython is a dependency
@@ -355,10 +370,11 @@ gnoduino (AUR)
 ##________ COMMS ________##
 ###########################
 gnupg2 --recv-keys 6feb6f83d48b3547
-aurman -S riot-web
+yay -S element-desktop
+
 # aurman -S retroshare
-# aurman -S onionshare # Need PyQT5 library
-aurman -S ring-gnome
+yay -S onionshare # Need PyQT5 library
+yay -S jami-gnome jami-daemon
 # aurman -S ricochet
 # aurman -S zulip-desktop
 # aurman -S rambox-bin
@@ -369,8 +385,8 @@ aurman -S ring-gnome
 
 # TODO: Add PS1 config
 # TODO: Add lain and copycat-killer config for AwesomeWM
-aurman -S lain-git
-aurman -S awesome-freedesktop-git
+yay -S lain-git
+yay -S awesome-freedesktop-git
 
 ## Configure Weather Widget in theme.lua
 ## OWM City ID for New Delhi - 1273840
@@ -390,8 +406,9 @@ pacman -S htop
 # Patchwork (secure scuttlebutt client ssb://)
 # Lucidor - E-book reader?
 # OpenBazaar
-aurman -S i2p
-aurman -S webtorrent-desktop-bin
+yay -S i2p
+yay -S ipfs-desktop go-ipfs
+yay -S webtorrent-desktop-bin
 
 ## Setting up PDF to open in Zathura
 pacman -S xdg-utils
@@ -412,7 +429,7 @@ xdg-mime default zathura.desktop application/pdf
 # - Vagrant / etc.
 # - Steam
 
-aurman -S xbanish # Hides mouse pointer when typing;
+yay -S xbanish # Hides mouse pointer when typing;
 
 ###
 # SSH Agent Config
@@ -466,3 +483,67 @@ yay -S mesa-demos glmark2 # GPU benchmarking
 # Thunar
 yay -S thunar thunar-archive-plugin thunar-media-tags-plugin
 yay -S file-roller # Archive and unarchive frontend
+
+# Bluetooth
+yay -S bluez
+yay -S blueman
+yay -S unrar
+yay -S android-udev
+yay -S android-tools # For ADB
+yay -S bluegriffon # For webdev
+
+"""       SECURITY AND HARDENING
+"""
+yay -S arch-audit
+yay -S libfido2 # For SSH with Fido2 support
+yay -S chkrootkit tiger wapiti
+
+yay -S maldet # sometimes outdated
+# to run checks
+# maldet -a /home
+
+# Import GPG key of security@cisofy.com
+gpg --keyserver hkps://hkps.pool.sks-keyservers.net:443 --recv-key 73AC9FC55848E977024D1A61429A566FD5B79251
+yay -S lynis3
+# To audit
+# lynis audit system
+
+
+yay -S hw-probe
+yay -S thunderbird-beta-bin
+yay -S xournalpp
+yay -S sshfs gvfs-smb # Navigate remote files via Thunar
+yay -S leafpad
+yay -S onlykey
+yay -S signal-desktop-beta
+yay -S stress
+yay -S systemdgenie
+yay -S mullvad-vpn
+yay -S mindforger
+yay -S pandoc
+yay -S grafx2
+yay -S vorta borg
+yay -S clang
+yay -S 0ad
+yay -S mpd meld openexr gnucash fail2ban electron chromium inkscape ipython bind-tools avahi audit arandr
+yay -S smbclient virt-manager virtualbox youtube-dl xfsprogs
+yay -S pgadmin4
+yay -S handbrake
+yay -S cdrtools cdrdao dvd+rw-tools cdparanoia
+yay -S grsync # Sync input tools between multiple devices
+yay -S exfatprogs
+# Just use KDE default DM - SDDM with breeze theme
+# yay -S lightdm lightdm-webkit2-greeter lightdm-gtk-greeter
+yay -S perl-finance-quote
+yay -S ccid acsccid pcsc-tools opensc solo-python
+yay -S linux-zen
+yay -S obs-studio
+yay -S node
+yay -S asp # AUR build packages - asp checkout element-desktop for example
+yay -S flameshot
+yay -S protonmail-bridge
+yay -S plasma-meta plasma-wayland-session
+yay -S alacritty-git mosh terminator
+yay -S rofi
+yay -S fwupd # Firmware updates
+
