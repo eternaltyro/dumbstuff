@@ -1,0 +1,1199 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API",
+  "osm3s": {
+    "timestamp_osm_base": "2017-04-23T09:13:59Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 243041583,
+  "lat": 13.0744312,
+  "lon": 80.2738180,
+  "tags": {
+    "name": "Chintadripet",
+    "name:ta": "சிந்தாதிரிப்பேட்டை",
+    "railway": "station",
+    "ref": "MCPT",
+    "wikidata": "Q5101294",
+    "wikipedia": "en:Chintadripet railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 243041677,
+  "lat": 13.0214775,
+  "lon": 80.2525988,
+  "tags": {
+    "name": "Greenways Road",
+    "railway": "station",
+    "ref": "GWYR",
+    "wikidata": "Q15222131",
+    "wikipedia": "en:Greenways Road railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 243041687,
+  "lat": 13.0145652,
+  "lon": 80.2484402,
+  "tags": {
+    "name": "Kotturpuram",
+    "name:ta": "கோட்டூர்புரம்",
+    "railway": "station",
+    "ref": "KPTM",
+    "wikidata": "Q6434367",
+    "wikipedia": "en:Kotturpuram railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 243041698,
+  "lat": 12.9958128,
+  "lon": 80.2498100,
+  "tags": {
+    "name": "Indira Nagar",
+    "name:ta": "இந்திரா நகர்",
+    "railway": "station",
+    "ref": "INDR",
+    "wikidata": "Q6025052",
+    "wikipedia": "en:Indira Nagar railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 243041721,
+  "lat": 12.9786135,
+  "lon": 80.2410567,
+  "tags": {
+    "name": "Taramani",
+    "name:ta": "தரமணி",
+    "railway": "station",
+    "ref": "TRMN",
+    "wikidata": "Q7685362",
+    "wikipedia": "en:Taramani railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 243041731,
+  "lat": 12.9758476,
+  "lon": 80.2320097,
+  "tags": {
+    "name": "Perungudi",
+    "name:ta": "பெருங்குடி",
+    "railway": "station",
+    "ref": "PRGD",
+    "wikidata": "Q7171100",
+    "wikipedia": "en:Perungudi railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 243041746,
+  "lat": 12.9672930,
+  "lon": 80.2194914,
+  "tags": {
+    "name": "Velachery",
+    "name:ta": "வேளச்சேரி",
+    "operator": "Southern Railways",
+    "platforms": "3",
+    "railway": "station",
+    "ref": "VLCY",
+    "wikidata": "Q7918772",
+    "wikipedia": "en:Velachery railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 247678330,
+  "lat": 13.0278907,
+  "lon": 80.2605783,
+  "tags": {
+    "name": "Mandaveli",
+    "railway": "station",
+    "ref": "MNDY",
+    "wikidata": "Q6747921",
+    "wikipedia": "en:Mandaveli railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 247678427,
+  "lat": 13.0352610,
+  "lon": 80.2674139,
+  "tags": {
+    "name": "Thirumayliai",
+    "railway": "station",
+    "ref": "MTMY"
+  }
+},
+{
+  "type": "node",
+  "id": 247678486,
+  "lat": 13.0449287,
+  "lon": 80.2767302,
+  "tags": {
+    "name": "Lighthouse",
+    "name:ta": "கலங்கரை விளக்கம்",
+    "railway": "station",
+    "ref": "MLHS",
+    "wikidata": "Q6546029",
+    "wikipedia": "en:Light House railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 248467412,
+  "lat": 13.0741218,
+  "lon": 80.2426015,
+  "tags": {
+    "name": "Chetpet",
+    "name:ta": "சேத்துப்பட்டு",
+    "railway": "station",
+    "ref": "MSC"
+  }
+},
+{
+  "type": "node",
+  "id": 248545100,
+  "lat": 13.1152253,
+  "lon": 80.1371903,
+  "tags": {
+    "name": "Tirumullaivoyal",
+    "railway": "station",
+    "ref": "TMVL"
+  }
+},
+{
+  "type": "node",
+  "id": 248545104,
+  "lat": 13.1140988,
+  "lon": 80.1526985,
+  "tags": {
+    "name": "Ambattur",
+    "name:ta": "அம்பத்தூர்",
+    "railway": "station",
+    "ref": "ABU",
+    "wikidata": "Q4741171",
+    "wikipedia": "en:Ambattur railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 248545108,
+  "lat": 13.1144999,
+  "lon": 80.1661815,
+  "tags": {
+    "name": "Pattaravakkam",
+    "railway": "station",
+    "ref": "PVM",
+    "wikidata": "Q7148328",
+    "wikipedia": "en:Pattaravakkam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 248545112,
+  "lat": 13.1134356,
+  "lon": 80.1825121,
+  "tags": {
+    "name": "Korattur",
+    "railway": "station",
+    "ref": "KOTR",
+    "wikidata": "Q6431441",
+    "wikipedia": "en:Korattur railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 249110186,
+  "lat": 13.0062997,
+  "lon": 80.2478338,
+  "tags": {
+    "name": "Kasturibai Nagar",
+    "name:ta": "கஸ்தூரிபாய் நகர்",
+    "railway": "station",
+    "ref": "KTBR"
+  }
+},
+{
+  "type": "node",
+  "id": 249110189,
+  "lat": 12.9888263,
+  "lon": 80.2515797,
+  "tags": {
+    "name": "Thiruvanmiyur",
+    "name:ta": "திருவான்மியூர்",
+    "railway": "station",
+    "ref": "TYMR",
+    "wikidata": "Q16956408",
+    "wikipedia": "en:Thiruvanmiyur railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 249272451,
+  "lat": 12.9515795,
+  "lon": 80.1410589,
+  "tags": {
+    "railway": "station",
+    "ref": "CMP"
+  }
+},
+{
+  "type": "node",
+  "id": 254142278,
+  "lat": 13.1197205,
+  "lon": 80.2782824,
+  "tags": {
+    "name": "Korukkupet",
+    "railway": "station",
+    "ref": "KOK",
+    "wikidata": "Q6432750",
+    "wikipedia": "en:Korukkupet railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 256029551,
+  "lat": 13.0083355,
+  "lon": 80.2127080,
+  "tags": {
+    "railway": "station",
+    "ref": "GDY:2;3"
+  }
+},
+{
+  "type": "node",
+  "id": 276513695,
+  "lat": 13.1274462,
+  "lon": 80.2818126,
+  "tags": {
+    "name": "Tondiarpet",
+    "name:ta": "தண்டையார்பேட்டை",
+    "railway": "station",
+    "ref": "TNP",
+    "wikidata": "Q7820800",
+    "wikipedia": "en:Tondiarpet railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 281996305,
+  "lat": 13.2044055,
+  "lon": 80.3168730,
+  "tags": {
+    "name": "Kathivakkam",
+    "name:ta": "கத்திவாக்கம்",
+    "railway": "station",
+    "ref": "KAVM",
+    "wikidata": "Q6376637",
+    "wikipedia": "en:Kathivakkam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 281996873,
+  "lat": 13.1802296,
+  "lon": 80.3058214,
+  "tags": {
+    "name": "Wimco Nagar",
+    "railway": "station",
+    "ref": "WCN",
+    "wikidata": "Q8023547",
+    "wikipedia": "en:Wimco Nagar railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 281997193,
+  "lat": 13.1590865,
+  "lon": 80.2961598,
+  "tags": {
+    "name": "Thiruvottiyur",
+    "name:ta": "திருவொற்றியூர்",
+    "railway": "station",
+    "ref": "TVT"
+  }
+},
+{
+  "type": "node",
+  "id": 304278622,
+  "lat": 13.0986095,
+  "lon": 80.2011244,
+  "tags": {
+    "name": "Anna Nagar West",
+    "name:ta": "அண்ணா நகர் மேற்கு",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 304278630,
+  "lat": 13.1031777,
+  "lon": 80.1948707,
+  "tags": {
+    "name": "Padi",
+    "name:ta": "பாடி",
+    "railway": "station",
+    "wikidata": "Q7123738",
+    "wikipedia": "en:Padi railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 340082846,
+  "lat": 12.9513228,
+  "lon": 80.1410157,
+  "tags": {
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 347527412,
+  "lat": 13.1163649,
+  "lon": 80.1271886,
+  "tags": {
+    "name": "Annanur",
+    "name:ta": "அண்ணனூர்",
+    "railway": "station",
+    "ref": "ANNR",
+    "wikidata": "Q4767947",
+    "wikipedia": "en:Annanur railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 602990311,
+  "lat": 13.0633059,
+  "lon": 80.2116697,
+  "tags": {
+    "name": "Arumbakkam",
+    "name:ta": "அரும்பாக்கம்",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603001067,
+  "lat": 13.0497329,
+  "lon": 80.2120985,
+  "tags": {
+    "name": "Vadapalani",
+    "name:ta": "வடபழநி",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603007132,
+  "lat": 12.9952641,
+  "lon": 80.1988879,
+  "tags": {
+    "disused": "yes",
+    "name": "St. Thomas Mount Metro",
+    "railway": "station",
+    "ref": "STM",
+    "wikidata": "Q7591984",
+    "wikipedia": "en:St. Thomas Mount railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 603007164,
+  "lat": 13.0042578,
+  "lon": 80.2015640,
+  "tags": {
+    "name": "Alandur",
+    "name:ta": "ஆலந்தூர்",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603012295,
+  "lat": 12.9859931,
+  "lon": 80.1740700,
+  "tags": {
+    "disused": "yes",
+    "name": "Meenambakkam Metro",
+    "railway": "station",
+    "wikidata": "Q19893884",
+    "wikipedia": "en:Meenambakkam metro station"
+  }
+},
+{
+  "type": "node",
+  "id": 603012299,
+  "lat": 12.9807900,
+  "lon": 80.1636070,
+  "tags": {
+    "disused": "yes",
+    "name": "Chennai Airport",
+    "railway": "station",
+    "wikidata": "Q5091440",
+    "wikipedia": "en:Chennai International Airport metro station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015245,
+  "lat": 13.1089077,
+  "lon": 80.2808134,
+  "tags": {
+    "disused": "yes",
+    "name": "Washermanpet Metro (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015252,
+  "lat": 13.0954001,
+  "lon": 80.2859733,
+  "tags": {
+    "disused": "yes",
+    "name": "Mannady (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015259,
+  "lat": 13.0847583,
+  "lon": 80.2833132,
+  "tags": {
+    "disused": "yes",
+    "name": "High Court (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015265,
+  "lat": 13.0818546,
+  "lon": 80.2739598,
+  "tags": {
+    "disused": "yes",
+    "name": "Chennai Central Metro (u/c)",
+    "railway": "station",
+    "wikidata": "Q5091428",
+    "wikipedia": "en:Chennai Central metro station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015278,
+  "lat": 13.0699132,
+  "lon": 80.2734427,
+  "tags": {
+    "disused": "yes",
+    "name": "Secretariat (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015287,
+  "lat": 13.0561183,
+  "lon": 80.2561444,
+  "tags": {
+    "disused": "yes",
+    "name": "Thousand Lights (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015312,
+  "lat": 13.0233919,
+  "lon": 80.2275447,
+  "tags": {
+    "disused": "yes",
+    "name": "Saidapet (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 603015331,
+  "lat": 13.0093429,
+  "lon": 80.2134422,
+  "tags": {
+    "disused": "yes",
+    "name": "Guindy Metro",
+    "railway": "station",
+    "wikidata": "Q18357501",
+    "wikipedia": "en:Guindy metro station"
+  }
+},
+{
+  "type": "node",
+  "id": 652426192,
+  "lat": 13.0787745,
+  "lon": 80.2505996,
+  "tags": {
+    "disused": "yes",
+    "name": "Nehru park (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 652426199,
+  "lat": 13.0802886,
+  "lon": 80.2630538,
+  "tags": {
+    "disused": "yes",
+    "name": "Egmore (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 687175415,
+  "lat": 13.0684618,
+  "lon": 80.2047813,
+  "tags": {
+    "name": "CMBT",
+    "operator": "CMRL",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 744509839,
+  "lat": 12.9824216,
+  "lon": 80.1967649,
+  "tags": {
+    "disused": "yes",
+    "name": "Adambakkam (u/c)",
+    "railway": "station",
+    "wikidata": "Q4680126",
+    "wikipedia": "en:Adambakkam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 744509866,
+  "lat": 12.9778123,
+  "lon": 80.2045627,
+  "tags": {
+    "disused": "yes",
+    "name": "Puzhithivakkam (u/c)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1008034350,
+  "lat": 13.0082177,
+  "lon": 80.2128072,
+  "tags": {
+    "railway": "station",
+    "ref": "GDY:4"
+  }
+},
+{
+  "type": "node",
+  "id": 1008034354,
+  "lat": 12.9846102,
+  "lon": 80.1749277,
+  "tags": {
+    "name": "Meenambakkam",
+    "name:ta": "மீனம்பாக்கம்",
+    "railway": "station",
+    "ref": "MN",
+    "wikidata": "Q6807623",
+    "wikipedia": "en:Meenambakkam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 1008034376,
+  "lat": 13.0084262,
+  "lon": 80.2125906,
+  "tags": {
+    "name": "Guindy",
+    "name:ta": "கிண்டி",
+    "railway": "station",
+    "ref": "GDY:1",
+    "wikidata": "Q5616431",
+    "wikipedia": "en:Guindy railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 1008034389,
+  "lat": 12.9516620,
+  "lon": 80.1408681,
+  "tags": {
+    "name": "Chromepet",
+    "name:ta": "குரோம்பேட்டை",
+    "railway": "station",
+    "ref": "CMP",
+    "wikidata": "Q5113793",
+    "wikipedia": "en:Chromepet railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 1008034405,
+  "lat": 12.9802900,
+  "lon": 80.1657062,
+  "tags": {
+    "name": "Tirisulam",
+    "railway": "station",
+    "ref": "TLM",
+    "wikidata": "Q7809428",
+    "wikipedia": "en:Tirusulam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 1115906888,
+  "lat": 12.9371832,
+  "lon": 80.1308914,
+  "tags": {
+    "name": "Tambaram Sanatorium",
+    "railway": "station",
+    "ref": "TBMS",
+    "wikidata": "Q7681014",
+    "wikipedia": "en:Tambaram Sanatorium railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 1141163691,
+  "lat": 12.9671758,
+  "lon": 80.2195107,
+  "tags": {
+    "railway": "station",
+    "ref": "VLCY:3"
+  }
+},
+{
+  "type": "node",
+  "id": 1165551007,
+  "lat": 13.0796089,
+  "lon": 80.2252379,
+  "tags": {
+    "disused": "yes",
+    "name": "Shenoy Nagar (u/c))",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1184233366,
+  "lat": 13.1274612,
+  "lon": 80.2817715,
+  "tags": {
+    "railway": "station",
+    "ref": "TNP"
+  }
+},
+{
+  "type": "node",
+  "id": 1184233385,
+  "lat": 13.1197028,
+  "lon": 80.2784326,
+  "tags": {
+    "railway": "station",
+    "ref": "KOK"
+  }
+},
+{
+  "type": "node",
+  "id": 1184233558,
+  "lat": 13.1197493,
+  "lon": 80.2782365,
+  "tags": {
+    "railway": "station",
+    "ref": "KOK"
+  }
+},
+{
+  "type": "node",
+  "id": 1207423990,
+  "lat": 13.0734065,
+  "lon": 80.1948601,
+  "tags": {
+    "name": "Koyambedu Metro Station",
+    "name:ta": "கோயம்பேடு மெட்ரோ ரயில் நிலையம்",
+    "operator": "CMRL",
+    "railway": "station",
+    "wikidata": "Q6435138",
+    "wikipedia": "en:Koyambedu metro station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207423991,
+  "lat": 13.0149762,
+  "lon": 80.2245550,
+  "tags": {
+    "disused": "yes",
+    "name": "Little Mount",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424023,
+  "lat": 13.0847938,
+  "lon": 80.2132214,
+  "tags": {
+    "disused": "yes",
+    "name": "Anna Nagar Tower (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424028,
+  "lat": 13.0845659,
+  "lon": 80.2195896,
+  "tags": {
+    "disused": "yes",
+    "name": "Anna Nagar East (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424051,
+  "lat": 13.0304562,
+  "lon": 80.2387801,
+  "tags": {
+    "disused": "yes",
+    "name": "Nandanam (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424057,
+  "lat": 12.9989581,
+  "lon": 80.1929004,
+  "tags": {
+    "disused": "yes",
+    "name": "Nanganallur Road",
+    "operator": "Chennai Metro Rail Limited",
+    "railway": "station",
+    "wikidata": "Q19894462",
+    "wikipedia": "en:Nanganallur Road metro station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424066,
+  "lat": 13.0852347,
+  "lon": 80.2011794,
+  "tags": {
+    "disused": "yes",
+    "name": "Thirumangalam (u/c)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424073,
+  "lat": 13.0642856,
+  "lon": 80.2657562,
+  "tags": {
+    "disused": "yes",
+    "name": "LIC (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424077,
+  "lat": 13.0374090,
+  "lon": 80.2466033,
+  "tags": {
+    "disused": "yes",
+    "name": "Teynampet (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1207424080,
+  "lat": 13.0776131,
+  "lon": 80.2425640,
+  "tags": {
+    "disused": "yes",
+    "name": "Kilpauk Medical College (planned)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1262355902,
+  "lat": 13.1134720,
+  "lon": 80.1825118,
+  "tags": {
+    "name:en": "korattur",
+    "railway": "station",
+    "ref": "KOTR"
+  }
+},
+{
+  "type": "node",
+  "id": 1701464403,
+  "lat": 13.0458621,
+  "lon": 80.2483005,
+  "tags": {
+    "disused": "yes",
+    "name": "Gemini (u/c)",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1703320464,
+  "lat": 12.9369136,
+  "lon": 80.1309301,
+  "tags": {
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1703320478,
+  "lat": 12.9370004,
+  "lon": 80.1308159,
+  "tags": {
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 1936508567,
+  "lat": 12.9516372,
+  "lon": 80.1410258,
+  "tags": {
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 2188608012,
+  "lat": 13.0406672,
+  "lon": 80.2700309,
+  "tags": {
+    "name": "Mundakanniamman Koil",
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 2241055929,
+  "lat": 13.0083671,
+  "lon": 80.2126870,
+  "tags": {
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 2439092381,
+  "lat": 12.9802008,
+  "lon": 80.1658047,
+  "tags": {
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 2440054264,
+  "lat": 12.9952199,
+  "lon": 80.1988710,
+  "tags": {
+    "railway": "station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481258995,
+  "lat": 13.0795870,
+  "lon": 80.2762947,
+  "tags": {
+    "name": "Chennai Park Town",
+    "railway": "station",
+    "ref": "MPK",
+    "wikidata": "Q5091453",
+    "wikipedia": "en:Chennai Park Town railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481258999,
+  "lat": 13.0805434,
+  "lon": 80.2733781,
+  "tags": {
+    "name": "Chennai Park",
+    "railway": "station",
+    "ref": "MPK",
+    "wikidata": "Q5091452",
+    "wikipedia": "en:Chennai Park railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481259002,
+  "lat": 13.0516624,
+  "lon": 80.2306892,
+  "tags": {
+    "name": "Kodambakkam",
+    "name:ta": "கோடம்பாக்கம்",
+    "railway": "station",
+    "ref": "MKKF",
+    "wikidata": "Q6425199",
+    "wikipedia": "en:Kodambakkam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481259006,
+  "lat": 13.0380730,
+  "lon": 80.2277729,
+  "tags": {
+    "name": "Mambalam",
+    "name:ta": "மாம்பலம் ரயில் நிலையம்",
+    "railway": "station",
+    "ref": "MBM",
+    "wikidata": "Q6745495",
+    "wikipedia": "en:Mambalam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481259010,
+  "lat": 13.0655132,
+  "lon": 80.2327627,
+  "tags": {
+    "name": "Nungambakkam",
+    "name:ta": "நுங்கம்பாக்கம்",
+    "railway": "station",
+    "ref": "NBK",
+    "wikidata": "Q7069830",
+    "wikipedia": "en:Nungambakkam railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481259024,
+  "lat": 13.1042650,
+  "lon": 80.2936736,
+  "tags": {
+    "name": "Royapuram",
+    "name:ta": "ராயபுரம்",
+    "railway": "station",
+    "ref": "RPM:1",
+    "wikidata": "Q7375145",
+    "wikipedia": "en:Royapuram railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481259029,
+  "lat": 13.0233098,
+  "lon": 80.2237191,
+  "tags": {
+    "name": "Saidapet",
+    "name:ta": "சைதாப்பேட்டை",
+    "railway": "station",
+    "ref": "SP",
+    "wikidata": "Q7399955",
+    "wikipedia": "en:Saidapet railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481259032,
+  "lat": 13.1088030,
+  "lon": 80.2819372,
+  "tags": {
+    "name": "Washermanpet",
+    "name:ta": "வண்ணாரப்பேட்டை",
+    "railway": "station",
+    "ref": "WST",
+    "wikidata": "Q7971483",
+    "wikipedia": "en:Washermanpet railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2481969291,
+  "lat": 13.0823593,
+  "lon": 80.2750788,
+  "tags": {
+    "admin_level": "A1",
+    "name": "Chennai Central",
+    "name:ta": "சென்னை சென்ட்ரல்",
+    "railway": "station",
+    "ref": "MAS",
+    "wikidata": "Q257382",
+    "wikipedia": "en:Chennai Central railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2486239287,
+  "lat": 13.0626554,
+  "lon": 80.2807553,
+  "tags": {
+    "name": "Chepauk",
+    "name:ta": "சேப்பாக்கம்",
+    "railway": "station",
+    "ref": "MCPK",
+    "wikidata": "Q5091698",
+    "wikipedia": "en:Chepauk railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2486239288,
+  "lat": 13.0559613,
+  "lon": 80.2807305,
+  "tags": {
+    "name": "Thiruvallikeni",
+    "railway": "station",
+    "ref": "MTCN",
+    "wikidata": "Q7785486",
+    "wikipedia": "en:Thiruvallikeni railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 2495414560,
+  "lat": 13.1022941,
+  "lon": 80.2710618,
+  "tags": {
+    "name": "Basin Bridge Junction",
+    "railway": "station",
+    "ref": "BBQ",
+    "wikidata": "Q4867482",
+    "wikipedia": "en:Basin Bridge railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 3187977875,
+  "lat": 12.9906385,
+  "lon": 80.1879401,
+  "tags": {
+    "name": "Pazhavanthangal",
+    "railway": "station",
+    "ref": "PZA",
+    "wikidata": "Q7156987",
+    "wikipedia": "en:Pazhavanthangal railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 3676144727,
+  "lat": 13.0354811,
+  "lon": 80.2112240,
+  "tags": {
+    "addr:city": "Chennai",
+    "addr:postcode": "600083",
+    "addr:street": "Jawaharlal Nehru Road (100 Feet Road)",
+    "name": "Ashok Nagar",
+    "name:ta": "அசோக் நகர்",
+    "operator": "CMRL",
+    "public_transport": "station",
+    "railway": "station",
+    "ref": "ASKN",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3676194021,
+  "lat": 13.0165262,
+  "lon": 80.2052830,
+  "tags": {
+    "addr:city": "Chennai",
+    "addr:postcode": "600032",
+    "addr:street": "Jawaharlal Nehru Road (100 Feet Road)",
+    "name": "Ekkattuthangal",
+    "operator": "CMRL",
+    "public_transport": "station",
+    "railway": "station",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3678939665,
+  "lat": 13.1182744,
+  "lon": 80.1015427,
+  "tags": {
+    "name": "Avadi",
+    "name:ta": "ஆவடி",
+    "railway": "station",
+    "ref": "AVD",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4221752111,
+  "lat": 12.9948700,
+  "lon": 80.1993447,
+  "tags": {
+    "railway": "station",
+    "ref": "STM"
+  }
+},
+{
+  "type": "node",
+  "id": 4435694788,
+  "lat": 12.9678902,
+  "lon": 80.1524373,
+  "tags": {
+    "name": "Pallavaram",
+    "name:ta": "பல்லாவரம்",
+    "railway": "station",
+    "ref": "PV",
+    "wikidata": "Q7127768",
+    "wikipedia": "en:Pallavaram railway station"
+  }
+},
+{
+  "type": "node",
+  "id": 4534763875,
+  "lat": 13.0352876,
+  "lon": 80.2673891,
+  "tags": {
+    "name": "Thirumayliai",
+    "railway": "station",
+    "ref": "MTMY"
+  }
+},
+{
+  "type": "node",
+  "id": 4534763876,
+  "lat": 13.0145658,
+  "lon": 80.2484112,
+  "tags": {
+    "name": "Kotturpuram",
+    "name:ta": "கோட்டூர்புரம்",
+    "railway": "station",
+    "ref": "KPTM",
+    "wikidata": "Q6434367",
+    "wikipedia": "en:Kotturpuram railway station"
+  }
+}
+
+  ]
+}
+

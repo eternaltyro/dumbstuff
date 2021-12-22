@@ -1,0 +1,12 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+BL,CMRL,BLUE,Washermanpet - Chennai International Airport,,1,,3281C4,
+BLEXT,CMRL,BLUEEXT,Washermanpet - Wimco Nagar,,1,,3281C4,
+GL,CMRL,GREEN,Washermanpet - Wimco Nagar,,1,,53B848,
+L3,CMRL,L3,Madhavaram - Siruseri,,1,,,
+L4,CMRL,L4,Koyambedu - Lighthouse,,1,,,
+L5,CMRL,L5,Madhavaram - Sholinganallur,,1,,,
+MRTS,MRTS,MRTS,Chennai Central - Nandiambakkam,,1,,000000,ffffff
+CSR_NORTH,CSR,CSR_NORTH,Chennai Beach - St. Thomas mount,,1,,000000,ffffff
+CSR_WEST,CSR,CSR_WEST,Chennai Central - Tiruttani,,1,,000000,ffffff
+CSR_SOUTH,CSR,CSR_SOUTH,Chennai Beach - Vandalur,,1,,000000,ffffff
+CSR_UNIQ,CSR,CSR_UNIQ,Chennai Beach - St. Thomas mount,,1,,000000,ffffff

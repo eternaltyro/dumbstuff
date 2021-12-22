@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version
+eternaltyro,https://github.com/eternaltyro/data_greed,en-GB,20170101,20201231,1
