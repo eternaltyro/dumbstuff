@@ -1,0 +1,29 @@
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: ubuntu
+    state: present
+    exclusive: False
+    key: '{{ item }}'
+    with_file:
+      - public_keys/dkbenjamin.pub
+      - public_keys/yogesh.pub
+      - public_keys/rob.pub
+      - public_keys/ramya.pub
+      - public_keys/kshitij.pub
+      - public_keys/omran.pub
+    path: /etc/ssh/authorized_keys/charlie
+    manage_dir: False
+
+- name: Remove authorized keys from file
+  ansible.posix.authorized_key:
+    user: ubuntu
+    state: absent
+    exclusive: False
+    key: '{{ item }}'
+    with_file:
+      - public_keys/yogesh_compromised.pub
+      - public_keys/dkbenjamin_old.pub
+#    path: /etc/ssh/authorized_keys/charlie
+#    manage_dir: False
+
+

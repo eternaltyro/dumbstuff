@@ -161,6 +161,7 @@ pacman -S unzip
 """__________ BACKUPS AND RECOVERY____________
 """
 yay -S vorta borg
+yay -S dupeguru
 pacman -S snapper # helps make btrfs subvol snapshots
 yay -S timeshift # Alternative to snapper
 pacman -S rclone
@@ -220,11 +221,11 @@ mkdir -p ~/.config/inkscape/symbols
 git clone https://github.com/Xaviju/inkscape-open-symbols.git /tmp/
 find /tmp/Xaviju/ -type f -name "*.svg" | xargs cp -t ~/.config/inkscape/symbols/
 
-pacman -S jre11-openjdk icedtea-web
-yay -S qgis
 pacman -S josm           ## OpenStreetMap editor
+pacman -S jre11-openjdk icedtea-web
 
 #rlwrap, dex, wireless_tools 
+
 
 ################################
 ##________ LOGGING IN ________##
@@ -495,6 +496,7 @@ yay -S teams zoom
 yay -S jami
 yay -S protonmail-bridge
 dino
+keybase
 
 ###################################
 ##________ LOOK AND FEEL ________##
@@ -666,9 +668,8 @@ powerdevil # KDE Power management
 # https://clay-atlas.com/us/blog/2021/06/08/linux-en-upower-power-remaining/
 upower # Battery information
 pacman -S tlp # enable tlp.service
-yay -S dupeguru # Find duplicates
-yay -S fslint # Find duplicates
-yay -S bleachbit # Clear cache and obsolete data
+qgis
+bleachbit
 tzdata
 voxel
 dia
