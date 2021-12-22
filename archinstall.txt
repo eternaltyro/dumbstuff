@@ -23,22 +23,62 @@ Use parted to create ESP and Root data partitions
 	# mkfs.fat -F32 /dev/sda1
 
 	# cryptsetup --verbose --cipher aes-xts-plain64 --hash sha512 --key-size 512 --iter-time 5000 --use-random luksFormat /dev/sda2
-    # cryptsetup --type luks2 --cipher aes-xts-plain64 --hash sha512 --iter-time 5000 --key-size 512 --pbkdf argon2i --sector-size 512 --use-urandom --verify-passphrase luksFormat /dev/sda2
+    # cryptsetup \
+        --type luks2 \
+        --cipher aes-xts-plain64 \
+        --hash sha512 \
+        --iter-time 5000 \
+        --key-size 512 \
+        --pbkdf argon2i \
+        --sector-size 4096 \
+        --use-urandom \
+        --verify-passphrase luksFormat /dev/sda2
 
+NOTE:
+- Sector size should be specified when creating filesystem
+- TRIM should be enabled for SSD using `--discard` option
+- Journaling should be switched off for SSD
+- Use noatime flag to reduce writes on SSD
+- MKE2FS_DEVICE_SECTSIZE=4096 mkfs.ext4 -O "^has_journal" -E discard -b 4096
+- Set --perf-no_read_workqueue --perf-no_write_workqueue while doing an open
 
 ## SWAP CREATION LATER ON  - encrypt with plain encryption with throwaway keys from urandom.
 
 	# cryptsetup luksOpen /dev/sda2 cryptted
-	# mkfs.btrfs /dev/mapper/cryptted
-	# mount /dev/mapper/cryptted /mnt
+	# mkfs.btrfs -R free-space-tree -L <label> /dev/mapper/cryptted
+	# mount -o compress=zstd /dev/mapper/cryptted /mnt
 	# btrfs subvolume create /mnt/root
 	# btrfs subvolume create /mnt/root/home
-	# btrfs sub volume create /mnt/root/var
-	# btrfs sub volume create /mnt/root/opt
-	# btrfs sub volume create /mnt/root/usr
+	# btrfs subvolume create /mnt/root/var
+	# btrfs subvolume create /mnt/root/opt
+	# btrfs subvolume create /mnt/root/usr
+	# btrfs subvolume create /mnt/root/etc
+	# btrfs subvolume create /mnt/root/.snapshots
+    # ALTERNATIVELY:
+	# btrfs subvolume create @root
+	# btrfs subvolume create @home
+	# btrfs subvolume create @var
+	# btrfs subvolume create @opt
+	# btrfs subvolume create @usr
+	# btrfs subvolume create @etc
+	# btrfs subvolume create @snapshots
 	# mkdir /mnt/boot
 	# umount /mnt
-	# mount -o defaults,compress=lzo,subvol=root /dev/mapper/cryptted /mnt
+	# mount -o defaults,noatime,compress=zstd,subvol=root /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,subvol=home /dev/mapper/cryptted /mnt
+	# mount -o defaults,noatime,compress=zstd,subvol=var /dev/mapper/cryptted /mnt
+	# mount -o defaults,noatime,compress=zstd,subvol=opt /dev/mapper/cryptted /mnt
+	# mount -o defaults,noatime,compress=zstd,subvol=usr /dev/mapper/cryptted /mnt
+	# mount -o defaults,noatime,compress=zstd,subvol=etc /dev/mapper/cryptted /mnt
+	# mount -o defaults,noatime,compress=zstd,subvol=.snapshots /dev/mapper/cryptted /mnt
+    # ALTERNATIVELY:
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=256 /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=257 /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=258 /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=259 /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=260 /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=261 /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=262 /dev/mapper/cryptted /mnt
 	# mount /dev/sda1 /mnt/boot
 
 ## ======== INTERNET CONNECTION ========= ##
@@ -50,11 +90,24 @@ Use parted to create ESP and Root data partitions
 	# pacstrap /mnt base base-devel
 	# genfstab -U /mnt > /mnt/etc/fstab
 	# arch-chroot /mnt /bin/bash
-	# nano /etc/locale.gen # Edit to enable en_US.UTF-8
-	# locale-gen
-	# echo LANG=en_US.UTF-8 > /etc/locale.conf
+    # Edit /etc/locale.gen to enable the following locales
+    """
+    en_IN UTF-8
+    en_DK.UTF-8
+    en_GB.UTF-8
+    en_US.UTF-8
+    en_US
+    ta_IN UTF-8
+    eo
+    """
+	locale-gen
+	echo LANG=en_IN.UTF-8 > /etc/locale.conf
+    echo LANGUAGE=en_IN.UTF-8:en_GB.UTF-8:en_US.UTF-8 >> /etc/locale.conf
+    echo LC_TIME=en_DK.UTF-8 >> /etc/locale.conf
 	# echo KEYMAP=dvorak > /etc/vconsole.conf
 	# echo FONT=lat9w-16 >> /etc/vconsole.conf
+    # Alternatively:
+    localectl set-keymap --no-convert dvorak
 	# tzselect
 	# ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 	# hwclock --systohc --utc

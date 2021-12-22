@@ -1,7 +1,7 @@
 #!/bin/zsh
 ## POST INSTALL CONFIGURATION
 
-###############################
+###
 ##________ DATE TIME ________##
 ###############################
 
@@ -11,9 +11,9 @@ systemctl start ntpd
 systemctl enable ntpd
 
 
-##############################
+###
 ##________ SECURITY ________##
-##############################
+###
 visudo
 Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
                       /sbin/halt, /sbin/reboot, /sbin/poweroff, \
@@ -31,20 +31,52 @@ gpg2 --recv-keys ec3cbe7f607d11e6
 yay -S ecryptfs-simple # Do modprobe ecryptfs to be able to use this
 pacman -S veracrypt
 
-###
-# PASSWORD MANAGERS
-yay -S keepassxc
-yay -S bitwarden-bin
+"""       SECURITY AND HARDENING
+"""
+gufw
+nftables
+firejail
+yay -S arch-audit
+yay -S libfido2 # For SSH with Fido2 support
+yay -S chkrootkit # Run: `chkrootkit`
+tiger
+wapiti
+pacman -S rkhunter # Run: `rkhunter -sk --checkall`
+pacman -S fail2ban # set enabled = true in jail.conf
+
+# Import GPG key of security@cisofy.com
+# gpg --keyserver hkps://hkps.pool.sks-keyservers.net:443 --recv-key 73AC9FC55848E977024D1A61429A566FD5B79251
+yay -S lynis # Run: `lynis audit system`
+
+"""____/security/vpn___
+"""
+wireguard
+mullvad
+yay -S mullvad-vpn
+protonvpn
+
+"""_____/security/password_managers____
+"""
+yay -S keepassxc bitwarden-bin
+
+"""_____/security/malware_handlers____
+"""
+yay -S clamtk clamav
+yay -S maldet # sometimes outdated
+# to run checks
+# maldet -a /home
 
 ################################
 ##________ NETWORKING ________##
 ################################
 ## Configure Internet using netctl.
 ## Interface name from `ip link`
-cp /etc/netctl/examples/ethernet-static /etc/netctl/
-netctl start ethernet-static
-netctl enable ethernet-static
+# cp /etc/netctl/examples/ethernet-static /etc/netctl/
+# netctl start ethernet-static
+# netctl enable ethernet-static
 ## netctl switch-to different-network
+pacman -S iwd
+pacman -S network-manager-applet
 
 #########################################
 ##________ X.ORG CONFIGURATION ________##
@@ -53,18 +85,28 @@ pacman -S xorg-xrdb (rendering Xresources)
 pacman -S xorg-xrandr xorg-xkill
 pacman -S xorg-server xorg-xinit xf86-input-synaptics
 # TODO: Add synaptics config / libinput config
+libinput-gestures
 
-########################################
-##________ ZSH, TERMINAL, VIM ________##
-########################################
+"""
+________ ZSH, TERMINAL, VIM ________
+
+TODO: vim-fugitive, plugins, etc.
+TODO: Explore alacritty circadian
+"""
 pacman -S zsh tmux vim-airline
 pacman -S rxvt-unicode rxvt-unicode-terminfo
+yay -S alacritty mosh terminator
 
+"""_____________DESKTOP ENVIRONMENT_______________
+"""
 pacman -S awesome slim slim-themes vicious
 #Z Shell is configured the first time user logs in
 yay -S prezto-git  ## Zsh Customization
 
-TODO: vim-fugitive, plugins, etc.
+yay -S plasma-meta plasma-wayland-session plasma-wayland
+yay -S rofi
+yay -S flameshot
+yay -S kdeconnect
 
 ###################################
 ##________ AUDIO / SOUND ________##
@@ -80,21 +122,59 @@ TODO: vim-fugitive, plugins, etc.
 #
 # pacman -S alsa-utils # or...
 pacman -S pavucontrol
-
-pacman -S moc mpd mpc    ## Audio players
-pacman -S vlc mplayer    ## Video players
 #yay -S pulseaudio-bluetooth
 # Replace pulseaudio with pipewire
-yay -S pipewire-pulse
-yay -S clementine audacious
+yay -S pipewire-media-session pulseeffects pipewire pipewire-pulse
+yay -S pulseffects
+yay -S noisetorch
 
 
-pacman -S btrfs-progs snapper # Snapper helps make btrfs subvol snapshots
-pacman -S f2fs-tools 
+"""_________PERSONAL MEDIA MANAGEMENT_______________
+"""
+yay -S vlc mpv kodi mplayer
+yay -S clementine qmmp audacious
+pacman -S shotwell digikam ristretto
+gwenview
+pacman -S tumbler       ## Thumbnailer service for ristretto
+pacman -S moc mpd mpc    ## Audio players
+yay -S vvawe
+youtube-dl -U
+
+"""_____DOWNLOAD TOOLS
+"""
+yay -S wget wget2
+yay -S aria2
+
+
+"""_____ COMPRESSION ALGORITHMS
+"""
+brotli
+zstd
+
+"""_____COMPRESSION UTILITIES
+"""
+pacman -S peazip
+pacman -S unrar
+pacman -S p7zip
+pacman -S unzip
+
+"""__________ BACKUPS AND RECOVERY____________
+"""
+yay -S vorta borg
+pacman -S snapper # helps make btrfs subvol snapshots
+yay -S timeshift # Alternative to snapper
+pacman -S rclone
+yay -S btrfs-progs exfatprogs xfsprogs f2fs-tools 
+btrfs-compsize compsize btrfs-maintenance
+# pacman -S ntfs-3g        ## NTFS devices write support (No-longer required?)
+yay -S ntfs ntfs3-dkms
+
 pacman -S lynx firefox chromium    ## Browsers
-pacman -S claws-mail claws-mail-themes    ## Mail Clients
 pacman -S libreoffice-fresh hunspell-en
+hyphen
+hunspell
 pacman -S gnucash
+yay -S perl-finance-quote
 pacman -S cherrytree    ## Note taking
 
 # DEAD
@@ -102,39 +182,49 @@ pacman -S cherrytree    ## Note taking
 
 pacman -S ibus ibus-m17n  ## Indic language typing
 pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
-pacman -S slock dos2unix unzip redshift wget
-pacman -S shotwell digikam ristretto
-pacman -S tumbler       ## Thumbnailer service for ristretto
+pacman -S slock dos2unix redshift
+
 pacman -S fbreader      ## e-Book reader
-pacman -S nodejs npm
 pacman -S dnsutils whois nmap gnu-netcat
-pacman -S tree josm
+pacman -S tree
 pacman -S openldap
 pacman -S hdparm strace dmidecode
-pacman -S git bzr       ## Distributed version control
-pacman -S openvpn
-pacman -S rdesktop
-youtube-dl -U
+
+"""______ DEVELOPMENT AND WORK ______
+"""
+pacman -S geany
+pacman -S git bzr mercurial      ## Distributed version control
+pacman -S meld
 pacman -S ansible
 pacman -S putty
+pacman -S nodejs npm
+# yay -S pgadmin4
+# yay -S dbeaver
+pacman -S rustup rust
+
+yay -S aws-session-manager-plugin
+yay -S aws-cli-v2-bin
+
+pacman -S openvpn
+pacman -S rdesktop
 
 ##################################
 ##________ DESIGN STUFF ________##
 ##################################
+yay -S obs-studio
+yay -S rawtherapee
 pacman -S inkscape gimp  ## Raster and Vector graphics editor
+pacman -S openexr mozjpeg # File format support
 # Download and install Xaviju's Inkscape Open Symbols
 mkdir -p ~/.config/inkscape/symbols
 git clone https://github.com/Xaviju/inkscape-open-symbols.git /tmp/
 find /tmp/Xaviju/ -type f -name "*.svg" | xargs cp -t ~/.config/inkscape/symbols/
 
-
-
+pacman -S jre11-openjdk icedtea-web
+yay -S qgis
 pacman -S josm           ## OpenStreetMap editor
-pacman -S ntfs-3g        ## NTFS devices write support
-pacman -S jre8-openjdk icedtea-web
 
 #rlwrap, dex, wireless_tools 
-
 
 ################################
 ##________ LOGGING IN ________##
@@ -268,6 +358,7 @@ Following fonts are installed:
 - Roboto
 - Public Sans
 - Powerline Symbol
+- Noto fonts emoji
 """
 #\\\ TERMINAL FONTS ///#
 pacman -S otf-fira-code
@@ -275,7 +366,14 @@ pacman -S otf-fira-mono
 pacman -S otf-fira-sans
 
 
-pacman -S ttf-dejavu    ## Alternative to Bitstream Vera Sans
+yay -S ttf-dejavu    ## Alternative to Bitstream Vera Sans
+yay -S ttf-bitstream-vera
+yay -S noto-fonts-emoji
+yay -S otf-openmoji
+yay -S ttf-twemoji-color
+# yay -S ttf-emojione-color ## Deprecated and superceded by twemoji
+
+# yay -S ttf-joypixels ## Non-free
 pacman -S ttf-liberation
 pacman -S ttf-anonymous-pro
 pacman -S ttf-inconsolata
@@ -283,10 +381,12 @@ pacman -S ttf-linux-libertine ttf-linux-libertine-g
 pacman -S adobe-source-code-pro-fonts adobe-source-sans-pro-fonts
 pacman -S adobe-source-serif-pro-fonts
 pacman -S noto-fonts ttf-roboto
-yay -S ttf-bitstream-vera
 yay -S awesome-terminal-fonts
 pacman -S font-mathematica
 pacman -S powerline-fonts    ## Patched fonts to show powerline icons
+yay -S tex-gyre-fonts
+yay -S inter-font
+
 # Install ttf-tamil package from AUR
 ## Add infinality repository
 pacman-key -r 962DDE58
@@ -312,6 +412,7 @@ modprobe vboxdrv
 pacman -S vagrant docker lxc
 systemctl enable docker
 systemctl start docker
+pacman -S podman
 
 gem install rhc ## Openshift RedHat Client
 rhc-setup
@@ -348,6 +449,12 @@ cat <<U2F >> /etc/udev/rules.d/45-u2f.rules
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0120", TAG+="uaccess"
 U2F
 
+## UDEV FOR ENABLING TRIM ON SSD ##
+# If SSD doesn't show non-zero bytes on `lsblk --discard` 
+cat <<TRIM >> /etc/udev/rules.d/46-ssd-trim.rules
+ACTION=="add|change", ATTRS{idVendor}=="<VENDOR_ID>", ATTRS{idProduct}=="<PRODUCT_ID>", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+TRIM
+
 ########################################
 # DOCKER 
 # Add IP forwarding to fix container public routing issue
@@ -372,12 +479,22 @@ gnoduino (AUR)
 gnupg2 --recv-keys 6feb6f83d48b3547
 yay -S element-desktop
 
-# aurman -S retroshare
 yay -S onionshare # Need PyQT5 library
 yay -S jami-gnome jami-daemon
 # aurman -S ricochet
 # aurman -S zulip-desktop
 # aurman -S rambox-bin
+# yay -S retroshare
+yay -S thunderbird-beta-bin thunderbird-beta-i18n-en-gb
+pacman -S claws-mail claws-mail-themes    ## Mail Clients
+yay -S slack
+pacman -S mumble
+yay -S tutanota-desktop-bin
+yay -S signal-desktop-beta
+yay -S teams zoom
+yay -S jami
+yay -S protonmail-bridge
+dino
 
 ###################################
 ##________ LOOK AND FEEL ________##
@@ -406,6 +523,7 @@ pacman -S htop
 # Patchwork (secure scuttlebutt client ssb://)
 # Lucidor - E-book reader?
 # OpenBazaar
+# bisq
 yay -S i2p
 yay -S ipfs-desktop go-ipfs
 yay -S webtorrent-desktop-bin
@@ -426,7 +544,6 @@ xdg-mime default zathura.desktop application/pdf
 # - Thunderbird Alpha / Beta
 # - geany / geany-plugins
 # - mpc / mpd / ncmpc setup
-# - Vagrant / etc.
 # - Steam
 
 yay -S xbanish # Hides mouse pointer when typing;
@@ -470,80 +587,131 @@ yay -S aic94xx-firmware wd719x-firmware
 lspci | grep -e VGA
 yay -S mesa vulkan-intel vulkan-icd-loader
 yay -S xf86-video-intel   # Video drivers for intel
-yay -S intel-media-driver # For video acceleration
-yay -S libva-intel-driver
+yay -S intel-media-driver libva-intel-driver # For video acceleration
 yay -S libva-utils
 export LIBVA_DRIVER_NAME=iHD
 vainfo
+yay -S vulkan-info gpu-viewer
+
 yay -S inxi               # System information tool
+yay -S hardinfo
 yay -S mesa-demos glmark2 # GPU benchmarking
 # Figure out kernel modesetting
 
-
-# Thunar
+# File Manager
 yay -S thunar thunar-archive-plugin thunar-media-tags-plugin
 yay -S file-roller # Archive and unarchive frontend
+yay -S nemo
 
 # Bluetooth
 yay -S bluez
 yay -S blueman
-yay -S unrar
 yay -S android-udev
 yay -S android-tools # For ADB
 yay -S bluegriffon # For webdev
 
-"""       SECURITY AND HARDENING
-"""
-yay -S arch-audit
-yay -S libfido2 # For SSH with Fido2 support
-yay -S chkrootkit tiger wapiti
-
-yay -S maldet # sometimes outdated
-# to run checks
-# maldet -a /home
-
-# Import GPG key of security@cisofy.com
-gpg --keyserver hkps://hkps.pool.sks-keyservers.net:443 --recv-key 73AC9FC55848E977024D1A61429A566FD5B79251
-yay -S lynis3
-# To audit
-# lynis audit system
-
-
 yay -S hw-probe
-yay -S thunderbird-beta-bin
 yay -S xournalpp
 yay -S sshfs gvfs-smb # Navigate remote files via Thunar
 yay -S leafpad
-yay -S onlykey
-yay -S signal-desktop-beta
+yay -S onlykey solo-python
 yay -S stress
 yay -S systemdgenie
-yay -S mullvad-vpn
+
+"""__Mind maps"""
 yay -S mindforger
+yay -S xmind
+yay -S vym
+
 yay -S pandoc
-yay -S grafx2
-yay -S vorta borg
+# yay -S grafx2 # Old style bitmap graphics editor
 yay -S clang
-yay -S 0ad
-yay -S mpd meld openexr gnucash fail2ban electron chromium inkscape ipython bind-tools avahi audit arandr
-yay -S smbclient virt-manager virtualbox youtube-dl xfsprogs
-yay -S pgadmin4
+yay -S mpd  chromium ipython bind-tools avahi audit arandr
+yay -S smbclient virt-manager virtualbox
 yay -S handbrake
 yay -S cdrtools cdrdao dvd+rw-tools cdparanoia
 yay -S grsync # Sync input tools between multiple devices
-yay -S exfatprogs
 # Just use KDE default DM - SDDM with breeze theme
 # yay -S lightdm lightdm-webkit2-greeter lightdm-gtk-greeter
-yay -S perl-finance-quote
-yay -S ccid acsccid pcsc-tools opensc solo-python
+yay -S ccid acsccid pcsc-tools opensc
+yay -S pkcs11 cryptoki
 yay -S linux-zen
-yay -S obs-studio
-yay -S node
 yay -S asp # AUR build packages - asp checkout element-desktop for example
-yay -S flameshot
-yay -S protonmail-bridge
-yay -S plasma-meta plasma-wayland-session
-yay -S alacritty-git mosh terminator
-yay -S rofi
-yay -S fwupd # Firmware updates
+yay -S udevil
+yay -S filezilla
+yay -S kalendar
+yay -S android-file-transfer gvfs-mtp gvfs
+yay -S n8n
+yay -S sssd
+yay -S calibre-web
+yay -S opensnitch osquery
+yay -S google-drive cryptomator
+yay -S paperkey
+yay -S sbsign sbutil
+yay -S efitools
+yay -S yara
+yay -S sgx
+yay -S unison
 
+focalboard
+yay -S megasync-bin
+polybar-git
+bfg
+ghostwriter
+lepton
+fawkes
+fwupd
+wine
+powerdevil # KDE Power management
+# https://clay-atlas.com/us/blog/2021/06/08/linux-en-upower-power-remaining/
+upower # Battery information
+pacman -S tlp # enable tlp.service
+yay -S dupeguru # Find duplicates
+yay -S fslint # Find duplicates
+yay -S bleachbit # Clear cache and obsolete data
+tzdata
+voxel
+dia
+pencil
+trebleshot
+bashtop
+arduino
+tabula
+asciinema
+ncdu # ncurses du
+libcastle 
+pkimanager
+pdftk
+mime-info
+pacman -S monero
+pacman -S xmrig
+pacman -S mymonero
+nix
+floor
+# yay -S metabase
+syncthing
+nss
+gnuradio
+scrpy
+seahorse
+pacman -S bluegriffin # WYSIWYG Web editor
+feh
+dropbox
+
+"""_________ GAMES __________
+"""
+surf
+torcs
+flightgear
+supertuxkart
+yay -S 0ad
+endless-sky
+cocaine
+unvanquished
+openra
+
+"""______ FUN STUFF _______
+"""
+pacman -S stellarium
+room-arranger
+sweethome3d
