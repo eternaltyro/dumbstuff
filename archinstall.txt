@@ -73,6 +73,7 @@ NOTE:
 	# mount -o defaults,noatime,compress=zstd,subvol=.snapshots /dev/mapper/cryptted /mnt
     # ALTERNATIVELY:
 	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=256 /dev/mapper/cryptted /mnt
+	# mkdir /mnt/home /mnt/var /mnt/opt /mnt/usr /mnt/etc /mnt/.snapshots
 	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=257 /dev/mapper/cryptted /mnt
 	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=258 /dev/mapper/cryptted /mnt
 	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=259 /dev/mapper/cryptted /mnt
