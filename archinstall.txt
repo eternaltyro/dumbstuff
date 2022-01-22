@@ -65,30 +65,35 @@ NOTE:
 	# mkdir /mnt/boot
 	# umount /mnt
 	# mount -o defaults,noatime,compress=zstd,subvol=root /dev/mapper/cryptted /mnt
-	# mount -o defaults,compress=zstd,subvol=home /dev/mapper/cryptted /mnt
-	# mount -o defaults,noatime,compress=zstd,subvol=var /dev/mapper/cryptted /mnt
-	# mount -o defaults,noatime,compress=zstd,subvol=opt /dev/mapper/cryptted /mnt
-	# mount -o defaults,noatime,compress=zstd,subvol=usr /dev/mapper/cryptted /mnt
-	# mount -o defaults,noatime,compress=zstd,subvol=etc /dev/mapper/cryptted /mnt
-	# mount -o defaults,noatime,compress=zstd,subvol=.snapshots /dev/mapper/cryptted /mnt
+	# mkdir /mnt/home /mnt/var /mnt/opt /mnt/usr /mnt/etc /mnt/snapshots
+	# mount -o defaults,compress=zstd,subvol=home /dev/mapper/cryptted /mnt/home
+	# mount -o defaults,noatime,compress=zstd,subvol=var /dev/mapper/cryptted /mnt/var
+	# mount -o defaults,noatime,compress=zstd,subvol=opt /dev/mapper/cryptted /mnt/opt
+	# mount -o defaults,noatime,compress=zstd,subvol=usr /dev/mapper/cryptted /mnt/usr
+	# mount -o defaults,noatime,compress=zstd,subvol=etc /dev/mapper/cryptted /mnt/etc
+	# mount -o defaults,noatime,compress=zstd,subvol=.snapshots /dev/mapper/cryptted /mnt/snapshots
     # ALTERNATIVELY:
 	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=256 /dev/mapper/cryptted /mnt
 	# mkdir /mnt/home /mnt/var /mnt/opt /mnt/usr /mnt/etc /mnt/.snapshots
-	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=257 /dev/mapper/cryptted /mnt
-	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=258 /dev/mapper/cryptted /mnt
-	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=259 /dev/mapper/cryptted /mnt
-	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=260 /dev/mapper/cryptted /mnt
-	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=261 /dev/mapper/cryptted /mnt
-	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=262 /dev/mapper/cryptted /mnt
+	# mount -o defaults,compress=zstd,space_cache=v2,subvolid=257 /dev/mapper/cryptted /mnt/home
+	# mount -o defaults,noatime,compress=zstd,space_cache=v2,subvolid=258 /dev/mapper/cryptted /mnt/var
+	# mount -o defaults,noatime,compress=zstd,space_cache=v2,subvolid=259 /dev/mapper/cryptted /mnt/opt
+	# mount -o defaults,noatime,compress=zstd,space_cache=v2,subvolid=260 /dev/mapper/cryptted /mnt/usr
+	# mount -o defaults,noatime,compress=zstd,space_cache=v2,subvolid=261 /dev/mapper/cryptted /mnt/etc
+	# mount -o defaults,noatime,compress=zstd,space_cache=v2,subvolid=262 /dev/mapper/cryptted /mnt/snapshots
 	# mount /dev/sda1 /mnt/boot
 
 ## ======== INTERNET CONNECTION ========= ##
 | At this point, wired internet connection should already be working.
 | Ping 8.8.8.8 to test. If ping archlinux.org doesn't return but pinging
 | IP addresses works, then add 8.8.8.8 to /etc/resolv.conf
+|
+| If ping doesn't work:
+|     $ iwctl
+|     [iwd] # station wlan0 connect <SSID>
 ## ======= INTERNET CONNECTION ======== ##
 
-	# pacstrap /mnt base base-devel
+	# pacstrap /mnt base base-devel linux linux-firmware
 	# genfstab -U /mnt > /mnt/etc/fstab
 	# arch-chroot /mnt /bin/bash
     # Edit /etc/locale.gen to enable the following locales
