@@ -1,29 +1,220 @@
 ---
+# TODO: Add packages
+# - zulucrypt
+# - cryptsetup
+# 
+# TODO: Add services
+# TODO: Fix SSHD config
 - hosts: archlaptop
   remote_user: eternaltyro 
   become: yes
 
   tasks:
-  - name: Install Security essentials
-    pacman: name=keepassx2 state=latest
+    - name: Install password manager
+      pacman: name=keepassxc state=latest
 
-  - name: Install X essentials
-    pacman:
-      name: xorg-xrdb,xorg-xkill,xorg-xrandr,xorg-server,xorg-xinit,xf86-input
-      state: latest
+    - name: Install backup utility
+      pacman: name=borg state=latest
 
-  - name: Setup Window Manager and Shell
-    pacman:
-      name: awesome,slim,slim-themes,vicious,zsh,tmux,vim-airline
-      state: latest
+    - name: Install filesystem utilities
+      pacman:
+        name:
+          - f2fs-tools
+          - btrfs-progs
+          - exfatprogs
+          - xfsprogs
+        state: latest
+          
+    - name: Install filesystem utilities via AUR
+      pacman:
+        name: 
+          - ntfs3-dkms
+        state: present
+        executable: /usr/bin/yay
 
-  - name: Setup Multimedia
-    pacman:
-      name: mpd,mpc,moc,vlc,alsa-utils
-      state: latest
+    - name: Install security scanners
+      pacman:
+        name: 
+          - lynis
+          - rkhunter
+          - arch-audit
+          - fail2ban
+        state: latest
 
-  - name: Setup Office tools
-    pacman:
-      name: libreoffice-fresh,firefox,cherrytree, gnucash
-      state: latest
+    - name: Install security scanners from AUR
+      community.general.pacman:
+        name:
+          - tiger
+          - google-tsunami-security-scanner
+          - chkrootkit
+          - openscap
+        state: present
+        executable: yay
+        # extra_args: --builddir /var/cache/yay
+      tags: never
+
+    - name: Install X essentials (legacy)
+      pacman:
+        name: 
+          - xorg-xrdb
+          - xorg-xkill
+          - xorg-xrandr
+          - xorg-server
+          - xorg-xinit
+          - xf86-input
+        state: latest
+      tags: never
+
+    - name: Setup Awesome Window Manager and login manager
+      pacman:
+        name: 
+          - awesome
+          - slim
+          - slim-themes
+          - vicious
+        state: latest
+      tags: never
+
+    - name: Setup terminal multiplexer and shells 
+      pacman:
+        name: 
+          - zsh
+          - tmux
+          - vim-airline
+        state: latest
+      tags: shell
+
+    - name: Setup modern audio drivers (pipewire)
+      pacman:
+        name: 
+          - pipewire
+          - pipewire-pulse
+          - pipewire-media-session
+        state: latest
+
+    - name: Setup legacy audio drivers (pulseaudio)
+      pacman:
+        name:
+          - pulseaudio
+          - pulseaudio-bluetooth
+          - pavucontrol
+          - pulseeffects
+      tags: never
+
+    - name: Setup Multimedia
+      pacman:
+        name: 
+          - mpd
+          - mpc
+          - moc
+          - vlc
+          - alsa-utils
+        state: latest
+      tags: never
+
+    - name: Setup Office tools
+      pacman:
+        name: 
+          - libreoffice-fresh
+          - firefox
+          - cherrytree
+          - gnucash
+        state: latest
+
+    - name: Install games from flatpak
+      community.general.flatpak:
+        name:
+          - net.pioneerspacesim.Pioneer
+          - com.play0ad.zeroad
+          - org.wesnoth.Wesnoth
+          - com.valvesoftware.Steam
+        state: present
+
+    - name: Install office comms apps from flatpak
+      community.general.flatpak:
+        name:
+          - com.slack.Slack
+          - com.github.IsmaelMartinez.teams_for_linux
+          - com.visualstudio.code
+          - us.zoom.Zoom
+          - org.gaphor.Gaphor
+        state: present
+
+    - name: Install multi-media apps from flatpak
+      community.general.flatpak:
+        name:
+          - com.obsproject.Studio
+          - org.blender.Blender
+          - org.blender.Blender.Codecs
+          - org.gimp.GIMP
+          - org.inkscape.Inkscape
+        state: present
+
+    - name: Install essential flatpak apps
+      community.general.flatpak:
+        name:
+          - org.keepassxc.KeePassXC
+          - org.qbittorrent.qBittorrent
+          - com.borgbase.Vorta
+          - com.brave.Browser
+          - com.github.tchx84.Flatseal
+          - im.riot.Riot
+          - net.giuspen.cherrytree
+          - org.cryptomator.Cryptomator
+        state: present
+
+    - name: Install optional flatpak apps
+      community.general.flatpak:
+        name:
+          - org.zotero.Zotero
+          - org.telegram.desktop
+          - com.github.johnfactotum.Foliate
+        state: present
+
+    - name: Install fonts via AUR
+      community.general.pacman:
+        name:
+          - otf-fira-code-mozilla
+          - otf-fira-code-symbol
+          - otf-openmoji
+          - font-mathematica
+        state: present
+        executable: yay
+      tags: never
+
+    - name: Install fonts
+      pacman:
+        name:
+          - otf-fira-mono
+          - otf-fira-sans
+          - ttf-dejavu
+          - ttf-bitstream-vera
+          - noto-fonts-emoji
+          - ttf-liberation
+          - ttf-anonymous-pro
+          - ttf-inconsolata
+          - ttf-linux-libertine
+          - ttf-linux-libertine-g
+          - adobe-source-code-pro-fonts
+          - adobe-source-sans-pro-fonts
+          - adobe-source-serif-pro-fonts
+          - noto-fonts
+          - ttf-roboto
+          - awesome-terminal-fonts
+          - powerline-fonts
+          - tex-gyre-fonts
+          - inter-font
+          - ttc-iosevka
+          - ttf-iosevka-term
+          - ttf-iosevka-term-curly
+          - ttf-iosevka-term-curly-slab
+          - ttf-iosevka-nerd
+          - ttc-iosevka-slab
+          - ttc-iosevka-curly
+          - ttc-iosevka-aile
+          - ttf-hack
+          - gnu-free-fonts
+        state: present
+
+      
 ...

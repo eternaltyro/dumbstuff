@@ -123,13 +123,10 @@ yay -S kdeconnect
 # pacman -S alsa-utils # or...
 """ Pulseaudio - Legacy audio driver
 """
-# yay -S pulseaudio \
-#        pavucontrol \
-#        pulseaudio-bluetooth \
-#        pulseeffects
-
-""" Replace pulseaudio with pipewire
-"""
+# yay -S pavucontrol
+# yay -S pulseaudio-bluetooth
+# yay -S pulseeffects
+# Replace pulseaudio with pipewire
 yay -S pipewire-media-session \
 	pipewire \
 	pipewire-pulse

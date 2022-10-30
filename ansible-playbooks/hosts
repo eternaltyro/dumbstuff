@@ -1,4 +1,4 @@
-archlaptop ansible_connection=local ansible_user=eternaltyro become=yes  
+archlaptop ansible_connection=local ansible_user=eternaltyro become=yes become_ask_pass=yes 
 
 [homepc]
 homeubuntu ansible_connection=ssh ansible_user=eternaltyro become=yes ansible_become_pass=cuddalore ansible_host=11.23.58.140
