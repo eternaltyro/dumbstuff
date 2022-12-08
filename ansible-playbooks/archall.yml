@@ -1,10 +1,59 @@
 ---
+# Running:
+#
+#  ansible-playbook --ask-become-pass --check --tags production --inventory hosts archall.yml
+#  ansbile-playbook --inventory hosts --syntax-check archall.yml
+#
+# Ideally:
+#  NixOS should take care of doing package management
+#  and configuration for the entire system. But until
+#  then, we'll stick to Ansible
+#
+#  Aspirations:
+#  - Immutable / read-only mode for important files ,
+#    packages and filesystem
+#  - Auto-configure
+#  - Safe rollbacks
+#
 # TODO: Add packages
 # - zulucrypt
 # - cryptsetup
+# - thunderbird-beta-bin (AUR)
+# - veracrypt
+# - Terraform
+# - tfsec-bin
+# - terrascan-bin
+# - Buildah + Podman
+# - Kubernetes?
 # 
 # TODO: Add services
+# - systemd-analyze security <service_name>
+#
+# TODO: Add IDS
+# - AIDS
+# - Snort
+# - Suricata
+#
+# TODO: Configure firewall / UFW
+# - or nftables
+# - ufw
+#
 # TODO: Fix SSHD config
+#   - yay -S czkawka-gui-bin
+#   - yay -S libva-utils - for vainfo
+#   - yay -S vulkan-intel
+#   - yay -S libva-intel-driver
+#   - yay -S intel-media-driver
+#   - yay -S intel-gpu-tools --> for intel_gpu_top
+#
+# TODO: System Monitoring Tools
+#   - htop
+#   - glances
+#
+# TODO: SHell stuff
+# - PS1
+# - oh-my-zsh
+# - zsh
 - hosts: archlaptop
   remote_user: eternaltyro 
   become: yes
@@ -24,6 +73,7 @@
           - exfatprogs
           - xfsprogs
         state: latest
+      tags: production
           
     - name: Install filesystem utilities via AUR
       pacman:
@@ -31,7 +81,29 @@
           - ntfs3-dkms
         state: present
         executable: /usr/bin/yay
+      tags: never
 
+# slirp4netns and fuse-overlayfs needed for rootless podman
+# Do the following to set subuid / subgid for user namespaces inside the container
+# sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 eternaltyro
+#
+    - name: Install container stuff incl. rootless podman
+      pacman:
+        name: 
+          - podman
+          - conmon
+          - containers-common
+          - fuse-overlayfs
+          - slirp4netns
+          - buildah
+          - toolbox
+        state: present
+      tags: production
+
+# TODO:
+# - Add ClamAV
+# - Add OSSEC
+# - Add LMD / Maldet
     - name: Install security scanners
       pacman:
         name: 
@@ -121,6 +193,18 @@
           - gnucash
         state: latest
 
+    - name: Libreoffice language tools (thesaurus, spell check, hypen rules)
+      pacman:
+        name:
+          - hunspell
+          - hunspell-en_us
+          - hunspell-en_gb
+          - hyphen
+          - hyphen-en
+          - libmythes
+          - mythes-en
+          - 
+
     - name: Install games from flatpak
       community.general.flatpak:
         name:
@@ -129,6 +213,7 @@
           - org.wesnoth.Wesnoth
           - com.valvesoftware.Steam
         state: present
+      tags: production
 
     - name: Install office comms apps from flatpak
       community.general.flatpak:
@@ -139,6 +224,7 @@
           - us.zoom.Zoom
           - org.gaphor.Gaphor
         state: present
+      tags: production
 
     - name: Install multi-media apps from flatpak
       community.general.flatpak:
@@ -149,6 +235,7 @@
           - org.gimp.GIMP
           - org.inkscape.Inkscape
         state: present
+      tags: production
 
     - name: Install essential flatpak apps
       community.general.flatpak:
@@ -162,6 +249,7 @@
           - net.giuspen.cherrytree
           - org.cryptomator.Cryptomator
         state: present
+      tags: production
 
     - name: Install optional flatpak apps
       community.general.flatpak:
@@ -170,6 +258,7 @@
           - org.telegram.desktop
           - com.github.johnfactotum.Foliate
         state: present
+      tags: production
 
     - name: Install fonts via AUR
       community.general.pacman:
@@ -179,7 +268,7 @@
           - otf-openmoji
           - font-mathematica
         state: present
-        executable: yay
+        executable: /usr/bin/yay
       tags: never
 
     - name: Install fonts
@@ -215,6 +304,45 @@
           - ttf-hack
           - gnu-free-fonts
         state: present
+      tags: production
+
+    - name: Install Uncomplicated Firewall (UFW)
+      pacman:
+        name:
+          - ufw
+
+    - name: Configure ufw Firewall Rules
+      ufw:
+        state: enabled
+        policy: allow
+        logging: 'on'
+#        delete: true
+
+    - name: Rate limit SSH attempts
+      ufw:
+        comment: Rate limit SSH attempts
+        rule: limit
+        port: auth
+        proto: tcp
+        log: true
+
+    - name: Allow RFC1918 networks
+      ufw:
+        comment: Allow RFC1918 networks
+        rule: allow
+        src: '{{ item }}'
+      loop:
+        - 10.0.0.0/8
+        - 172.16.0.0/12
+        - 192.168.0.0/16 
+
+    - name: Allow IPv6 Unique Local Addresses
+      ufw:
+        rule: allow
+        src: fc00::/7
+        proto: any
+        comment: Allow IPv6 Unique Local Addresses
+
 
       
 ...
