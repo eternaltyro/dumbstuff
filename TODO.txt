@@ -1,0 +1,5 @@
+- Add git commit templates
+```
+git config --global commit.template ~/.git/commit-template.txt
+
+```
