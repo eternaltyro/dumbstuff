@@ -41,7 +41,13 @@ yay -S libfido2 # For SSH with Fido2 support
 yay -S chkrootkit # Run: `chkrootkit`
 tiger
 wapiti
-pacman -S rkhunter # Run: `rkhunter -sk --checkall`
+
+## RKHUNTER Optional Dependencies:
+# - lsof
+# - netstat
+# - skdet - Simple rootkit detector
+pacman -S rkhunter # Run: `rkhunter --skip-keypress --check`
+
 pacman -S fail2ban # set enabled = true in jail.conf
 
 # Import GPG key of security@cisofy.com

@@ -104,6 +104,7 @@
 # - Add ClamAV
 # - Add OSSEC
 # - Add LMD / Maldet
+# - Tripwire
     - name: Install security scanners
       pacman:
         name: 
@@ -113,16 +114,21 @@
           - fail2ban
         state: latest
 
-    - name: Install security scanners from AUR
-      community.general.pacman:
+    - name: Install security scanner dependencies
+      pacman:
         name:
+          - skdet
+          - lsof
+          - netstat
+
+    - name: Install security scanners from AUR
+      ansible.builtin.command:
+        argv:
+          - /usr/bin/yay -S
           - tiger
-          - google-tsunami-security-scanner
           - chkrootkit
+          - google-tsunami-security-scanner
           - openscap
-        state: present
-        executable: yay
-        # extra_args: --builddir /var/cache/yay
       tags: never
 
     - name: Install X essentials (legacy)
@@ -268,8 +274,8 @@
           - otf-openmoji
           - font-mathematica
         state: present
-        executable: /usr/bin/yay
-      tags: never
+      executable: "/usr/bin/yay"
+      tags: onetime
 
     - name: Install fonts
       pacman:
