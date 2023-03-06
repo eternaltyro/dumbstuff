@@ -1,0 +1,2 @@
+sudo rkhunter --skip-keypress --check --report-warnings-only
+sudo rkhunter --propupd
