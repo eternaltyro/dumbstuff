@@ -1,2 +1,46 @@
-sudo rkhunter --skip-keypress --check --report-warnings-only
-sudo rkhunter --propupd
+- name: Run RKHUNTER property update
+  ansible.builtin.command: rkhunter --propupd
+  become: yes
+
+- name: Run RKHUNTER checks
+  ansible.builtin.command: rkhunter --check --skip-keypress --report-warnings-only
+  become: yes
+
+- name: Run chkrootkit
+  ansible.builtin.command: chkrootkit --quiet
+  become: yes
+
+- name: Run chkrootkit
+  ansible.builtin.command: chkrootkit --quiet
+  become: yes
+
+- name: Install Fangfrisch
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/yay -S
+      - python-fangfrisch
+
+- name: Install Fangfrisch
+  ansible.builtin.command: /usr/bin/fangfrisch --conf /etc/fangfrisch/fangfrisch.conf initdb
+  become: yes
+  become_user: clamav
+  args:
+    creates: /var/lib/fangfrisch/db.sqlite
+
+- name: Enable Fangfrisch scheduled runs
+  ansible.builtin.systemd:
+    name: fangfrisch.timer
+    state: started
+    enabled: true
+
+- name: Make sure freshclam is enabled
+  ansible.builtin.systemd:
+    name: clamav-freshclam
+    state: started
+    enabled: true
+
+- name: Make sure clamav-daemon is running
+  ansible.builtin.systemd:
+    name: clamav-daemon
+    state: started
+    enabled: true
