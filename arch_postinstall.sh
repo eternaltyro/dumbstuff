@@ -390,6 +390,7 @@ pacman -S font-mathematica
 pacman -S powerline-fonts    ## Patched fonts to show powerline icons
 yay -S tex-gyre-fonts
 yay -S inter-font
+yay -S otf-latin-modern ## Font default in LaTeX improved. 
 
 # Install ttf-tamil package from AUR
 ## Add infinality repository
