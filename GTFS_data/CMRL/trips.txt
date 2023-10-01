@@ -1,0 +1,19 @@
+route_id,service_id,trip_id,trip_headsign,direction_id,wheelchair_accessible,bikes_allowed
+BL_C1,SUN,BL_C1_NB_SUN,Wimco Nagar,0,0,0
+IC_A1,SUN,IC_A1_NB_SUN,Chennai Central,0,0,0
+GL_C2,SUN,GL_C2_NB_SUN,Chennai Central,0,0,0
+BL_C1,SUN,BL_C1_SB_SUN,Airport,1,0,0
+IC_A1,SUN,IC_A1_SB_SUN,Airport,1,0,0
+GL_C2,SUN,GL_C2_SB_SUN,St. Thomas Mount,1,0,0
+BL_C1,SAT,BL_C1_NB_SAT,Wimco Nagar,0,0,0
+IC_A1,SAT,IC_A1_NB_SAT,Chennai Central,0,0,0
+GL_C2,SAT,GL_C2_NB_SAT,Chennai Central,0,0,0
+BL_C1,SAT,BL_C1_SB_SAT,Airport,1,0,0
+IC_A1,SAT,IC_A1_SB_SAT,Airport,1,0,0
+GL_C2,SAT,GL_C2_SB_SAT,St. Thomas Mount,1,0,0
+BL_C1,WDY,BL_C1_NB_WDY,Wimco Nagar,0,0,0
+IC_A1,WDY,IC_A1_NB_WDY,Chennai Central,0,0,0
+GL_C2,WDY,GL_C2_NB_WDY,Chennai Central,0,0,0
+BL_C1,WDY,BL_C1_SB_WDY,Airport,1,0,0
+IC_A1,WDY,IC_A1_SB_WDY,Airport,1,0,0
+GL_C2,WDY,GL_C2_SB_WDY,St. Thomas Mount,1,0,0

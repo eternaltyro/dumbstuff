@@ -1,0 +1,11 @@
+fare_id,price,currency_type,payment_method,transfers,transfer_duration
+NC1,10,INR,1,0,
+NC2,20,INR,1,0,
+NC3,30,INR,1,0,
+NC4,40,INR,1,0,
+NC5,50,INR,1,0,
+SC1,20,INR,1,0,
+SC2,40,INR,1,0,
+SC3,60,INR,1,0,
+SC4,80,INR,1,0,
+SC5,100,INR,1,0,
