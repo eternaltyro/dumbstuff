@@ -198,6 +198,10 @@ yay -S putty # - To help generate / transform Putty compatible SSH keys
 # yay -S pgadmin4
 # yay -S dbeaver
 
+yay -S stow # GNU Stow manages dotfiles.
+yay -S ruff # Super fast Python linter written in Rust.
+yay -S uv # Super fast Python package installer and resolver written in Rust.
+
 """ --- LANGUAGES ---
 yay -S nodejs npm
 yay -S rustup rust
