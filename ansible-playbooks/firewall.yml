@@ -1,0 +1,44 @@
+---
+# Firewall TEST (DO NOT USE IN PRODUCTION)
+- name: Allow everything and enable UFW
+  community.general.ufw:
+    state: enabled
+    policy: allow
+
+- name: Set logging
+  community.general.ufw:
+    logging: 'on'
+
+# ufw supports connection rate limiting, which is useful for protecting
+# against brute-force login attacks. ufw will deny connections if an IP
+# address has attempted to initiate 6 or more connections in the last
+# 30 seconds. See  http://www.debian-administration.org/articles/187
+# for details. Typical usage is:
+- community.general.ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+
+# Allow OpenSSH. (Note that as ufw manages its own state, simply removing
+# a rule=allow task can leave those ports exposed. Either use delete=true
+# or a separate state=reset task)
+- community.general.ufw:
+    rule: allow
+    name: OpenSSH
+
+# - name: Delete OpenSSH rule
+#   community.general.ufw:
+#     rule: allow
+#     name: OpenSSH
+#     delete: true
+
+- name: Allow all access from RFC1918 networks to this host
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+...
+
