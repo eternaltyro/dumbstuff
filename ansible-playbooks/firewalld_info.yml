@@ -1,0 +1,18 @@
+---
+- name: Gather information about active zones
+  ansible.posix.firewalld_info:
+    active_zones: true
+  register: result
+
+- name: Print default zone for debugging
+  ansible.builtin.debug:
+    var: result.firewalld_info.default_zone
+
+- name: Gather information about specific zones
+  ansible.posix.firewalld_info:
+    zones:
+      - public
+      - external
+      - internal
+  register: result
+  ...
