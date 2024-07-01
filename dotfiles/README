@@ -3,5 +3,9 @@
 # Install GNU Stow
 pacman -S stow
 
+# !!!___CAREFUL___!!!
 # Adopt dotfiles
-stow --adopt .
+#stow --adopt .
+
+# If you need to set target directory
+stow --adopt . --dir=/usr/local/stow --target=/home/eternaltyro
