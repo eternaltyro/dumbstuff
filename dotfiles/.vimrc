@@ -1,6 +1,8 @@
-" Font on terminal - inconsolata
+" Terminal fonts
+" - inconsolata
+" - Fira Mono Medium 11 pt.
 
-execute pathogen#infect()
+" execute pathogen#infect()
 syntax enable
 
 set encoding=utf8
@@ -13,7 +15,7 @@ set sw=4  "shiftwidth=4 - tab inserts 4 spaces
 
 set ts=4  "tabstop=4 - Number of spaces each tab accounts for
 
-set lbr   "linebreak - display lines in multiple lines. "
+"set lbr   "linebreak - display lines in multiple lines.
 
 set tw=72 "textwidth=72 - After 72 char, the first space breaks line
 
@@ -40,12 +42,12 @@ set cursorline "Highlight current cursor line
 
 "set mouse+=a "Use mouse to highlight lines for copy
 
-set omnifunc=pythoncomplete#Complete
+"set omnifunc=pythoncomplete#Complete
 
 "Control+P toggles fuzzy search functionality
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-map <F2> :NERDTreeToggle<CR>
+"map <F2> :NERDTreeToggle<CR>
 
 autocmd Filetype rb setlocal shiftwidth=2 tabstop=2
 autocmd Filetype erb setlocal shiftwidth=2 tabstop=2
@@ -54,13 +56,13 @@ autocmd FileType tf setlocal shiftwidth=2 tabstop=2
 autocmd FileType tfvars setlocal shiftwidth=2 tabstop=2
 
 " https://superuser.com/questions/22444/make-vim-display-a-line-at-the-edge-of-the-set-textwidth
-" set colorcolumn=80
-" set colorcolumn=-2 (if textwidth = 80, column would be drawn in 78)
+"set colorcolumn=80
+"set colorcolumn=-2 (if textwidth = 80, column would be drawn in 78)
 " highlight ColorColumn ctermbg=green guibg=orange
 
 " Colors from zenburn: https://github.com/jnurmine/Zenburn/blob/master/colors/zenburn.vim
 " Copy to ~/.vim/colors/
-colors zenburn
+"colors zenburn
 
 set ls=2 "laststatus=2 # Always show status line esp. for vim-airline
 "set t_Co=256 "Terminal colors

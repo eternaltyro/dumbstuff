@@ -1,0 +1,7 @@
+# dotfiles management
+
+# Install GNU Stow
+pacman -S stow
+
+# Adopt dotfiles
+stow --adopt .

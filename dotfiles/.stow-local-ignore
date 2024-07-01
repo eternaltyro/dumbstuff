@@ -1,0 +1,46 @@
+# Comments and blank lines are allowed.
+# Doc: https://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html
+
+RCS
+.+,v
+
+CVS
+\.\#.+       # CVS conflict files / emacs lock files
+\.cvsignore
+
+\.svn
+_darcs
+\.hg
+
+\.git
+\.gitignore
+\.gitmodules
+
+.+~          # emacs backup files
+\#.*\#       # emacs autosave files
+
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Ignore XOrg / X11 stuff
+xbindkeysrc
+\.Xdefaults1
+Xdefaults
+Xresources
+
+# Ignore uninstalled software configuration
+config.irssi
+muttrc
+vimrc
+zshrc
+
+# Alacritty configuration (migrated from YAML to TOML)
+#
+#  $XDG_CONFIG_HOME/alacritty/alacritty.toml
+#  $XDG_CONFIG_HOME/alacritty.toml
+#  $HOME/.config/alacritty/alacritty.toml
+#  $HOME/.alacritty.toml
+
+alacritty.yml
+#
