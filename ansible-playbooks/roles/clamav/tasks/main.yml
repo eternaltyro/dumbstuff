@@ -1,0 +1,50 @@
+---
+- name: Install ClamAV
+  ansible.builtin.package:
+    name: clamav
+    state: present
+  notify: restart clamav
+
+- name: Ensure ClamAV Daemon service is running.
+  ansible.builtin.service:
+    name: clamav-daemon
+    enabled: true
+    state: started
+
+- name: Ensure Freshclam service is enabled.
+  ansible.builtin.service:
+    name: clamav-freshclam
+    enabled: true
+    state: started
+
+# Work-in-progress
+# - name: Install Fangfrisch using AUR helper.
+#   become: false
+#   community.general.pacman:
+#     name: python-fangfrisch
+#     state: present
+#     executable: yay
+#     extra_args: "--answerdiff N --answerclean N --removemake"
+# 
+# - name: Install Fangfrisch using command module.
+#   become: false
+#   ansible.builtin.command:
+#     argv:
+#       - /usr/bin/yay
+#       - --answerdiff N
+#       - --answerclean N
+#       - --removemake
+#       - --noconfirm
+#       - -S python-fangfrisch
+#     creates: /usr/bin/fangfrisch
+# 
+# - name: Initialise Fangfrisch DB
+#   ansible.builtin.command:
+#     argv:
+#       - /usr/bin/fangfrisch
+#       - --conf /etc/fangfrisch/fangfrisch.conf
+#       - initdb
+#   become: true
+#   become_user: clamav
+#   args:
+#     creates: /var/lib/fangfrisch/db.sqlite

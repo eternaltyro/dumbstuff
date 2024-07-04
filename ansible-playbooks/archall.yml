@@ -62,20 +62,13 @@
         name: tailscaled
         state: restarted
 
-    - name: restart clamav
-      service:
-        name: clamav-daemon
-        state: restarted
-
-    - name: restart freshclam
-      service:
-        name: clamav-freshclam
-        state: restarted
-
     - name: restart firewall
       service:
         name: ufw
         state: restarted
+
+  roles:
+    - clamav
 
   tasks:
 
