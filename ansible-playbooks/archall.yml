@@ -20,10 +20,8 @@
 # - cryptsetup
 # - thunderbird-beta-bin (AUR)
 # - veracrypt
-# - Terraform
 # - tfsec-bin
 # - terrascan-bin
-# - Buildah + Podman
 # - Kubernetes?
 # 
 # TODO: Add services
@@ -33,174 +31,279 @@
 # - AIDS
 # - Snort
 # - Suricata
+# - OSSEC
+# - LMD / Maldet
+# - Tripwire
 #
 # TODO: Configure firewall / UFW
 # - or nftables
 # - ufw
+# - firewalld
 #
 # TODO: Fix SSHD config
 #   - yay -S czkawka-gui-bin
-#   - yay -S libva-utils - for vainfo
-#   - yay -S vulkan-intel
-#   - yay -S libva-intel-driver
-#   - yay -S intel-media-driver
-#   - yay -S intel-gpu-tools --> for intel_gpu_top
 #
 # TODO: System Monitoring Tools
 #   - htop
 #   - glances
 #
-# TODO: SHell stuff
+# TODO: Shell stuff
 # - PS1
 # - oh-my-zsh
 # - zsh
-- hosts: archlaptop
-  remote_user: eternaltyro 
-  become: yes
+- name: Install basic applications in Arch
+  hosts: workstation
+  become: true
+
+  handlers:
+
+    - name: restart tailscale
+      service:
+        name: tailscaled
+        state: restarted
+
+    - name: restart clamav
+      service:
+        name: clamav-daemon
+        state: restarted
+
+    - name: restart freshclam
+      service:
+        name: clamav-freshclam
+        state: restarted
+
+    - name: restart firewall
+      service:
+        name: ufw
+        state: restarted
 
   tasks:
-    - name: Install password manager
-      pacman: name=keepassxc state=latest
 
-    - name: Install backup utility
-      pacman: name=borg state=latest
-
-    - name: Install filesystem utilities
-      pacman:
-        name:
-          - f2fs-tools
-          - btrfs-progs
-          - exfatprogs
-          - xfsprogs
-        state: latest
-      tags: production
-          
-    - name: Install filesystem utilities via AUR
-      pacman:
-        name: 
-          - ntfs3-dkms
+    - name: Install core system services
+      package:
+        name: systemd-resolvconf
         state: present
-        executable: /usr/bin/yay
+      tags: production
+
+    - name: Install flatpak
+      package:
+        name: flatpak
+        state: present
       tags: never
 
-# slirp4netns and fuse-overlayfs needed for rootless podman
-# Do the following to set subuid / subgid for user namespaces inside the container
-# sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 eternaltyro
-#
-    - name: Install container stuff incl. rootless podman
-      pacman:
-        name: 
+    - name: Install security scanners
+      package:
+        name: clamav
+        state: latest
+      notify: restart clamav
+      tags:
+        - security
+        - production
+
+    - name: Install security scanners
+      package:
+        name:
+          - fail2ban
+          - arch-audit
+          - rkhunter
+          - lynis
+        state: present
+      tags:
+        - security
+        - production
+
+    - name: Install firewall frontend
+      package:
+        name: ufw
+        state: latest
+      notify: restart firewall
+      tags: production
+
+    # slirp4netns and fuse-overlayfs needed for rootless podman
+    # Do the following to set subuid / subgid for user namespaces inside
+    # the container:
+    # sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 eternaltyro
+    - name: Install infra dev utilities
+      package:
+        name:
+          - virtualbox
+          - opentofu
+          - terraform
+          - buildah
+          - toolbox
           - podman
+          - podman-compose
           - conmon
           - containers-common
           - fuse-overlayfs
           - slirp4netns
-          - buildah
-          - toolbox
         state: present
-      tags: production
 
-# TODO:
-# - Add ClamAV
-# - Add OSSEC
-# - Add LMD / Maldet
-# - Tripwire
-    - name: Install security scanners
-      pacman:
-        name: 
-          - lynis
-          - rkhunter
-          - arch-audit
-          - fail2ban
-        state: latest
-
-    - name: Install security scanner dependencies
-      pacman:
+    - name: Install system customisations
+      package:
         name:
-          - skdet
-          - lsof
-          - netstat
-
-    - name: Install security scanners from AUR
-      ansible.builtin.command:
-        argv:
-          - /usr/bin/yay -S
-          - tiger
-          - chkrootkit
-          - google-tsunami-security-scanner
-          - openscap
-      tags: never
-
-    - name: Install X essentials (legacy)
-      pacman:
-        name: 
-          - xorg-xrdb
-          - xorg-xkill
-          - xorg-xrandr
-          - xorg-server
-          - xorg-xinit
-          - xf86-input
-        state: latest
-      tags: never
-
-    - name: Setup Awesome Window Manager and login manager
-      pacman:
-        name: 
-          - awesome
-          - slim
-          - slim-themes
-          - vicious
-        state: latest
-      tags: never
-
-    - name: Setup terminal multiplexer and shells 
-      pacman:
-        name: 
           - zsh
           - tmux
           - vim-airline
-        state: latest
-      tags: shell
-
-    - name: Setup modern audio drivers (pipewire)
-      pacman:
-        name: 
-          - pipewire
-          - pipewire-pulse
-          - pipewire-media-session
-        state: latest
-
-    - name: Setup legacy audio drivers (pulseaudio)
-      pacman:
-        name:
-          - pulseaudio
-          - pulseaudio-bluetooth
-          - pavucontrol
-          - pulseeffects
+          - borg
+        state: present
       tags: never
 
+    - name: Install core fsutils
+      package:
+        name:
+          - btrfs-progs
+          - xfsprogs
+        state: present
+      tags: production
+
+    - name: Install extra fsutils
+      package:
+        name:
+          - f2fs-tools
+          - exfatprogs
+        state: present
+      tags: never
+
+    - name: Install backup utility
+      package:
+        name: borg
+        state: latest
+
+    - name: Install essential apps via flatpak
+      become: false
+      community.general.flatpak:
+        name:
+          - org.gimp.GIMP
+          - org.gnucash.GnuCash
+          - org.inkscape.Inkscape
+          - org.keepassxc.KeePassXC
+          - org.libreoffice.LibreOffice
+          - org.openstreetmap.josm
+          - org.qownnotes.QOwnNotes
+          - org.cryptomator.Cryptomator
+          - im.riot.Riot
+          - io.mpv.Mpv
+          - io.podman_desktop.PodmanDesktop
+          - com.borgbase.Vorta
+          - com.brave.Browser
+          - ch.protonmail.protonmail-bridge
+          - com.calibre_ebook.calibre
+        state: present
+
+    - name: Install beta apps via flatpak
+      become: false
+      community.general.flatpak:
+        remote: flathub-beta
+        name:
+          - org.telegram.desktop
+          - org.mozilla.firefox
+        state: present
+      tags:
+        - flatpak
+        - flatpak-beta
+        - beta
+
+    - name: Install optional apps via flatpak
+      become: false
+      community.general.flatpak:
+        name:
+          - org.zotero.Zotero
+          - in.cinny.Cinny
+          - com.github.tchx84.Flatseal
+          - com.github.johnfactotum.Foliate
+          - org.audacityteam.Audacity
+          - network.loki.Session
+          - net.giuspen.cherrytree
+          - org.blender.Blender
+        state: present
+      tags:
+        - flatpak
+
+    - name: Install games from flatpak
+      become: false
+      community.general.flatpak:
+        name:
+          - net.pioneerspacesim.Pioneer
+          - com.play0ad.zeroad
+          - org.wesnoth.Wesnoth
+          - com.valvesoftware.Steam
+        state: present
+      tags:
+        - flatpak
+        - games
+        - never
+
+    - name: Install apps for work from flatpak
+      become: false
+      community.general.flatpak:
+        name:
+          - com.slack.Slack
+          - us.zoom.Zoom
+          - org.gaphor.Gaphor
+        state: present
+      tags:
+        - flatpak
+        - work
+        - production
+
+#    - name: Install chkrootkit and tiger from AUR
+#      community.general.pacman:
+#        name: 
+#          - chkrootkit
+#          - tiger
+#        state: present
+#        executable: "/usr/bin/yay"
+#        extra_args: --builddir /var/cache/yay
+#      tags:
+#        - aur
+#        - security
+#
+#    - name: Install other scanners from AUR
+#      community.general.pacman:
+#        name: 
+#          - google-tsunami-security-scanner
+#          - openscap
+#        state: latest
+#        executable: /usr/bin/yay
+#      tags:
+#        - aur
+#        - security
+
+    - name: Setup graphics drivers
+      package:
+        name: 
+          - libva-utils # --> for vainfo
+          - vulkan-intel
+          - libva-intel-driver
+          - intel-media-driver
+          - intel-gpu-tools # --> for intel_gpu_top
+        state: latest
+
+    - name: Setup modern audio drivers (pipewire)
+      package:
+        name: 
+          - pipewire
+          - libpipewire
+          - pipewire-pulse
+          - pipewire-audio
+          - pipewire-jack
+          - wireplumber
+          - libwireplumber
+        state: latest
+
+    # moc package deprecated
     - name: Setup Multimedia
-      pacman:
+      package:
         name: 
           - mpd
           - mpc
-          - moc
           - vlc
-          - alsa-utils
         state: latest
       tags: never
 
-    - name: Setup Office tools
-      pacman:
-        name: 
-          - libreoffice-fresh
-          - firefox
-          - cherrytree
-          - gnucash
-        state: latest
-
     - name: Libreoffice language tools (thesaurus, spell check, hypen rules)
-      pacman:
+      package:
         name:
           - hunspell
           - hunspell-en_us
@@ -209,76 +312,24 @@
           - hyphen-en
           - libmythes
           - mythes-en
-          - 
-
-    - name: Install games from flatpak
-      community.general.flatpak:
-        name:
-          - net.pioneerspacesim.Pioneer
-          - com.play0ad.zeroad
-          - org.wesnoth.Wesnoth
-          - com.valvesoftware.Steam
         state: present
-      tags: production
+      tags: never
 
-    - name: Install office comms apps from flatpak
-      community.general.flatpak:
-        name:
-          - com.slack.Slack
-          - com.github.IsmaelMartinez.teams_for_linux
-          - com.visualstudio.code
-          - us.zoom.Zoom
-          - org.gaphor.Gaphor
-        state: present
-      tags: production
-
-    - name: Install multi-media apps from flatpak
-      community.general.flatpak:
-        name:
-          - com.obsproject.Studio
-          - org.blender.Blender
-          - org.blender.Blender.Codecs
-          - org.gimp.GIMP
-          - org.inkscape.Inkscape
-        state: present
-      tags: production
-
-    - name: Install essential flatpak apps
-      community.general.flatpak:
-        name:
-          - org.keepassxc.KeePassXC
-          - org.qbittorrent.qBittorrent
-          - com.borgbase.Vorta
-          - com.brave.Browser
-          - com.github.tchx84.Flatseal
-          - im.riot.Riot
-          - net.giuspen.cherrytree
-          - org.cryptomator.Cryptomator
-        state: present
-      tags: production
-
-    - name: Install optional flatpak apps
-      community.general.flatpak:
-        name:
-          - org.zotero.Zotero
-          - org.telegram.desktop
-          - com.github.johnfactotum.Foliate
-        state: present
-      tags: production
-
-    - name: Install fonts via AUR
-      community.general.pacman:
-        name:
-          - otf-fira-code-mozilla
-          - otf-fira-code-symbol
-          - otf-openmoji
-          - font-mathematica
-        state: present
-      executable: "/usr/bin/yay"
-      tags: onetime
+#    - name: Install fonts via AUR
+#      community.general.pacman:
+#        name:
+#          - otf-fira-code-mozilla
+#          - otf-fira-code-symbol
+#          - otf-openmoji
+#        state: present
+#        executable: "/usr/bin/yay"
+#      tags: 
+#        - fonts
+#        - aur
+#        - never
 
     - name: Install fonts
-      pacman:
+      package:
         name:
           - otf-fira-mono
           - otf-fira-sans
@@ -301,54 +352,108 @@
           - inter-font
           - ttc-iosevka
           - ttf-iosevka-term
-          - ttf-iosevka-term-curly
-          - ttf-iosevka-term-curly-slab
           - ttf-iosevka-nerd
-          - ttc-iosevka-slab
-          - ttc-iosevka-curly
-          - ttc-iosevka-aile
           - ttf-hack
           - gnu-free-fonts
-        state: present
-      tags: production
+        state: latest
+      tags:
+        - fonts
+        - production
 
-    - name: Install Uncomplicated Firewall (UFW)
-      pacman:
-        name:
-          - ufw
-
+    # deny = ignore
+    # reject = inform
     - name: Configure ufw Firewall Rules
-      ufw:
+      community.general.ufw:
         state: enabled
-        policy: allow
+        policy: reject
         logging: 'on'
 #        delete: true
+      tags:
+        - security
+        - firewall
 
     - name: Rate limit SSH attempts
-      ufw:
+      community.general.ufw:
         comment: Rate limit SSH attempts
         rule: limit
-        port: auth
+        port: ssh
         proto: tcp
         log: true
+      notify: restart firewall
+      tags:
+        - security
+        - firewall
 
-    - name: Allow RFC1918 networks
-      ufw:
-        comment: Allow RFC1918 networks
+    - name: Allow Jellyfin service
+      community.general.ufw:
+        comment: Jellyfin access
         rule: allow
+        port: '8096'
+        proto: tcp
         src: '{{ item }}'
       loop:
-        - 10.0.0.0/8
-        - 172.16.0.0/12
-        - 192.168.0.0/16 
+        - 192.168.1.0/24
+        - fe80::/64
+      notify: restart firewall
+      tags:
+        - security
+        - firewall
 
-    - name: Allow IPv6 Unique Local Addresses
-      ufw:
+    - name: Allow Jellyfin service auto-discovery
+      community.general.ufw:
+        comment: Jellyfin service discovery
         rule: allow
-        src: fc00::/7
-        proto: any
-        comment: Allow IPv6 Unique Local Addresses
+        port: '1900'
+        proto: udp
+        src: '{{ item }}'
+      loop:
+        - 192.168.1.0/24
+        - fe80::/64
+      notify: restart firewall
+      tags:
+        - security
+        - firewall
 
+    - name: Allow Jellyfin service auto-discovery
+      community.general.ufw:
+        comment: Jellyfin service discovery
+        rule: allow
+        port: '7359'
+        proto: udp
+        src: '{{ item }}'
+      loop:
+        - 192.168.1.0/24
+        - fe80::/64
+      notify: restart firewall
+      tags:
+        - security
+        - firewall
 
-      
+    # Switched to Wayland
+    - name: Install X essentials (legacy)
+      package:
+        name: 
+          - xorg-xrdb
+          - xorg-xkill
+          - xorg-xrandr
+          - xorg-server
+          - xorg-xinit
+          - xf86-input-libinput
+        state: latest
+      tags: 
+        - deprecated
+        - never
+
+    # Switched to KDE
+    - name: Setup Awesome Window Manager and login manager
+      package:
+        name: 
+          - awesome
+          - slim
+          - slim-themes
+          - vicious
+        state: latest
+      tags: 
+        - deprecated
+        - never
 ...
