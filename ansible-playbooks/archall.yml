@@ -68,6 +68,7 @@
         state: restarted
 
   roles:
+    - DevOps-setup
     - clamav
 
   tasks:
@@ -112,33 +113,12 @@
       notify: restart firewall
       tags: production
 
-    # slirp4netns and fuse-overlayfs needed for rootless podman
-    # Do the following to set subuid / subgid for user namespaces inside
-    # the container:
-    # sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 eternaltyro
-    - name: Install infra dev utilities
-      package:
-        name:
-          - virtualbox
-          - opentofu
-          - terraform
-          - buildah
-          - toolbox
-          - podman
-          - podman-compose
-          - conmon
-          - containers-common
-          - fuse-overlayfs
-          - slirp4netns
-        state: present
-
     - name: Install system customisations
       package:
         name:
           - zsh
           - tmux
           - vim-airline
-          - borg
         state: present
       tags: never
 
@@ -384,7 +364,7 @@
         port: '8096'
         proto: tcp
         src: '{{ item }}'
-      loop:
+      with_items:
         - 192.168.1.0/24
         - fe80::/64
       notify: restart firewall
@@ -399,7 +379,7 @@
         port: '1900'
         proto: udp
         src: '{{ item }}'
-      loop:
+      with_items:
         - 192.168.1.0/24
         - fe80::/64
       notify: restart firewall
@@ -414,7 +394,7 @@
         port: '7359'
         proto: udp
         src: '{{ item }}'
-      loop:
+      with_items:
         - 192.168.1.0/24
         - fe80::/64
       notify: restart firewall
