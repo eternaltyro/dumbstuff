@@ -1,5 +1,6 @@
 " Color options:
 "   - zenburn: https://github.com/jnurmine/Zenburn/blob/master/colors/zenburn.vim
+"   - cobalt:  https://github.com/gkjgh/cobalt/blob/master/colors/cobalt.vim
 
 " Terminal fonts
 " - inconsolata
@@ -51,9 +52,9 @@ set colorcolumn=80
 
 " Plugins
 "set omnifunc=pythoncomplete#Complete
-"set runtimepath^=~/.vim/bundle/ctrlp.vim       "Control+P toggles fuzzy search functionality
+"set runtimepath^=~/.vim/bundle/ctrlp.vim       "Ctrl+P toggles fuzzy search
 "map <F2> :NERDTreeToggle<CR>
-" execute pathogen#infect()
+"execute pathogen#infect()
 
 " Themes and colours
 "colorscheme zenburn         " Copy to ~/.vim/colors/

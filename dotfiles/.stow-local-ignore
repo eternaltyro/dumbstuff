@@ -24,6 +24,7 @@ _darcs
 ^/COPYING
 
 # Ignore XOrg / X11 stuff
+^/xorg_legacy.conf
 xbindkeysrc
 \.Xdefaults1
 Xdefaults

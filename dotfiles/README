@@ -1,4 +1,7 @@
-# dotfiles management
+dotfiles management
+=====================
+
+These dotfiles are managed using GNU Stow (https://www.gnu.org/software/stow/)
 
 # Install GNU Stow
 pacman -S stow
@@ -7,5 +10,33 @@ pacman -S stow
 # Adopt dotfiles
 #stow --adopt .
 
+# Simulate changes to ensure you don't mess-up the system
+stow --simulate --verbose=2 --target=/home/eternaltyro \
+    --dir=/usr/local/stow --adopt .
+
 # If you need to set target directory
 stow --adopt . --dir=/usr/local/stow --target=/home/eternaltyro
+
+
+Notes on VIM configuration:
+---------------------------
+
+Plugins:
+
+- NerdTree
+- ctrlp
+- Pathogen
+- fugitive
+
+Tips:
+----
+Add to the top of scripts the following for vim to be able to read
+
+#!/usr/bin/env python
+#
+# vim: set expandtab:tw=4:ts=4:sw=4:
+
+# before you paste in a vim session that has ai and si on
+:set paste
+
+# spliting the window
