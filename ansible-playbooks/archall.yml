@@ -51,7 +51,7 @@
 # - PS1
 # - oh-my-zsh
 # - zsh
-- name: Install basic applications in Arch
+- name: Install basic applications in Arch.
   hosts: workstation
   become: true
 
@@ -73,7 +73,7 @@
 
   tasks:
 
-    - name: Install core system services
+    - name: Install core system services.
       package:
         name: systemd-resolvconf
         state: present
@@ -85,16 +85,19 @@
         state: present
       tags: never
 
-    - name: Install security scanners
-      package:
-        name: clamav
-        state: latest
-      notify: restart clamav
-      tags:
-        - security
-        - production
+    - name: Add the flathub flatpak repository remote.
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
 
-    - name: Install security scanners
+    - name: Add the flathub-beta flatpak repository remote.
+      community.general.flatpak_remote:
+        name: flathub-beta
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/beta-repo/flathub-beta.flatpakrepo
+
+    - name: Install security scanners.
       package:
         name:
           - fail2ban
@@ -106,14 +109,14 @@
         - security
         - production
 
-    - name: Install firewall frontend
+    - name: Install firewall frontend.
       package:
         name: ufw
         state: latest
       notify: restart firewall
       tags: production
 
-    - name: Install system customisations
+    - name: Install system customisations.
       package:
         name:
           - zsh
@@ -122,7 +125,7 @@
         state: present
       tags: never
 
-    - name: Install core fsutils
+    - name: Install core fsutils.
       package:
         name:
           - btrfs-progs
@@ -130,7 +133,7 @@
         state: present
       tags: production
 
-    - name: Install extra fsutils
+    - name: Install extra fsutils.
       package:
         name:
           - f2fs-tools
@@ -143,9 +146,10 @@
         name: borg
         state: latest
 
-    - name: Install essential apps via flatpak
+    - name: Install essential apps via flatpak.
       become: false
       community.general.flatpak:
+        remote: flathub
         name:
           - org.gimp.GIMP
           - org.gnucash.GnuCash
@@ -164,7 +168,7 @@
           - com.calibre_ebook.calibre
         state: present
 
-    - name: Install beta apps via flatpak
+    - name: Install beta apps via flatpak.
       become: false
       community.general.flatpak:
         remote: flathub-beta
@@ -177,9 +181,10 @@
         - flatpak-beta
         - beta
 
-    - name: Install optional apps via flatpak
+    - name: Install optional apps via flatpak.
       become: false
       community.general.flatpak:
+        remote: flathub
         name:
           - org.zotero.Zotero
           - in.cinny.Cinny
@@ -193,23 +198,36 @@
       tags:
         - flatpak
 
-    - name: Install games from flatpak
+    - name: Install games from flatpak.
       become: false
       community.general.flatpak:
+        remote: flathub
         name:
           - net.pioneerspacesim.Pioneer
           - com.play0ad.zeroad
-          - org.wesnoth.Wesnoth
           - com.valvesoftware.Steam
+        state: present
+      tags:
+        - flatpak
+        - games
+
+    # Flatpak module can't select from multiple available versions.
+    - name: Install Battle for Wesnoth from flatpak.
+      become: false
+      community.general.flatpak:
+        remote: flathub
+        name:
+          - org.wesnoth.Wesnoth
         state: present
       tags:
         - flatpak
         - games
         - never
 
-    - name: Install apps for work from flatpak
+    - name: Install apps for work from flatpak.
       become: false
       community.general.flatpak:
+        remote: flathub
         name:
           - com.slack.Slack
           - us.zoom.Zoom
@@ -243,7 +261,7 @@
 #        - aur
 #        - security
 
-    - name: Setup graphics drivers
+    - name: Setup graphics drivers.
       package:
         name: 
           - libva-utils # --> for vainfo
@@ -253,7 +271,7 @@
           - intel-gpu-tools # --> for intel_gpu_top
         state: latest
 
-    - name: Setup modern audio drivers (pipewire)
+    - name: Setup modern audio drivers (pipewire).
       package:
         name: 
           - pipewire
@@ -266,7 +284,7 @@
         state: latest
 
     # moc package deprecated
-    - name: Setup Multimedia
+    - name: Setup Multimedia players.
       package:
         name: 
           - mpd
@@ -275,7 +293,7 @@
         state: latest
       tags: never
 
-    - name: Libreoffice language tools (thesaurus, spell check, hypen rules)
+    - name: Libreoffice language tools (thesaurus, spell check, hypen rules).
       package:
         name:
           - hunspell
@@ -301,7 +319,7 @@
 #        - aur
 #        - never
 
-    - name: Install fonts
+    - name: Install fonts.
       package:
         name:
           - otf-fira-mono
@@ -335,7 +353,7 @@
 
     # deny = ignore
     # reject = inform
-    - name: Configure ufw Firewall Rules
+    - name: Configure UFW default firewall rules.
       community.general.ufw:
         state: enabled
         policy: reject
@@ -345,7 +363,7 @@
         - security
         - firewall
 
-    - name: Rate limit SSH attempts
+    - name: Rate limit SSH attempts.
       community.general.ufw:
         comment: Rate limit SSH attempts
         rule: limit
@@ -357,7 +375,7 @@
         - security
         - firewall
 
-    - name: Allow Jellyfin service
+    - name: Allow Jellyfin service.
       community.general.ufw:
         comment: Jellyfin access
         rule: allow
@@ -372,7 +390,7 @@
         - security
         - firewall
 
-    - name: Allow Jellyfin service auto-discovery
+    - name: Allow Jellyfin service auto-discovery.
       community.general.ufw:
         comment: Jellyfin service discovery
         rule: allow
@@ -387,7 +405,7 @@
         - security
         - firewall
 
-    - name: Allow Jellyfin service auto-discovery
+    - name: Allow Jellyfin service auto-discovery.
       community.general.ufw:
         comment: Jellyfin service discovery
         rule: allow
@@ -403,7 +421,7 @@
         - firewall
 
     # Switched to Wayland
-    - name: Install X essentials (legacy)
+    - name: Install X essentials (legacy).
       package:
         name: 
           - xorg-xrdb
@@ -418,7 +436,7 @@
         - never
 
     # Switched to KDE
-    - name: Setup Awesome Window Manager and login manager
+    - name: Setup Awesome Window Manager and login manager.
       package:
         name: 
           - awesome
