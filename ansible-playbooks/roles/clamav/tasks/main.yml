@@ -25,7 +25,7 @@
 #     state: present
 #     executable: yay
 #     extra_args: "--answerdiff N --answerclean N --removemake"
-# 
+#
 # - name: Install Fangfrisch using command module.
 #   become: false
 #   ansible.builtin.command:
@@ -37,7 +37,7 @@
 #       - --noconfirm
 #       - -S python-fangfrisch
 #     creates: /usr/bin/fangfrisch
-# 
+#
 # - name: Initialise Fangfrisch DB
 #   ansible.builtin.command:
 #     argv:

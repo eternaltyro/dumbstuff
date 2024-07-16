@@ -1,20 +1,22 @@
 ---
 - name: Install development essentials.
-  package:
+  ansible.legacy.package:
     name:
       - git
       - git-filter-repo
       - gitsign
+      - cosign
+      - ruff
     state: latest
 
 - name: Install other development utilities.
-  package:
+  ansible.legacy.package:
     name:
       - toolbox
     state: latest
 
 - name: Install virtualisation tools.
-  package:
+  ansible.legacy.package:
     name:
       - libvirt
       - libvirt-python
@@ -32,7 +34,7 @@
 # sudo usermod --add-subuids 100000-165535 \
 #              --add-subgids 100000-165535 <username>
 - name: Install containerisation tools.
-  package:
+  ansible.legacy.package:
     name:
       - podman
       - podman-compose
@@ -45,15 +47,15 @@
     state: latest
 
 - name: Install infrastructure automation tools.
-  package:
+  ansible.legacy.package:
     name:
       - opentofu
       - terraform
     state: latest
 
 - name: Install terragrunt terraform wrapper
-  package:
+  ansible.legacy.package:
     name:
       - terragrunt
     state: latest
-  tags: [ never, terragrunt ]
+  tags: [never, terragrunt]

@@ -23,7 +23,7 @@
 # - tfsec-bin
 # - terrascan-bin
 # - Kubernetes?
-# 
+#
 # TODO: Add services
 # - systemd-analyze security <service_name>
 #
@@ -51,6 +51,12 @@
 # - PS1
 # - oh-my-zsh
 # - zsh
+#    - name: Install from AUR
+#          - chkrootkit
+#          - tiger
+#          - google-tsunami-security-scanner
+#          - openscap
+
 - name: Install basic applications in Arch.
   hosts: workstation
   become: true
@@ -58,12 +64,12 @@
   handlers:
 
     - name: restart tailscale
-      service:
+      ansible.builtin.service:
         name: tailscaled
         state: restarted
 
     - name: restart firewall
-      service:
+      ansible.builtin.service:
         name: ufw
         state: restarted
 
@@ -74,13 +80,29 @@
   tasks:
 
     - name: Install core system services.
-      package:
+      ansible.builtin.package:
         name: systemd-resolvconf
         state: present
       tags: production
 
+    - name: Install core fsutils.
+      ansible.builtin.package:
+        name:
+          - btrfs-progs
+          - xfsprogs
+        state: latest
+      tags: production
+
+    - name: Install extra fsutils.
+      ansible.builtin.package:
+        name:
+          - f2fs-tools
+          - exfatprogs
+        state: present
+      tags: never
+
     - name: Install flatpak
-      package:
+      ansible.builtin.package:
         name: flatpak
         state: present
       tags: never
@@ -98,7 +120,7 @@
         flatpakrepo_url: https://dl.flathub.org/beta-repo/flathub-beta.flatpakrepo
 
     - name: Install security scanners.
-      package:
+      ansible.builtin.package:
         name:
           - fail2ban
           - arch-audit
@@ -110,39 +132,30 @@
         - production
 
     - name: Install firewall frontend.
-      package:
+      ansible.builtin.package:
         name: ufw
         state: latest
       notify: restart firewall
       tags: production
 
     - name: Install system customisations.
-      package:
+      ansible.builtin.package:
         name:
           - zsh
           - tmux
           - vim-airline
-        state: present
-      tags: never
-
-    - name: Install core fsutils.
-      package:
-        name:
-          - btrfs-progs
-          - xfsprogs
-        state: present
+          - vim-airline-themes
+        state: latest
       tags: production
 
-    - name: Install extra fsutils.
-      package:
-        name:
-          - f2fs-tools
-          - exfatprogs
-        state: present
-      tags: never
+    - name: Install fwupd utility.
+      ansible.builtin.package:
+        name: fwupd
+        state: latest
+      tags: production
 
     - name: Install backup utility
-      package:
+      ansible.builtin.package:
         name: borg
         state: latest
 
@@ -238,32 +251,9 @@
         - work
         - production
 
-#    - name: Install chkrootkit and tiger from AUR
-#      community.general.pacman:
-#        name: 
-#          - chkrootkit
-#          - tiger
-#        state: present
-#        executable: "/usr/bin/yay"
-#        extra_args: --builddir /var/cache/yay
-#      tags:
-#        - aur
-#        - security
-#
-#    - name: Install other scanners from AUR
-#      community.general.pacman:
-#        name: 
-#          - google-tsunami-security-scanner
-#          - openscap
-#        state: latest
-#        executable: /usr/bin/yay
-#      tags:
-#        - aur
-#        - security
-
     - name: Setup graphics drivers.
-      package:
-        name: 
+      ansible.builtin.package:
+        name:
           - libva-utils # --> for vainfo
           - vulkan-intel
           - libva-intel-driver
@@ -272,8 +262,8 @@
         state: latest
 
     - name: Setup modern audio drivers (pipewire).
-      package:
-        name: 
+      ansible.builtin.package:
+        name:
           - pipewire
           - libpipewire
           - pipewire-pulse
@@ -285,8 +275,8 @@
 
     # moc package deprecated
     - name: Setup Multimedia players.
-      package:
-        name: 
+      ansible.builtin.package:
+        name:
           - mpd
           - mpc
           - vlc
@@ -294,7 +284,7 @@
       tags: never
 
     - name: Libreoffice language tools (thesaurus, spell check, hypen rules).
-      package:
+      ansible.builtin.package:
         name:
           - hunspell
           - hunspell-en_us
@@ -306,21 +296,20 @@
         state: present
       tags: never
 
-#    - name: Install fonts via AUR
-#      community.general.pacman:
-#        name:
-#          - otf-fira-code-mozilla
-#          - otf-fira-code-symbol
-#          - otf-openmoji
-#        state: present
-#        executable: "/usr/bin/yay"
-#      tags: 
-#        - fonts
-#        - aur
-#        - never
+    # - name: Install fonts via AUR
+    #   community.general.pacman:
+    #     name:
+    #       - otf-fira-code-mozilla
+    #       - otf-fira-code-symbol
+    #       - otf-openmoji
+    #     state: present
+    #     executable: "/usr/bin/yay"
+    #   tags:
+    #     - fonts
+    #     - aur
 
     - name: Install fonts.
-      package:
+      ansible.builtin.package:
         name:
           - otf-fira-mono
           - otf-fira-sans
@@ -358,7 +347,7 @@
         state: enabled
         policy: reject
         logging: 'on'
-#        delete: true
+        # delete: true
       tags:
         - security
         - firewall
@@ -422,8 +411,8 @@
 
     # Switched to Wayland
     - name: Install X essentials (legacy).
-      package:
-        name: 
+      ansible.builtin.package:
+        name:
           - xorg-xrdb
           - xorg-xkill
           - xorg-xrandr
@@ -431,20 +420,20 @@
           - xorg-xinit
           - xf86-input-libinput
         state: latest
-      tags: 
+      tags:
         - deprecated
         - never
 
     # Switched to KDE
     - name: Setup Awesome Window Manager and login manager.
-      package:
-        name: 
+      ansible.builtin.package:
+        name:
           - awesome
           - slim
           - slim-themes
           - vicious
         state: latest
-      tags: 
+      tags:
         - deprecated
         - never
 ...
