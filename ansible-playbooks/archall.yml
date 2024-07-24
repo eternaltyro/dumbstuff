@@ -35,13 +35,16 @@
 # - LMD / Maldet
 # - Tripwire
 #
-# TODO: Configure firewall / UFW
-# - or nftables
-# - ufw
-# - firewalld
+# TODO: ..and security scanners from AUR
+# - chkrootkit
+# - tiger
+# - google-tsunami-security-scanner
+# - openscap
 #
 # TODO: Fix SSHD config
-#   - yay -S czkawka-gui-bin
+#
+# TODO: Install file dedup from AUR
+# - czkawka-gui-bin
 #
 # TODO: System Monitoring Tools
 #   - htop
@@ -51,11 +54,6 @@
 # - PS1
 # - oh-my-zsh
 # - zsh
-#    - name: Install from AUR
-#          - chkrootkit
-#          - tiger
-#          - google-tsunami-security-scanner
-#          - openscap
 
 - name: Install basic applications in Arch.
   hosts: workstation
@@ -101,11 +99,11 @@
         state: present
       tags: never
 
-    - name: Install flatpak
+    - name: Install flatpak runtime.
       ansible.builtin.package:
         name: flatpak
-        state: present
-      tags: never
+        state: latest
+      tags: production
 
     - name: Add the flathub flatpak repository remote.
       community.general.flatpak_remote:
@@ -126,16 +124,36 @@
           - arch-audit
           - rkhunter
           - lynis
-        state: present
+        state: latest
       tags:
         - security
         - production
+
+    - name: Install Netfilter userspace tools.
+      ansible.builtin.package:
+        name: nftables
+        state: latest
+      tags: production
+
+    - name: Install Firewall daemon.
+      ansible.builtin.package:
+        name: firewalld
+        state: latest
+      tags: [production, never]
 
     - name: Install firewall frontend.
       ansible.builtin.package:
         name: ufw
         state: latest
       notify: restart firewall
+      tags: production
+
+    - name: Install VIM and friends.
+      ansible.builtin.package:
+        name:
+          - vim
+          - vim-runtime
+        state: latest
       tags: production
 
     - name: Install system customisations.
@@ -154,7 +172,7 @@
         state: latest
       tags: production
 
-    - name: Install backup utility
+    - name: Install Borg backup utility.
       ansible.builtin.package:
         name: borg
         state: latest

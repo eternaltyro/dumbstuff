@@ -7,6 +7,7 @@
       - gitsign
       - cosign
       - ruff
+      - uv
     state: latest
 
 - name: Install other development utilities.
