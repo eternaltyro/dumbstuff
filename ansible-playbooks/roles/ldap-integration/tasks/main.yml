@@ -1,0 +1,32 @@
+---
+- name: Install System Security Services daemon (SSSD).
+  ansible.builtin.package:
+    name:
+      - sssd
+      - sssd-ldap
+    state: latest
+
+- name: Configure SSSD.
+  ansible.builtin.template:
+    mode: '0600'
+    backup: true
+    src: templates/sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    validate: echo "FIXME - fix config validation step"
+
+- name: Configure SSH daemon.
+  ansible.builtin.copy:
+    mode: '0600'
+    backup: true
+    src: templates/sshd_config.j2
+    dest: /etc/ssh/sshd_config.d/75-ldap.conf
+    validate: /usr/sbin/sshd -t -f %s
+  notify: restart sshd
+
+- name: Configure PAM authentication
+  ansible.builtin.copy:
+    mode: '0600'
+    backup: true
+    src: templates/pam.d.conf.j2
+    dest: /etc/pam.d/ldap-auth
+    validate: echo "FIXME - fix config validation step"

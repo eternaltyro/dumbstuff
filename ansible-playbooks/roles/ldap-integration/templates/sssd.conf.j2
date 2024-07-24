@@ -1,0 +1,36 @@
+# /etc/sssd/sssd.conf
+#
+# SSSD configuration file for LDAP integration.
+#
+# !IMPORTANT!
+# This file is being managed by Ansible
+
+[sssd]
+config_file_version = 2
+services = nss,pam,ssh
+domains = MYADDRESSBOOK
+
+[nss]
+filter_users = root
+filter_groups = root
+
+[pam]
+
+[domain/MYADDRESSBOOK]
+debug_level = 2
+
+id_provider = ldap
+auth_provider = ldap
+enumerate = true
+
+ldap_uri = '{{ ldap_uri }}'
+ldap_search_base = '{{ ldap_search_base }}'
+ldap_default_bind_dn = '{{ ldap_bind_dn }}'
+ldap_default_authtok = '{{ ldap_auth_token }}'
+ldap_access_filter = '{{ ldap_access_filter }}'
+
+ldap_user_ssh_public_key = sshKey
+ldap_use_tokengroups = False
+ldap_tls_cacert = /etc/ssl/certs/ca-certificates.crt
+sudo_provider = none
+

@@ -74,6 +74,7 @@
   roles:
     - DevOps-setup
     - clamav
+  #  - ldap-integration
 
   tasks:
 

@@ -1,0 +1,8 @@
+---
+ldap_uri: 'ldaps://ldap.example.net:636'
+ldap_base_dn: 'dc=example,dc=net'
+ldap_bind_dn: 'uid=sysadmin,ou=Users,o=abcdef123456,dc=example,dc=net'
+ldap_search_base: 'o=abcdef123456,dc=example,dc=net'
+ldap_auth_token: 'SuperrInsecurrePassworrd#$'
+ldap_access_filter: 'memberOf=cn=admingroup,ou=Users,o=abcdef123456,dc=example,dc=net'
+bind_password: 'AnotherrVerryInsecurrePassworrd$#' # (for user directory)
