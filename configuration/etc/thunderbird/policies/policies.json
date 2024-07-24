@@ -1,0 +1,51 @@
+{
+    "policies": {
+        "DisableTelemetry": true,
+        "DNSOverHTTPS": {
+            "Enabled": true,
+            "ProviderURL": "https://dns.adguard-dns.com/dns-query",
+            "Locked": true,
+            "ExcludedDomains": [
+                "example.com"
+            ]
+        },
+        "DownloadDirectory": "${HOME}/Downloads",
+        "ExtensionSettings": {
+            "*": {
+                "blocked_install_message": "Blocked by policies.json",
+                "install_sources": [
+                    "about:addons",
+                    "https://addons.thunderbird.net/"
+                ],
+                "installation_mode": "blocked",
+                "allowed_types": [
+                    "extension",
+                    "dictionary",
+                    "locale"
+                ]
+            },
+            "uBlock0@raymondhill.net": {
+                "installation_mode": "normal_installed",
+                "install_url": "https://addons.thunderbird.net/thunderbird/downloads/latest/ublock-origin/latest.xpi"
+            },
+            "thirdstats@devmount.de": {
+                "installation_mode": "normal_installed",
+                "install_url": "https://addons.thunderbird.net/thunderbird/downloads/latest/thirdstats/latest.xpi"
+            }
+        },
+        "Cookies": {
+            "Default": true,
+            "AcceptThirdParty": "never",
+            "RejectTracker": true,
+            "Locked": true
+        },
+        "NetworkPrediction": false,
+        "SearchEngines": {
+            "Remove": [
+                "Google",
+                "Bing"
+            ],
+            "PreventInstalls": true
+        }
+    }
+}

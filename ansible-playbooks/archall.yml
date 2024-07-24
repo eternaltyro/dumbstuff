@@ -213,6 +213,11 @@
         - flatpak-beta
         - beta
 
+    - name: Install speech dispatcher for Firefox.
+      ansible.builtin.package:
+        name: speech-dispatcher
+        state: latest
+
     - name: Install optional apps via flatpak.
       become: false
       community.general.flatpak:
