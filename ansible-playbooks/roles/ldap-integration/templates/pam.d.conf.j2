@@ -1,6 +1,0 @@
-# /etc/pam.d/
-common-password:password        sufficient                      pam_sss.so use_authtok
-common-account:account  [default=bad success=ok user_unknown=ignore]    pam_sss.so
-common-auth:auth        [success=1 default=ignore]      pam_sss.so use_first_pass
-common-session:session  optional                        pam_sss.so
-
