@@ -29,3 +29,13 @@ List of scripts here:
   - Set alacritty or urxvt as x-terminal
   - Set rofi at mod + x
   - Set OpenWeatherMap API city code to local city code
+
+Repository TODO
+---------------
+
+- Add git commit templates
+
+```
+git config --global commit.template ~/.git/commit-template.txt
+
+```
