@@ -1,4 +1,4 @@
-require ["fileinto", "imap4flags"];
+require ["comparator-i;unicode-casemap","fileinto","imap4flags"];
 
 /**
  * Safe flags - \Flagged \Deleted \Seen
@@ -9,12 +9,29 @@ require ["fileinto", "imap4flags"];
  * Send MF mails to catchall folder
  */
 
-if address :domain :is "From" ["camsmf.com","camsonline.com", "kfintech.com","abfss.adityabirlacapital.org","adityabirlacapital.com","axismf.com","canararobeco.com","emkt.franklintempleton.com","franklintempleton.com","kotak-amc.com","kotakmf.com","lntmf.co.in","ltfs.com","motilaloswal.com","ppfas.com","ppfas.in","dspim.com","wintwealth.com","updates.wintwealth.com","info.wintwealth.com"] {
-    if address :all :is "From" "accountstatement@axismf.com" {
+if address :domain :is "From" [
+    "camsmf.com","camsonline.com","kfintech.com", # Aggregators
+    "abfss.adityabirlacapital.org","adityabirlacapital.com",
+    "axismf.com",
+    "canararobeco.com","emkt.franklintempleton.com","franklintempleton.com",
+    "kotak-amc.com","kotakmf.com",
+    "lntmf.co.in","ltfs.com",
+    "motilaloswal.com",
+    "ppfas.com","ppfas.in",
+    "dspim.com",
+    "wintwealth.com","updates.wintwealth.com","info.wintwealth.com","mail.wintwealth.com"
+] {
+    if header :contains "Subject" " NFO " {
+        setflag "\\Deleted";
+    }
+    elsif address :all :is "From" "accountstatement@axismf.com"
+    {
         fileinto "Investments/Statements";
-    } elsif header :contains "subject" "statement" {
+    } elsif header :contains "subject" "statement"
+    {
         fileinto "Investments/Statements";
-    } else {
+    } else
+    {
         fileinto "Investments";
     }
 }
@@ -27,11 +44,17 @@ if address :all :is "From" [
     "hdfcbanksmartstatement@hdfcbank.net",
     "estatement@icicibank.com",
     "estatement2@punjabnationalbank.in"
-    ] {
+] {
     fileinto "Banking/Statements";
-} elsif address :domain :is "From" ["axisbank.com", "hdfcbank.net", "hdfcbank.com", "icicibank.com", "custcomm.icicibank.com"] {
+} elsif address :domain :is "From" [
+    "axisbank.com",
+    "hdfcbank.net", "hdfcbank.com",
+    "icicibank.com", "custcomm.icicibank.com",
+    "updates.starlingbank.com", "starlingbank.com"
+  ]
+  {
     fileinto "Banking";
-}
+  }
 
 /**
  * Send credit card statements to folder
