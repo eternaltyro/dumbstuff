@@ -6,6 +6,12 @@
 function aws { podman run --rm --mount type=bind,source="${HOME}"/.aws,target=/root/.aws,readonly --mount type=tmpfs,destination=/tmp -it docker.io/amazon/aws-cli "$@"; }
 ```
 
+## Gitlab Runner
+
+```
+function gitlab-runner { podman run --rm -it gitlab/gitlab-runner "$@"; }
+```
+
 ## Open Policy Agent
 
 ```

@@ -1,0 +1,171 @@
+---
+name: et-selfhosted
+
+volumes:
+  tailscale-config:
+    driver: local
+    labels:
+      - "net.et.homeserver.description=Tailscale config volume"
+      - "net.et.homeserver.mtime=2024-07-25"
+
+  tailscale-storage:
+    driver: local
+    labels:
+      - "net.et.homeserver.description=Tailscale storage volume"
+      - "net.et.homeserver.mtime=2024-07-25"
+
+  stirling-config:
+    driver: local
+    labels:
+      - "net.et.homeserver.description=StirlingPDF config volume"
+      - "net.et.homeserver.mtime=2024-07-25"
+
+  stirling-storage:
+    driver: local
+    labels:
+      - "net.et.homeserver.description=StirlingPDF storage volume"
+      - "net.et.homeserver.mtime=2024-07-25"
+
+  vaultwarden-storage:
+    driver: local
+    labels:
+      - "net.et.homeserver.description=Vaultwarden storage volume"
+      - "net.et.homeserver.mtime=2024-07-25"
+#  prom_data:
+#  filestash:
+
+services:
+
+#  immich:
+
+  tailscale-pdf:
+    image: tailscale/tailscale:latest
+    container_name: tailscale-pdf
+    hostname: tailscale-pdf
+    domainname: tailscale-pdf
+    volumes:
+      - tailscale-storage:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      TS_AUTHKEY: $TS_AUTHKEY
+      TS_STATE_DIR: /var/lib/tailscale
+    cap_add:
+      - net_admin
+      - sys_module
+    restart: unless-stopped
+
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    container_name: pdf
+    hostname: pdf
+    domainname: pdf
+#    network_mode: "service:tailscale-pdf"
+    ports:
+      - "8080:8080"
+    volumes:
+      - stirling-storage:/usr/share/tesseract-ocr/5/tessdata
+      - stirling-config:/configs
+    environment:
+      DOCKER_ENABLE_SECURITY: false
+#    depends_on:
+#      - tailscale-pdf
+    restart: unless-stopped
+
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: passwords
+    hostname: passwords
+    domainname: passwords
+    ports:
+      - "8334:80"
+    volumes:
+      - vaultwarden-storage:/data/
+    restart: unless-stopped
+#
+#  filestash:
+#    image: machines/filestash
+#    container_name: filestash
+#    domainname: filestash.tail8b9c1.ts.net
+#    ports:
+#      - "8334:8334"
+#    hostname: filestash.tail8b9c1.ts.net
+#    restart: unless-stopped
+#    volumes:
+#      - type: bind
+#        source: /home/eternaltyro/Notes
+#        target: /app/data/store
+#
+#  file_browser:
+#    image: filebrowser/filebrowser
+#    container_name: filebrowser
+#    domainname: filebrowser.tail8b9c1.ts.net
+#    ports:
+#      - "5244:5244"
+#    hostname: filebrowser.tail8b9c1.ts.net
+#    volumes:
+#      - /path/to/root:/srv
+#      - /path/filebrowser.db:/database.db
+#      - /path/.filebrowser.json:/.filebrowser.json
+#    user: $(id -u):$(id -g)
+#    ports:
+#      - "8080:8080"
+#
+#  oasis:
+#    image: machengim/oasis
+#    container_name: oasis
+#    domainname: oasis.tail8b9c1.ts.net
+#    ports:
+#      - "8000:8000"
+#    hostname: oasis.tail8b9c1.ts.net
+#    volume:
+#      - /home/eternaltyro/Notes:/home/storage
+#      - /tmp/oasis/data:/opt/oasis/data
+#
+#  alist:
+#    image: xhofe/alist:latest
+#    container_name: alist
+#    domainname: alist.tail8b9c1.ts.net
+#    ports:
+#      - "5244:5244"
+#    hostname: alist.tail8b9c1.ts.net
+#    volume:
+#      - /home/eternaltyro/Notes:/home/storage
+#      - /etc/alist:/opt/alist/data
+#
+#  filestash:
+#    image: machines/filestash
+#    container_name: filestash
+#    domainname: filestash.tail8b9c1.ts.net
+#    ports:
+#      - "8334:8334"
+#    hostname: filestash.tail8b9c1.ts.net
+#    restart: unless-stopped
+#    deploy:
+#      mode: replicated
+#      replicas: 2
+#      endpoint_mode: dnsrr # or vip - virtualIP
+#
+#  prometheus:
+#    image: prom/prometheus
+#    container_name: prometheus
+#    command:
+#      - '--config.file=/etc/prometheus/prometheus.yml'
+#    ports:
+#      - 9090:9090
+#    restart: unless-stopped
+#    volumes:
+#      - ./prometheus:/etc/prometheus
+#      - prom_data:/prometheus
+#
+#  grafana:
+#    image: grafana/grafana
+#    container_name: grafana
+#    ports:
+#      - 3000:3000
+#    restart: unless-stopped
+#    environment:
+#      GF_SECURITY_ADMIN_USER: admin
+#      GF_SECURITY_ADMIN_PASSWORD: grafana
+#    volumes:
+#      - ./grafana:/etc/grafana/provisioning/datasources
+#
