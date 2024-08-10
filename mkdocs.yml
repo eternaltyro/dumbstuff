@@ -13,4 +13,5 @@ draft_docs: |
 theme:
   name: material
   locale: en
-  
+  features:
+    - navigation.tabs
