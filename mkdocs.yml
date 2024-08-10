@@ -1,0 +1,16 @@
+site_name: All the dumbstuff of the world!
+repo_url: https://gitlab.com/eternaltyro/dumbstuff/
+
+#nav:
+#  - Home: 'index.md'
+#  - About: 'about.md'
+#  - Self hosting: 'selfhosted.md'
+
+draft_docs: |
+  drafts/           # A 'drafts' directory anywhere
+  _unpublished.md   # An md file ending in _unpublished.md
+
+theme:
+  name: material
+  locale: en
+  

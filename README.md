@@ -18,6 +18,7 @@ List of scripts here:
 
 - Automatic Openstack installation
 - Preeseeds and Kickstarts
+- mkdocs ci for documentation
 
 # Setting up Awesome Themes
 
