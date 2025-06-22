@@ -4,11 +4,17 @@
 # TODO: Add yay installation
 
 """ --- DATE / TIME ---
-"""
-pacman -S ntp
+ntp and chrony are standard ntp clients. The systemd alternative is systemd-timesyncd
+
+pacman -S ntp chrony
 ntpdate 0.arch.pool.ntp.org
-systemctl start ntpd
-systemctl enable ntpd
+systemctl enable ntpd && systemctl start ntpd
+"""
+
+sudo nvim /etc/systemd/timesyncd.conf
+timedatectl set-ntp true # Asks for password
+timedatectl show-timesync --all
+
 
 """ --- SECURITY ---
 """
