@@ -16,6 +16,7 @@ timedatectl show-timesync --all
 
 
 """ --- SECURITY: USER PRIVS / SUDO ACCESS --- """
+"""
 visudo
 Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
                       /sbin/halt, /sbin/reboot, /sbin/poweroff, \
@@ -23,11 +24,14 @@ Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
                       /usr/bin/systemct, /usr/bin/wifi-menu, /usr/bin/cryptsetup, \
                       /usr/bin/mount, /usr/bin/umount
 myusername ALL=USER1
+"""
 sudo useradd -m -G wheel -s /bin/zsh eternaltyro
 sudo passwd eternaltyro
 Enter new UNIX password: somelongcompl3x$hi+
 Retype new UINX password: samelongcompl3x$hi+
 passwd: password updated successfully
+
+# NOTE: Use visudo to enable root access to users in the %wheel group (uncomment)
 
 /usr/bin/gpg --recv-keys ec3cbe7f607d11e6
 # yay -S ecryptfs-simple # NOTE: Replaced by fscrypt.
