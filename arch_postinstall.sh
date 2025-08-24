@@ -16,8 +16,7 @@ timedatectl set-ntp true # Asks for password
 timedatectl show-timesync --all
 
 
-""" --- SECURITY ---
-"""
+""" --- SECURITY: USER PRIVS / SUDO ACCESS --- """
 visudo
 Cmnd_Alias    USER1 = /bin/kill, /usr/bin/pkill, /usr/bin/top, \
                       /sbin/halt, /sbin/reboot, /sbin/poweroff, \
@@ -32,8 +31,9 @@ Retype new UINX password: samelongcompl3x$hi+
 passwd: password updated successfully
 
 gpg2 --recv-keys ec3cbe7f607d11e6
-yay -S ecryptfs-simple
-sudo modprobe ecryptfs
+# yay -S ecryptfs-simple # NOTE: Replaced by fscrypt.
+# sudo modprobe ecryptfs # NOTE: Replaced by fscrypt
+pacman -S fscrypt
 pacman -S veracrypt
 
 """ --- SECURITY AND HARDENING ---
@@ -41,8 +41,8 @@ pacman -S veracrypt
 gufw
 nftables
 firejail
-yay -S arch-audit
-yay -S libfido2 # For SSH with Fido2 support
+pacman -S arch-audit
+pacman -S libfido2 # For SSH with Fido2 support
 yay -S chkrootkit # Run: `chkrootkit`
 tiger
 wapiti
@@ -59,36 +59,34 @@ yay -S lynis # Run: `lynis audit system`
 
 """ ___/security/vpn___
 """
-wireguard
-mullvad
-yay -S mullvad-vpn
-protonvpn
+# wireguard # NOTE: Part of the Kernel now!
+# yay -S mullvad-vpn protonvpn # NOTE: Maybe not
 
 """ ___/security/password_managers___
 """
-flatpak install --assumeyes --user "flathub" "com.bitwarden.desktop"
-flatpak install --assumeyes --user "flathub" "org.keepassxc.KeePassXC"
+flatpak install --user flathub "com.bitwarden.desktop"
+flatpak install --user flathub "org.keepassxc.KeePassXC"
+flatpak install --user flathub "org.cryptomator.Cryptomator"
 
 """ ___/security/malware_handlers___
 """
-yay -S clamtk clamav
+pacman -S clamtk clamav
 yay -S maldet # sometimes outdated
 # to run checks
 # maldet -a /home
 
-""" --- NETWORKING --- 
-"""
+""" --- NETWORKING --- """
 ## Configure Internet using netctl.
 ## Interface name from `ip link`
 # cp /etc/netctl/examples/ethernet-static /etc/netctl/
 # netctl start ethernet-static
 # netctl enable ethernet-static
-## netctl switch-to different-network
-yay -S iwd
-yay -S network-manager-applet
+# netctl switch-to different-network
+pacman -S iwd
+pacman -S network-manager-applet
 
-""" --- X.ORG CONFIGURATION ---
-"""
+""" --- X.ORG CONFIGURATION --- """
+# NOTE: Dropped in favour of Wayland
 yay -S xorg-xrdb (rendering Xresources)
 yay -S xorg-xrandr xorg-xkill
 yay -S xorg-server xorg-xinit xf86-input-synaptics
@@ -104,19 +102,17 @@ yay -S zsh tmux vim-airline
 yay -S rxvt-unicode rxvt-unicode-terminfo
 yay -S alacritty mosh terminator
 
-""" --- WINDOW MANAGER / DESKTOP ENVIRONMENT ---
-"""
-yay -S awesome slim slim-themes vicious # - Dropped in favour of KDE Plasma + Wayland
+""" --- WINDOW MANAGER / DESKTOP ENVIRONMENT --- """
+yay -S awesome slim slim-themes vicious # NOTE: Dropped in favour of KDE Plasma + Wayland
 #Z Shell is configured the first time user logs in
 yay -S prezto-git  ## Zsh Customization
 
 yay -S plasma-meta plasma-wayland-session plasma-wayland
 yay -S rofi
-yay -S flameshot # - Replaced with Spectacle 
+# yay -S flameshot # NOTE: Replaced with Spectacle 
 yay -S kdeconnect
 
-""" --- AUDIO / SOUND ---
-"""
+""" --- AUDIO / SOUND DRIVERS AND ENABLEMENT --- """
 
 # ALSA: API for soundcard drivers; Part of the Kernel
 #   closer to hardware
@@ -127,88 +123,109 @@ yay -S kdeconnect
 # JACK is an alternative for professionals
 #
 # pacman -S alsa-utils # or...
-""" Pulseaudio - Legacy audio driver
-"""
-# yay -S pulseaudio \
-#        pavucontrol \
-#        pulseaudio-bluetooth \
-#        pulseeffects
+#
+# Pipewire is the latest and the best
 
-""" Replace pulseaudio with pipewire
-"""
+# --- AUDIO DRIVER: Pipewire ---
 yay -S pipewire-media-session \
 	pipewire \
 	pipewire-pulse
 yay -S noisetorch
 
+# --- AUDIO DRIVER: Pulseaudio (Legacy) """
+# yay -S pulseaudio \
+#        pavucontrol \
+#        pulseaudio-bluetooth \
+#        pulseeffects
 
-""" --- PERSONAL MEDIA MANAGEMENT ---
-"""
-yay -S vlc mpv kodi mplayer
-yay -S shotwell
-flatpak install --assumeyes --user "flathub" "org.kde.digikam"
-gwenview
-pacman -S ristretto tumbler      # - Thumbnailer service for ristretto
-yay -S moc mpd mpc               # - Audio players
-yay -S clementine qmmp audacious # - Audio players
+""" --- PERSONAL MEDIA MANAGEMENT --- """
 
-yay -S wget wget2 aria2 # - Download utilities
-yay -S brotli zstd      # - Compression algorithm support
-yay -S peazip unrar p7zip unzip # - Compression utilities
+# --- PHOTO MANAGEMENT
+flatpak install --user flathub "org.kde.digikam"
+flatpak install --user flathub "io.ente.photos"
+# flatpak install --user flathub "org.gnome.Shotwell" # NOTE: Replaced by digikam
+# flatpak install --user flathub "org.xfce.ristretto"
+# pacman -S tumbler      # - Thumbnailer service for ristretto
+# flatpak install --user flathub "org.kde.gwenview"
 
-"""__________ BACKUPS AND RECOVERY____________
-"""
-yay -S borg
-flatpak install --assumeyes --user "flathub" "com.borgbase.Vorta"
-yay -S dupeguru
-yay -S snapper # helps make btrfs subvol snapshots
-yay -S timeshift # Alternative to snapper
-yay -S rclone
-yay -S btrfs-progs exfatprogs xfsprogs f2fs-tools # - Filesystem programs
+# --- AUDIO PLAYERS
+flatpak install --user flathub "org.kde.amarok"
+flatpak install --user flathub "org.strawberrymusicplayer.strawberry"
+# yay -S moc mpd mpc
+# flatpak install --user flathub "com.ylsoftware.qmmp.Qmmp"
+# flatpak install --user flathub "org.atheme.audacious"
+# yay - S clementine
+
+# --- VIDEO PLAYERS
+flatpak install --user flathub "io.mpv.Mpv"
+pacman -S vlc # Need system packages as dependency.
+# yay -S mplayer
+# flatpak install --user flathub "tv.kodi.Kodi"
+
+pacman -S wget aria2 # TODO: Add wcurl (part of curl)
+yay -S wget2 # - Download utilities
+pacman -S brotli zstd      # - Compression algorithm support
+yay -S peazip 
+pacman -S unrar p7zip unzip # - Compression utilities
+pacman -S yt-dlp # Modern replacement for youtube-dl
+
+""" --- BACKUPS AND RECOVERY --- """
+pacman -S borg
+flatpak install --user flathub "com.borgbase.Vorta"
+# yay -S dupeguru
+# yay -S snapper # helps make btrfs subvol snapshots
+# yay -S timeshift # Alternative to snapper
+pacman -S rclone
+pacman -S btrfs-progs exfatprogs xfsprogs f2fs-tools # NOTE: Filesystem programs
 btrfs-compsize compsize btrfs-maintenance
-# pacman -S ntfs-3g        ## NTFS devices write support (No-longer required?)
-yay -S ntfs ntfs3-dkms
+# pacman -S ntfs-3g        # NOTE: NTFS devices write support (No-longer required?)
+# yay -S ntfs ntfs3-dkms # NOTE: DANGEROUS?
 
-""" --- WEB BROWSERS ---
-"""
+""" --- WEB BROWSERS --- """
 yay -S lynx
-flatpak install --assumeyes --user "flathub-beta" "org.mozilla.firefox"
-flatpak install --assumeyes --user "flathub" "org.chromium.Chromium"
-flatpak install --assumeyes --user "flathub" "com.github.Eloston.UngoogledChromium" # - Prefer over Brave?
-flatpak install --assumeyes --user "flathub" "com.brave.Browser" # - Maybe not
+flatpak install --user "flathub-beta" "org.mozilla.firefox"
+flatpak install --user flathub app.zen_browser.zen
+# flatpak install --user flathub "org.chromium.Chromium"
+# flatpak install --user flathub "com.github.Eloston.UngoogledChromium" # NOTE: Prefer over Brave?
+# flatpak install --user flathub "com.brave.Browser" # NOTE: Maybe not
 
-flatpak install --assumeyes --user "flathub" "org.libreoffice.LibreOffice"
-yay -S hunspell-en hyphen hunspell # - Spelling and punctuations; TODO: How do I let flatpak use these?
+""" --- OFFICE UTILITIES --- """
+flatpak install --user flathub "org.qownnotes.QOwnNotes"
+flatpak install --user flathub "com.github.johnfactotum.Foliate"
+flatpak install --user flathub "org.zotero.Zotero"
+flatpak install --user flathub "org.libreoffice.LibreOffice"
+pacman -S hunspell-en_gb hunspell-en_us hyphen-en hunspell # - Spelling and punctuations; TODO: How do I let flatpak use these?
 
-flatpak install --assumeyes --user "flathub" "org.gnucash.GnuCash"
+flatpak install --user flathub "org.gnucash.GnuCash"
 yay -S perl-finance-quote # - TODO: How do I let flatpak GnuCash use this?
-flatpak install --assumeyes --user "flathub" "net.giuspen.cherrytree"
+# flatpak install --user flathub "net.giuspen.cherrytree" # Replaced by QOwnNotes
 
-yay -S ibus ibus-m17n  ## Indic language typing
-yay -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
+pacman -S ibus
+yay -S ibus-m17n  ## Indic language typing
+pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
 
-yay -S fbreader      ## e-Book reader
-yay -S dnsutils whois nmap gnu-netcat
-yay -S tree
-yay -S openldap
-yay -S hdparm strace dmidecode
+pacman -S fbreader      ## e-Book reader
+pacman -S dnsutils whois nmap gnu-netcat
+pacman -S tree
+pacman -S openldap
+pacman -S hdparm strace dmidecode
 
-"""______ DEVELOPMENT AND WORK ______
-"""
-flatpak install --assumeyes --user "flathub-beta" "org.kde.kate"
-flatpak install --assumeyes --user "flathub" "org.geany.Geany"
-yay -S git bzr mercurial # - Distributed version control
-yay -S meld
-yay -S ansible
-yay -S putty # - To help generate / transform Putty compatible SSH keys
+""" --- DEVELOPMENT AND WORK --- """
+flatpak install --user "flathub-beta" "org.kde.kate"
+flatpak install --user flathub "io.podman_desktop.PodmanDesktop"
+# flatpak install --user flathub "org.geany.Geany"
+pacman -S git bzr mercurial # - Distributed version control
+pacman -S meld
+# yay -S ansible
+# yay -S putty # - To help generate / transform Putty compatible SSH keys
 # yay -S pgadmin4
 # yay -S dbeaver
 
-yay -S stow # GNU Stow manages dotfiles.
-yay -S ruff # Super fast Python linter written in Rust.
-yay -S uv # Super fast Python package installer and resolver written in Rust.
+pacman -S stow # GNU Stow manages dotfiles.
+pacman -S ruff # Super fast Python linter written in Rust.
+pacman -S uv # Super fast Python package installer and resolver written in Rust.
 
-""" --- LANGUAGES ---
+""" --- DEVELOPMENT / LANGUAGE CORE ---
 yay -S nodejs npm
 yay -S rustup rust
 """
@@ -217,25 +234,29 @@ yay -S rustup rust
 yay -S aws-session-manager-plugin
 yay -S aws-cli-v2-bin
 """
-yay -S autopep8          # - Python auto-formatter for Kate
-yay -S python-lsp-server # - Python Language Server Protocol server
+pacman -S autopep8          # - Python auto-formatter for Kate
+pacman -S python-lsp-server # - Python Language Server Protocol server
+pacman -S pyenv # Python env manager
 
 
-""" --- GRAPHIC DESIGN STUFF ---
-"""
-flatpak install --assumeyes --user "flathub" "com.obsproject.Studio"
-yay -S rawtherapee
-flatpak install --assumeyes --user "flathub" "org.gimp.GIMP"         # - Raster editor
-flatpak install --assumeyes --user "flathub" "org.inkscape.Inkscape" # Vector editor
+""" --- MEDIA EDITING & GRAPHIC DESIGN --- """
+flatpak install --user flathub "com.obsproject.Studio"
+flatpak install --user flathub "org.gimp.GIMP"         # - Raster editor
+flatpak install --user flathub "org.inkscape.Inkscape" # Vector editor
 yay -S openexr mozjpeg # - Image format support
 # Download and install Xaviju's Inkscape Open Symbols
 mkdir -p ~/.config/inkscape/symbols
 git clone https://github.com/Xaviju/inkscape-open-symbols.git /tmp/
 find /tmp/Xaviju/ -type f -name "*.svg" | xargs cp -t ~/.config/inkscape/symbols/
+# flatpak install --user flathub "com.rawtherapee.RawTherapee"
 
-flatpak install --assumeyes --user "flathub" "org.openstreetmap.josm" # - OSM Editor
+flatpak install --user flathub "org.openstreetmap.josm" # - OSM Editor
 
 #rlwrap, dex, wireless_tools 
+#
+# --- Media editing
+flatpak install --user flathub "org.blender.Blender"
+flatpak install --user flathub "org.audacityteam.Audacity"
 
 
 ################################
@@ -264,10 +285,10 @@ fi
 Only vboxvideo and vboxguest are important. vboxsf is for shared directories.
 
 
-##________ KEYBOARD INPUT ________##
-Fix SLiM Keyboard layout issue
-==============================
+""" --- KEYBOARD INPUT --- """
+# --- Fix SLiM Keyboard layout issue
 
+"""
 # pacman -S xf86-input-evdev
 # cat /etc/X11/xorg.conf.d/10-evdev.conf
 Section "InputClass"
@@ -291,19 +312,16 @@ xbindkeys —defaults > /home/eternaltyro/.xbindkeysrc
 `xbindkeys -mk` then type keys
 # Input into `.xbindkeysrc` file
 `xbindkeys -p` to reload config
+"""
 
-###
-# DISPLAY 
-######
+""" --- DISPLAY --- """
 # pacman -S xorg-xbacklight
 # echo 5000 > /sys/class/backlight/intel_backlight/brightness
 # cat /sys/class/backlight/intel_backlight/max_brightness
 
-yay -S light # Monitor backlight control
+#yay -S light # Monitor backlight control
 
-###
-# .xbindkeysrc config for brightness
-######
+# --- .xbindkeysrc config for brightness
 ```
 "light -A 5"
   XF86MonBrightnessUp
@@ -312,12 +330,12 @@ yay -S light # Monitor backlight control
   XF86MonBrightnessDown
 ```
 
-###
+"""
 # .xbindkeysrc config for volume controls
 #
 # TODO:
 # - Switch from amixer to pactl
-######
+"""
 ```
 "amixer set Master 5%+"
   XF86AudioRaiseVolume
@@ -477,26 +495,28 @@ sudo rmmod pcspkr
 ###########################
 ##________ COMMS ________##
 ###########################
-gnupg2 --recv-keys 6feb6f83d48b3547
-yay -S element-desktop
+# gnupg2 --recv-keys 6feb6f83d48b3547
+flatpak install --user flathub "im.riot.Riot" # element-desktop
+flatpak install --user flathub "in.cinny.Cinny"
+flatpak install --user "flathub-beta" "org.telegram.desktop"
+flatpak install --user flathub "org.signal.Signal"
+flatpak install --user flathub "com.slack.Slack"
+flatpak install --user flathub "net.jami.Jami"
 
-yay -S onionshare # Need PyQT5 library
-yay -S jami-gnome jami-daemon
 # aurman -S ricochet
-# aurman -S zulip-desktop
 # aurman -S rambox-bin
-# yay -S retroshare
-yay -S thunderbird-beta-bin thunderbird-beta-i18n-en-gb
-pacman -S claws-mail claws-mail-themes    ## Mail Clients
-yay -S slack
-pacman -S mumble
-yay -S tutanota-desktop-bin
-yay -S signal-desktop-beta
-yay -S teams zoom
-yay -S jami
-yay -S protonmail-bridge
-dino
-keybase
+# flatpak install --user flathub "org.onionshare.OnionShare"
+# flatpak install --user flathub "org.zulip.Zulip"
+# flatpak install --user flathub "cc.retroshare.retroshare-gui"
+flatpak install --user "flathub-beta" "org.mozilla.Thunderbird"
+
+# flatpak install --user "org.claws_mail.Claws-Mail"
+# pacman -S claws-mail claws-mail-themes
+
+# flatpak install --user flathub "info.mumble.Mumble"
+# flatpak install --user flathub "com.github.IsmaelMartinez.teams_for_linux"
+# flatpak install --user "im.dino.Dino" # XMPP Client
+# keybase
 
 ###################################
 ##________ LOOK AND FEEL ________##
@@ -521,7 +541,6 @@ pacman -S htop
 # ###
 
 # Alvo
-# Telegram
 # Patchwork (secure scuttlebutt client ssb://)
 # Lucidor - E-book reader?
 # OpenBazaar
@@ -543,10 +562,8 @@ xdg-mime default zathura.desktop application/pdf
 
 ### TODO
 # - 7Zip install
-# - Thunderbird Alpha / Beta
 # - geany / geany-plugins
 # - mpc / mpd / ncmpc setup
-# - Steam
 
 yay -S xbanish # Hides mouse pointer when typing;
 
@@ -601,7 +618,7 @@ yay -S mesa-demos glmark2 # GPU benchmarking
 # Figure out kernel modesetting
 
 # File Manager
-yay -S thunar thunar-archive-plugin thunar-media-tags-plugin
+# yay -S thunar thunar-archive-plugin thunar-media-tags-plugin
 yay -S file-roller # Archive and unarchive frontend
 yay -S nemo
 
@@ -628,9 +645,9 @@ yay -S vym
 yay -S pandoc
 # yay -S grafx2 # Old style bitmap graphics editor
 yay -S clang
-yay -S mpd  chromium ipython bind-tools avahi audit arandr
+yay -S mpd ipython bind-tools avahi audit arandr
 yay -S smbclient virt-manager virtualbox
-yay -S handbrake
+flatpak install --user flathub "fr.handbrake.ghb"
 yay -S cdrtools cdrdao dvd+rw-tools cdparanoia
 yay -S grsync # Sync input tools between multiple devices
 # Just use KDE default DM - SDDM with breeze theme
@@ -645,9 +662,8 @@ yay -S kalendar
 yay -S android-file-transfer gvfs-mtp gvfs
 yay -S n8n
 yay -S sssd
-yay -S calibre-web
 yay -S opensnitch osquery
-yay -S google-drive cryptomator
+yay -S google-drive
 yay -S paperkey
 yay -S sbsign sbutil
 yay -S efitools
@@ -658,7 +674,6 @@ yay -S unison
 focalboard
 polybar-git
 bfg
-ghostwriter
 lepton
 fawkes
 fwupd
@@ -669,6 +684,7 @@ upower # Battery information
 pacman -S tlp # enable tlp.service
 qgis
 bleachbit
+flatpak install --user flathub "com.github.qarmin.czkawka" # Duplicate remover
 tzdata
 voxel
 dia
@@ -683,9 +699,6 @@ libcastle
 pkimanager
 pdftk
 mime-info
-pacman -S monero
-pacman -S xmrig
-pacman -S mymonero
 nix
 floor
 # yay -S metabase
@@ -696,64 +709,49 @@ scrpy
 seahorse
 pacman -S bluegriffin # WYSIWYG Web editor
 feh
-dropbox
 
 """_________ GAMES __________
 """
-surf
-torcs
-flightgear
-supertuxkart
-yay -S 0ad
-endless-sky
-cocaine
-unvanquished
-openra
+# surf
+# cocaine
+flatpak install --user flathub org.flightgear.FlightGear
+flatpak install --user flathub net.sourceforge.torcs
+flatpak install --user flathub net.supertuxkart.SuperTuxKart
+flatpak install --user flathub io.github.endless_sky.endless_sky
+flatpak install --user flathub net.unvanquished.Unvanquished
+flatpak install --user flathub net.openra.OpenRA
+flatpak install --user flathub org.wesnoth.Wesnoth
+flatpak install --user flathub com.valvesoftware.Steam
+flatpak install --user flathub com.play0ad.zeroad
+flatpak install --user flathub net.pioneerspacesim.Pioneer
+flatpak install --user flathub com.shatteredpixel.shatteredpixeldungeon
 
-"""______ FUN STUFF _______
-"""
-pacman -S stellarium
+""" --- FUN STUFF --- """
+flatpak install --user flathub "org.stellarium.Stellarium"
 room-arranger
 sweethome3d
 
-""" --- FLATPAK APPS ---
+""" --- FLATPAK APPS --- """
+# flatpak install --user flathub "ch.protonmail.protonmail-bridge"
+# flatpak install --user flathub "io.github.wereturtle.ghostwriter"
+flatpak install --user flathub "com.calibre_ebook.calibre"
+flatpak install --user flathub "com.github.tchx84.Flatseal"
+flatpak install --user flathub "org.gaphor.Gaphor"
+flatpak install --user flathub "org.qbittorrent.qBittorrent"
+
+# --- Work
+flatpak install --user flathub "us.zoom.Zoom"
+flatpak install --user flathub "com.slack.Slack"
+flatpak install --user flathub "com.discordapp.Discord"
+
+
+""" --- DEPRECATED --- """
+
+# flatpak install --user flathub "net.giuspen.cherrytree" # Replaced by QOwnNotes
+
 """
-flatpak install --assumeyes --user "flathub" "ch.protonmail.protonmail-bridge"
-flatpak install --assumeyes --user "flathub" "com.borgbase.Vorta"
-flatpak install --assumeyes --user "flathub" "com.brave.Browser"
-flatpak install --assumeyes --user "flathub" "com.calibre_ebook.calibre"
-flatpak install --assumeyes --user "flathub" "com.github.johnfactotum.Foliate"
-flatpak install --assumeyes --user "flathub" "com.github.tchx84.Flatseal"
-flatpak install --assumeyes --user "flathub" "com.obsproject.Studio"
-flatpak install --assumeyes --user "flathub" "com.play0ad.zeroad"
-flatpak install --assumeyes --user "flathub" "com.slack.Slack"
-flatpak install --assumeyes --user "flathub" "com.valvesoftware.Steam"
-flatpak install --assumeyes --user "flathub" "im.riot.Riot"
-flatpak install --assumeyes --user "flathub" "in.cinny.Cinny"
-flatpak install --assumeyes --user "flathub" "io.github.wereturtle.ghostwriter"
-flatpak install --assumeyes --user "flathub" "io.mpv.Mpv"
-flatpak install --assumeyes --user "flathub" "io.podman_desktop.PodmanDesktop"
-flatpak install --assumeyes --user "flathub" "net.giuspen.cherrytree"
-flatpak install --assumeyes --user "flathub" "net.pioneerspacesim.Pioneer"
-flatpak install --assumeyes --user "flathub" "org.audacityteam.Audacity"
-flatpak install --assumeyes --user "flathub" "org.blender.Blender"
-flatpak install --assumeyes --user "flathub" "org.cryptomator.Cryptomator"
-flatpak install --assumeyes --user "flathub" "org.gaphor.Gaphor"
-flatpak install --assumeyes --user "flathub" "org.gimp.GIMP"
-flatpak install --assumeyes --user "flathub" "org.gnucash.GnuCash"
-flatpak install --assumeyes --user "flathub" "org.inkscape.Inkscape"
-flatpak install --assumeyes --user "flathub" "org.keepassxc.KeePassXC"
-flatpak install --assumeyes --user "flathub-beta" "org.mozilla.firefox"
-flatpak install --assumeyes --user "flathub" "org.qbittorrent.qBittorrent"
-flatpak install --assumeyes --user "flathub-beta" "org.telegram.desktop"
-flatpak install --assumeyes --user "flathub" "org.wesnoth.Wesnoth"
-flatpak install --assumeyes --user "flathub" "org.zotero.Zotero"
-flatpak install --assumeyes --user "flathub" "us.zoom.Zoom"
-
-""" --- DEPRECATED ---
-
-yay -S megasync-bin
-yay -S vvawe
+megasync-bin
+vvawe
 youtube-dl -U
 # pacman -S laverna # - Note taking
 pacman -S jre11-openjdk icedtea-web # - Probably only needed for JOSM
