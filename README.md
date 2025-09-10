@@ -14,13 +14,51 @@ List of scripts here:
 + installstuff.sh Script to prep new personal systems
 + ...
 
-### TO - ADD
+# TODO: Selfhosted Setup
+
+- Mealie
+- Calibre Web
+- Jellyfin
+- Vaultwarden
+
+## TODO: SYSTEM SETUP
+
+- Move away from mkinitcpio to dracut or booster
+- Move mkinitcpio hooks to Systemd
+    - udev -> systemd
+    - keymap consolefont -> sd-vconsole
+    - encrypt -> sd-encrypt
+- Enable FIDO2 unlock for dm-crypt devices
+- Attempt a move from iwctl to networkctl (WiFi, VPN, DoH/DoT, IPv6 extensions)
+- Smart card login
+- Fingerprint setup + PAM using fingwit (or alternatives)
+- TPM2 keys
+- Podman systemd unit
+
+## TODO: REPO
 
 - Automatic Openstack installation
 - Preeseeds and Kickstarts
 - mkdocs ci for documentation
+- Add git commit templates
 
-# Setting up Awesome Themes
+```
+git config --global commit.template ~/.git/commit-template.txt
+
+```
+- PolKit configuration
+- Alternative Utilities:
+    - lsusb -> cyme
+    - VPN -> wireguard
+- Proper configuration of libsecret / KWalletd6
+- Flatpak portal configuration and app envvar for Wayland
+
+
+# DEPRECATED:
+
+- Usage of AwesomeWM: Switched to KDE
+
+## Setting up Awesome Themes
 
 - Install awesome WM
 - Setup awesome-freedesktop
@@ -31,12 +69,3 @@ List of scripts here:
   - Set rofi at mod + x
   - Set OpenWeatherMap API city code to local city code
 
-Repository TODO
----------------
-
-- Add git commit templates
-
-```
-git config --global commit.template ~/.git/commit-template.txt
-
-```
