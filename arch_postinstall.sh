@@ -2,6 +2,23 @@
 # Arch Linux post-install configuration
 #
 
+"""
+ORDER OF INSTALLATION
+
+BASICS:
+  0. Setup user account with sudo permissions
+    0.1. Logout from root and Login as user before proceeding
+  1. Configure networking (Wifi and wired networks)
+  2. Time setup and syncing
+  3. Filesystem utils and media drivers
+  4. Setup Flatpak and Container runtimes
+  5. Install security tools
+  6. Install utilities
+  7. Configure
+  8. Other / Misc
+"""
+
+# BASICS
 """ --- DATE / TIME ---
 ntp and chrony are standard ntp clients. The systemd alternative is systemd-timesyncd
 
@@ -45,10 +62,13 @@ gufw
 nftables
 firejail
 pacman -S arch-audit
-pacman -S libfido2 # For SSH with Fido2 support
+# Install libfido2 to SSH with FIDO2 support and
+# for systemd-cryptenroll LUKS2/dmcrypt unlock using HMAC key
+pacman -S libfido2
 yay -S chkrootkit # Run: `chkrootkit`
 tiger
 wapiti
+pacman -S cyme # lsusb alternative
 
 ## RKHUNTER Optional Dependencies:
 # - lsof
@@ -130,9 +150,7 @@ yay -S kdeconnect
 # Pipewire is the latest and the best
 
 # --- AUDIO DRIVER: Pipewire ---
-yay -S pipewire-media-session \
-	pipewire \
-	pipewire-pulse
+pacman -S pipewire pipewire-pulse
 yay -S noisetorch
 
 # --- AUDIO DRIVER: Pulseaudio (Legacy) """
@@ -157,7 +175,7 @@ flatpak install --user flathub "org.strawberrymusicplayer.strawberry"
 
 # --- VIDEO PLAYERS
 flatpak install --user flathub "io.mpv.Mpv"
-pacman -S vlc # Need system packages as dependency.
+flatpak install --user flathub "org.videolan.VLC"
 # yay -S mplayer
 # flatpak install --user flathub "tv.kodi.Kodi"
 
