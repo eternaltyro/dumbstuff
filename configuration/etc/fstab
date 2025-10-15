@@ -1,0 +1,27 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/mapper/crypted LABEL=roachnest
+UUID=f0686ae6-a3f9-40b8-a588-21eab33babbc	/         	btrfs     	rw,relatime,compress=zstd:3,ssd,space_cache=v2,subvolid=256,subvol=/@root	0 0
+
+# /dev/nvme0n1p1
+UUID=82F5-F751      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /dev/mapper/crypted LABEL=roachnest
+UUID=f0686ae6-a3f9-40b8-a588-21eab33babbc	/home     	btrfs     	rw,relatime,compress=zstd:3,ssd,space_cache=v2,subvolid=257,subvol=/@home	0 0
+
+# /dev/mapper/crypted LABEL=roachnest
+UUID=f0686ae6-a3f9-40b8-a588-21eab33babbc	/opt      	btrfs     	rw,noatime,compress=zstd:3,ssd,space_cache=v2,subvolid=259,subvol=/@opt	0 0
+
+# /dev/mapper/crypted LABEL=roachnest
+UUID=f0686ae6-a3f9-40b8-a588-21eab33babbc	/var      	btrfs     	rw,noatime,compress=zstd:3,ssd,space_cache=v2,subvolid=258,subvol=/@var	0 0
+
+# /dev/mapper/crypted LABEL=roachnest
+UUID=f0686ae6-a3f9-40b8-a588-21eab33babbc	/usr      	btrfs     	rw,noatime,compress=zstd:3,ssd,space_cache=v2,subvolid=260,subvol=/@usr	0 0
+
+# /dev/mapper/crypted LABEL=roachnest
+UUID=f0686ae6-a3f9-40b8-a588-21eab33babbc	/snapshots	btrfs     	rw,noatime,compress=zstd:3,ssd,space_cache=v2,subvolid=261,subvol=/@snapshots	0 0
+
+# zram
+/dev/zram0	none	swap	defaults,discard,pri=100,x-systemd.makefs	0	0
