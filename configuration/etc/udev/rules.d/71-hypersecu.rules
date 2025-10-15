@@ -1,0 +1,5 @@
+# HyperSecu HyperKi
+# sudo cat /sys/kernel/debug/usb/devices | less
+# KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="096e|2ccf", ATTRS{idProduct}=="0880", TAG+="uaccess", GROUP="plugdev", MODE="0660"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2ccf", ATTR{idProduct}=="080a", TAG+="uaccess", MODE="0666"
+# BUS=="usb", SYSFS{idVendor}=="2ccf", MODE="0666"
