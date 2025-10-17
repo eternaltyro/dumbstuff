@@ -439,6 +439,8 @@ pacman -S \
     noto-fonts \
     ttf-roboto
 
+pacman -S noto-fonts-cjk # Display CJK correctly without blocky placeholders
+
 yay -S awesome-terminal-fonts
 pacman -S font-mathematica
 pacman -S powerline-fonts    ## Patched fonts to show powerline icons
