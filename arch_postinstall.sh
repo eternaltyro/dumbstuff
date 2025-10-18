@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 # Arch Linux post-install configuration
 #
 
@@ -19,7 +19,28 @@ BASICS:
 """
 
 # BASICS
-""" --- DATE / TIME ---
+
+""" SYSTEM: NETWORKING """
+## Configure Internet using netctl.
+## Interface name from `ip link`
+# cp /etc/netctl/examples/ethernet-static /etc/netctl/
+# netctl start ethernet-static
+# netctl enable ethernet-static
+# netctl switch-to different-network
+pacman -S iwd
+pacman -S network-manager-applet
+
+""" --- ZSH, TERMINAL, VIM ---
+
+TODO: vim-fugitive, plugins, etc.
+TODO: Explore alacritty circadian
+TODO: Add ripgrep and fzf
+"""
+pacman -S zsh tmux vim-airline
+# pacman -S rxvt-unicode rxvt-unicode-terminfo
+# pacman -S alacritty mosh terminator
+
+""" SYSTEM: DATE & TIME SYNC
 ntp and chrony are standard ntp clients. The systemd alternative is systemd-timesyncd
 
 pacman -S ntp chrony
@@ -56,18 +77,44 @@ passwd: password updated successfully
 pacman -S fscrypt
 pacman -S veracrypt
 
+""" --- ZRAM / ZSWAP --- """
+# Improves performance by creating a compressed block device in RAM
+# that acts as a swap device.
+
+# Enable zram kernel module (`modprobe zram` or autoload)
+echo zram | sudo tee -a /etc/modules-load.d/zram.conf
+
+# Add udev rules to add /dev/zram0 device
+# Copy udev rule file from ../configuration/etc/udev/rules.d/99-zram.rules
+
+# Add fstab entry to create a swap
+# Copy fstab file from ../configuration/etc/fstab
+
+# REBOOT
+
+""" --- FLATPAK RUNTIME """
+pacman -S flatpak
+
 """ --- SECURITY AND HARDENING ---
 """
-gufw
-nftables
-firejail
+
+## App / namespace sandboxing
+# pacman -S gufw # Firewall frontend
+# pacman -S nftables # Netfilter userspace tools
+# pacman -S firejail # Namespace sandboxing (bubblewrap preferred)
 pacman -S arch-audit
-# Install libfido2 to SSH with FIDO2 support and
-# for systemd-cryptenroll LUKS2/dmcrypt unlock using HMAC key
+
+## Install libfido2 to SSH with FIDO2 support and
+## for systemd-cryptenroll LUKS2/dmcrypt unlock using HMAC key
 pacman -S libfido2
+
+## Security scanners
+# TODO: Find rkhunter signature update methods
+pacman -S rkhunter # Run: `rkhunter --skip-keypress --check`
 yay -S chkrootkit # Run: `chkrootkit`
-tiger
-wapiti
+yay -S tiger
+yay -S wapiti
+
 pacman -S cyme # lsusb alternative
 
 ## RKHUNTER Optional Dependencies:
@@ -75,38 +122,24 @@ pacman -S cyme # lsusb alternative
 # - netstat
 # - skdet - Simple rootkit detector
 
-pacman -S rkhunter # Run: `rkhunter --skip-keypress --check`
 pacman -S fail2ban # set enabled = true in jail.conf
 /usr/bin/gpg --keyserver hkps://hkps.pool.sks-keyservers.net:443 --recv-key 73AC9FC55848E977024D1A61429A566FD5B79251 # Import GPG key of security@cisofy.com
 yay -S lynis # Run: `lynis audit system`
 
-""" ___/security/vpn___
-"""
+""" SECURITY: VPN """
 # wireguard # NOTE: Part of the Kernel now!
 # yay -S mullvad-vpn protonvpn # NOTE: Maybe not
 
-""" ___/security/password_managers___
-"""
+""" SECURITY: SECRETS MANAGERS """
 flatpak install --user flathub "com.bitwarden.desktop"
 flatpak install --user flathub "org.keepassxc.KeePassXC"
 flatpak install --user flathub "org.cryptomator.Cryptomator"
 
-""" ___/security/malware_handlers___
-"""
+""" SECURITY: MALWARE MITIGATION """
 pacman -S clamtk clamav
 yay -S maldet # sometimes outdated
 # to run checks
 # maldet -a /home
-
-""" --- NETWORKING --- """
-## Configure Internet using netctl.
-## Interface name from `ip link`
-# cp /etc/netctl/examples/ethernet-static /etc/netctl/
-# netctl start ethernet-static
-# netctl enable ethernet-static
-# netctl switch-to different-network
-pacman -S iwd
-pacman -S network-manager-applet
 
 """ --- X.ORG CONFIGURATION --- """
 # NOTE: Dropped in favour of Wayland
@@ -116,18 +149,9 @@ yay -S xorg-server xorg-xinit xf86-input-synaptics
 # TODO: Add synaptics config / libinput config
 libinput-gestures
 
-""" --- ZSH, TERMINAL, VIM ---
-
-TODO: vim-fugitive, plugins, etc.
-TODO: Explore alacritty circadian
-"""
-yay -S zsh tmux vim-airline
-yay -S rxvt-unicode rxvt-unicode-terminfo
-yay -S alacritty mosh terminator
-
-""" --- WINDOW MANAGER / DESKTOP ENVIRONMENT --- """
-yay -S awesome slim slim-themes vicious # NOTE: Dropped in favour of KDE Plasma + Wayland
-#Z Shell is configured the first time user logs in
+""" SYSTEM: WINDOW MANAGER / DESKTOP ENVIRONMENT """
+# yay -S awesome slim slim-themes vicious # NOTE: Dropped in favour of KDE Plasma + Wayland
+## Z Shell is configured the first time user logs in
 yay -S prezto-git  ## Zsh Customization
 
 yay -S plasma-meta plasma-wayland-session plasma-wayland
@@ -135,7 +159,7 @@ yay -S rofi
 # yay -S flameshot # NOTE: Replaced with Spectacle 
 yay -S kdeconnect
 
-""" --- AUDIO / SOUND DRIVERS AND ENABLEMENT --- """
+""" SYSTEM: AUDIO DRIVERS """
 
 # ALSA: API for soundcard drivers; Part of the Kernel
 #   closer to hardware
@@ -179,7 +203,7 @@ flatpak install --user flathub "org.videolan.VLC"
 # yay -S mplayer
 # flatpak install --user flathub "tv.kodi.Kodi"
 
-pacman -S wget aria2 # TODO: Add wcurl (part of curl)
+pacman -S wget aria2 # TODO: Replace wget with wcurl (part of curl)
 yay -S wget2 # - Download utilities
 pacman -S brotli zstd      # - Compression algorithm support
 yay -S peazip 
@@ -219,7 +243,8 @@ yay -S perl-finance-quote # - TODO: How do I let flatpak GnuCash use this?
 
 pacman -S ibus
 yay -S ibus-m17n  ## Indic language typing
-pacman -S qpdf zathura-pdf-poppler zathura-pdf-mupdf
+pacman -S qpdf # PDF toolkit
+# pacman -S zathura-pdf-poppler zathura-pdf-mupdf
 
 pacman -S fbreader      ## e-Book reader
 pacman -S dnsutils whois nmap gnu-netcat
