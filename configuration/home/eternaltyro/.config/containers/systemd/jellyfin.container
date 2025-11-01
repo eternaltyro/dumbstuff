@@ -1,0 +1,21 @@
+[Container]
+Image=docker.io/jellyfin/jellyfin:2025102005
+# Alternatives
+#Image=docker.io/linuxserver/jellyfin:latest
+#Image=docker.io/hotio/jellyfin:latest
+AutoUpdate=registry
+PublishPort=8096:8096/tcp
+UserNS=keep-id
+Volume=${HOME}/.config/selfhosted/jellyfin/config:/config:Z
+Volume=${HOME}/.config/selfhosted/jellyfin/cache:/cache:Z
+Volume=${HOME}/Videos/Movies:/Movies:Z
+Volume=${HOME}/Videos/TV_Series:/TV_Shows:Z
+Volume=${HOME}/Videos/Documentaries:/Documentaries:Z
+
+[Service]
+# Inform systemd of additional exit status
+SuccessExitStatus=0 143
+
+[Install]
+# Start by default on boot
+WantedBy=default.target

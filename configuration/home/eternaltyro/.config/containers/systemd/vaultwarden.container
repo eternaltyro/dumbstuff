@@ -1,0 +1,22 @@
+[Container]
+Image=docker.io/vaultwarden/server@sha256:84fd8a47f58d79a1ad824c27be0a9492750c0fa5216b35c749863093bfa3c3d7
+AutoUpdate=registry
+
+## Format: PublishPort=<IP>:<host_port>:<container_port>
+PublishPort=8003:80/tcp
+Environment=DOMAIN="http://vw.home.arpa"
+
+## User account mapped to container root
+## https://docs.podman.io/en/v4.6.1/markdown/options/userns.container.html
+## Needed to map privileged port on Container
+UserNS=host
+
+Volume=vaultwarden.volume:/data/
+
+[Service]
+# Inform systemd of additional exit status
+Restart=always
+
+[Install]
+# Start by default on boot
+WantedBy=default.target

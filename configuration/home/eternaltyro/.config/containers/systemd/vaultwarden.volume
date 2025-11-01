@@ -1,0 +1,4 @@
+[Volume]
+Label="service.name=vaultwarden"
+User=1000
+Group=1000
