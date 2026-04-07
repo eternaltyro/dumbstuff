@@ -183,8 +183,9 @@ yay -S kdeconnect
 # Pipewire is the latest and the best
 
 # --- AUDIO DRIVER: Pipewire ---
-pacman -S pipewire pipewire-pulse
+pacman -S pipewire pipewire-pulse pipewire-libcamera
 yay -S noisetorch
+flatpak install com.github.wwmm.easyeffects # Audio effects control
 
 # --- AUDIO DRIVER: Pulseaudio (Legacy) """
 # yay -S pulseaudio \
