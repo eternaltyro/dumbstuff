@@ -34,11 +34,20 @@ pacman -S network-manager-applet
 
 TODO: vim-fugitive, plugins, etc.
 TODO: Explore alacritty circadian
-TODO: Add ripgrep and fzf
 """
-pacman -S zsh tmux vim-airline
+pacman -S dash zsh # dash is POSIX compliant tiny shell
+pacman -S neovim
+pacman -S tmux vim-airline
 # pacman -S rxvt-unicode rxvt-unicode-terminfo
 # pacman -S alacritty mosh terminator
+
+pacman -S ripgrep ripgrep-all # provides rg binary
+pacman -S fzf # provides fuzzy search
+## Shell key bindings and fuzzy completion
+## tail -3 ~/.zshrc
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 
 """ SYSTEM: DATE & TIME SYNC
 ntp and chrony are standard ntp clients. The systemd alternative is systemd-timesyncd
