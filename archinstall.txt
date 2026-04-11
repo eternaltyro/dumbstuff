@@ -118,17 +118,33 @@ NOTE:
 	# ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 	# hwclock --systohc --utc
 	
+
+```bash
 # nano /etc/mkinitcpio.conf
-	##edit the HOOKS line. Remove fsck and add btrfs; add encrypt for LUKS;
-	HOOKS="base udev autodetect modconf encrypt block filesystems keyboard btrfs”
+```
+
+```text output
+  ## HOOKS configuration for systemd boot
+  HOOKS=(base systemd autodetect microcode kms keyboard sd-vconsole block sd-encrypt filesystems btrfs usr fsck shutdown)
+```
+
+```
 # pacman -S btrfs-progs
 # mkinitcpio -p linux
-# bootctl install
+# bootctl install 
+```
+
 # cat /boot/loader/entries/arch.conf
-title         Arch Linux
-linux        /vmlinuz-linux
-initrd        /initramfs-linux.img
-options    cryptdevice=UUID=14420948-2cea-4de7-b042-40f67c618660:cryptted root=/dev/mapper/roasted rw rootflags=compress=lzo,subvol=root
+title     Arch Linux
+linux     /vmlinuz-linux
+initrd    /initramfs-linux.img
+options   cryptdevice=UUID=14420948-2cea-4de7-b042-40f67c618660:cryptted root=/dev/mapper/crypted rw rootflags=compress=lzo,subvol=root
+
+# cat /boot/loader/entries/arch-fallback.conf
+title     Arch Linux (fallback initramfs)
+linux     /vmlinuz-linux
+initrd    /initramfs-linux-fallback.img
+options   rd.luks.name=14420948-2cea-4de7-b042-40f67c618660=cryptted root=/dev/mapper/crypted rw rootflags=compress=zstd,space_cache=v2,subvol=@root
 
 # cat /boot/loader/loader.conf
 timeout 3
