@@ -28,6 +28,7 @@ BASICS:
 # netctl enable ethernet-static
 # netctl switch-to different-network
 pacman -S iwd
+pacman -S networkmanager plasma-nm # Should be automatically installed
 pacman -S network-manager-applet
 
 """ --- ZSH, TERMINAL, VIM ---
@@ -698,6 +699,7 @@ flatpak install --user flathub "fr.handbrake.ghb"
 yay -S cdrtools cdrdao dvd+rw-tools cdparanoia
 yay -S grsync # Sync input tools between multiple devices
 # Just use KDE default DM - SDDM with breeze theme
+# Update: 25 June 2026 - Moved from SDDM to plasma-login-manager
 # yay -S lightdm lightdm-webkit2-greeter lightdm-gtk-greeter
 yay -S ccid acsccid pcsc-tools opensc
 yay -S pkcs11 cryptoki
