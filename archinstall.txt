@@ -134,11 +134,18 @@ NOTE:
 # bootctl install 
 ```
 
+# NOTE:
+#    Kernel Lockdown is enabled with `integrity` mode.
+#    Alternatively, for a more strict lockdown use `confidentiality` mode
+#    but this might cause issues
+# TODO:
+#    Find out what issues `confidentiality` lockdown mode causes
+
 # cat /boot/loader/entries/arch.conf
 title     Arch Linux
 linux     /vmlinuz-linux
 initrd    /initramfs-linux.img
-options   cryptdevice=UUID=14420948-2cea-4de7-b042-40f67c618660:cryptted root=/dev/mapper/crypted rw rootflags=compress=lzo,subvol=root
+options   cryptdevice=UUID=14420948-2cea-4de7-b042-40f67c618660:cryptted root=/dev/mapper/crypted rw rootflags=compress=lzo,subvol=root lockdown=integrity
 
 # cat /boot/loader/entries/arch-fallback.conf
 title     Arch Linux (fallback initramfs)

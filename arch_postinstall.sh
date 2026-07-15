@@ -336,6 +336,9 @@ exec awesome
 
 ## https://bbs.archlinux.org/viewtopic.php?id=120243
 
+# TODO:
+#     Disable VirtualBox usage because it taints the kernel by using a non-standard
+#     kernel module (`vboxdrv`). Prefer libvirt or something else.
 # If virtualbox guest, add virtualbox modules
 # Errors starting X could be related to this
 
